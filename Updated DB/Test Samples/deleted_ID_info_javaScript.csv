@@ -1,0 +1,1545 @@
+Unnamed: 0,text,code,task_id,test_list
+6,Write a function to find all words which are at least 4 characters long in a string by using regex.,"```javascript
+function findCharLong(text) {
+  return text.match(/\b\w{4,}\b/g);
+}
+```",7,"```javascript
+console.assert(find_char_long('Please move back to stream').toString() === ['Please', 'move', 'back', 'stream'].toString());
+console.assert(find_char_long('Jing Eco and Tech').toString() === ['Jing', 'Tech'].toString());
+console.assert(find_char_long('Jhingai wulu road Zone 3').toString() === ['Jhingai', 'wulu', 'road', 'Zone'].toString());
+```"
+9,Write a function to get the n smallest items from a dataset.,"```javascript
+function smallNNum(list1, n) {
+  return list1.sort((a, b) => a - b).slice(0, n);
+}
+```",10,"```javascript
+['console.assert(small_nnum([10, 20, 50, 70, 90, 20, 50, 40, 60, 80, 100], 2).toString() === [10, 20].toString())', 'console.assert(small_nnum([10, 20, 50, 70, 90, 20, 50, 40, 60, 80, 100], 5).toString() === [10, 20, 20, 40, 50].toString())', 'console.assert(small_nnum([10, 20, 50, 70, 90, 20, 50, 40, 60, 80, 100], 3).toString() === [10, 20, 20].toString())']
+```"
+50,Write a function to print check if the triangle is equilateral or not.,"```javascript
+function checkEquilateral(x, y, z) {
+  if (x === y && y === z) {
+    return true;
+  } else {
+    return false;
+  }
+}
+```",51,"```javascript
+['console.assert(check_equilateral(6, 8, 12) === false)', 'console.assert(check_equilateral(6, 6, 12) === false)', 'console.assert(check_equilateral(6, 6, 6) === true)']
+```"
+52,Write a python function to check whether the first and last characters of a given string are equal or not.,"```javascript
+function check_Equality(str) {
+  if (str[0] === str[str.length - 1]) {
+    return ""Equal"";
+  } else {
+    return ""Not Equal"";
+  }
+}
+```",53,"```javascript
+['console.assert(check_Equality(""abcda"") === ""Equal"")', 'console.assert(check_Equality(""ab"") === ""Not Equal"")', 'console.assert(check_Equality(""mad"") === ""Not Equal"")']
+```"
+58,Write a function to find the nth octagonal number.,"```javascript
+function isOctagonal(n) {
+    return 3 * n * n - 2 * n;
+}
+```",59,"```javascript
+['console.assert(is_octagonal(5) === 65)', 'console.assert(is_octagonal(10) === 280)', 'console.assert(is_octagonal(15) === 645)'];
+```"
+70,Write a function to sort a list of elements using comb sort.,"```javascript
+function combSort(nums) {
+    let shrinkFact = 1.3;
+    let gaps = nums.length;
+    let swapped = true;
+    let i = 0;
+    while (gaps > 1 || swapped) {
+        gaps = Math.floor(gaps / shrinkFact);
+        swapped = false;
+        i = 0;
+        while (gaps + i < nums.length) {
+            if (nums[i] > nums[i + gaps]) {
+                [nums[i], nums[i + gaps]] = [nums[i + gaps], nums[i]];
+                swapped = true;
+            }
+            i++;
+        }
+    }
+    return nums;
+}
+```",71,"```javascript
+['console.assert(comb_sort([5, 15, 37, 25, 79]).toString() === [5, 15, 25, 37, 79].toString())', 
+ 'console.assert(comb_sort([41, 32, 15, 19, 22]).toString() === [15, 19, 22, 32, 41].toString())', 
+ 'console.assert(comb_sort([99, 15, 13, 47]).toString() === [13, 15, 47, 99].toString())']
+```"
+72,Write a function to split the given string with multiple delimiters by using regex.,"```javascript
+function multipleSplit(text) {
+  return text.split(/; |, |\*|\n/);
+}
+```",73,"```javascript
+console.assert(multiple_split('Forces of the \ndarkness*are coming into the play.') === ['Forces of the ', 'darkness', 'are coming into the play.']);
+console.assert(multiple_split('Mi Box runs on the \n Latest android*which has google assistance and chromecast.') === ['Mi Box runs on the ', ' Latest android', 'which has google assistance and chromecast.']);
+console.assert(multiple_split('Certain services\nare subjected to change*over the seperate subscriptions.') === ['Certain services', 'are subjected to change', 'over the seperate subscriptions.']);
+```"
+80,Write a function to zip the two given tuples.,"```javascript
+function zip_tuples(test_tup1, test_tup2) {
+    let res = [];
+    for (let i = 0; i < test_tup1.length; i++) {
+        res.push([test_tup1[i], test_tup2[i % test_tup2.length]]);
+    }
+    return res;
+}
+```",81,"```javascript
+['console.assert(JSON.stringify(zip_tuples([7, 8, 4, 5, 9, 10], [1, 5, 6])) === JSON.stringify([[7, 1], [8, 5], [4, 6], [5, 1], [9, 5], [10, 6]]))', 'console.assert(JSON.stringify(zip_tuples([8, 9, 5, 6, 10, 11], [2, 6, 7])) === JSON.stringify([[8, 2], [9, 6], [5, 7], [6, 2], [10, 6], [11, 7]]))', 'console.assert(JSON.stringify(zip_tuples([9, 10, 6, 7, 11, 12], [3, 7, 8])) === JSON.stringify([[9, 3], [10, 7], [6, 8], [7, 3], [11, 7], [12, 8]]))']
+```"
+81,Write a function to find the volume of a sphere.,"```javascript
+function volume_sphere(r) {
+  let volume = (4/3) * Math.PI * r * r * r;
+  return volume;
+}
+```",82,"```javascript
+['console.assert(volume_sphere(10) === 4188.790204786391)', 'console.assert(volume_sphere(25) === 65449.84694978735)', 'console.assert(volume_sphere(20) === 33510.32163829113)']
+```"
+88,Write a function to find the closest smaller number than n.,"```javascript
+function closestNum(N) {
+  return N - 1;
+}
+```",89,"```javascript
+console.assert(closest_num(11) === 10);
+console.assert(closest_num(7) === 6);
+console.assert(closest_num(12) === 11);
+```"
+92,Write a function to calculate the value of 'a' to the power 'b'.,"```javascript
+function power(a, b) {
+    if (b === 0) {
+        return 1;
+    } else if (a === 0) {
+        return 0;
+    } else if (b === 1) {
+        return a;
+    } else {
+        return a * power(a, b - 1);
+    }
+}
+```",93,"```javascript
+['console.assert(power(3, 4) === 81), console.assert(power(2, 3) === 8), console.assert(power(5, 5) === 3125)'];
+```"
+95,Write a python function to find the number of divisors of a given integer.,"```javascript
+function divisor(n) {
+  let x = 0;
+  for (let i = 1; i < n + 1; i++) {
+    if (n % i === 0) {
+      x++;
+    }
+  }
+  return x;
+}
+```",96,"```javascript
+['console.assert(divisor(15) === 4)', 'console.assert(divisor(12) === 6)', 'console.assert(divisor(9) === 3)'];
+```"
+125,Write a python function to find the sum of common divisors of two given numbers.,"```javascript
+function sum(a, b) {
+    let sum = 0;
+    for (let i = 1; i < Math.min(a, b); i++) {
+        if (a % i === 0 && b % i === 0) {
+            sum += i;
+        }
+    }
+    return sum;
+}
+```",126,"```javascript
+['console.assert(sum(10, 15) === 6)', 'console.assert(sum(100, 150) === 93)', 'console.assert(sum(4, 6) === 3)']
+```"
+128,Write a function to calculate magic square.,"```javascript
+function magicSquareTest(myMatrix) {
+    const iSize = myMatrix[0].length;
+    const sumList = [];
+    sumList.push(...myMatrix.map(lines => lines.reduce((a, b) => a + b, 0)));
+
+    for (let col = 0; col < iSize; col++) {
+        sumList.push(myMatrix.reduce((acc, row) => acc + row[col], 0));
+    }
+
+    let result1 = 0;
+    for (let i = 0; i < iSize; i++) {
+        result1 += myMatrix[i][i];
+    }
+    sumList.push(result1);
+
+    let result2 = 0;
+    for (let i = iSize - 1; i >= 0; i--) {
+        result2 += myMatrix[i][i];
+    }
+    sumList.push(result2);
+
+    if (new Set(sumList).size > 1) {
+        return false;
+    }
+    return true;
+}
+```",129,"```javascript
+console.assert(magic_square_test([[7, 12, 1, 14], [2, 13, 8, 11], [16, 3, 10, 5], [9, 6, 15, 4]]) === true);
+console.assert(magic_square_test([[2, 7, 6], [9, 5, 1], [4, 3, 8]]) === true);
+console.assert(magic_square_test([[2, 7, 6], [9, 5, 1], [4, 3, 7]]) === false);
+```"
+149,Write a python function to find whether the given number is present in the infinite sequence or not.,"```javascript
+function does_Contain_B(a, b, c) {
+    if (a === b) {
+        return true;
+    }
+    if ((b - a) * c > 0 && (b - a) % c === 0) {
+        return true;
+    }
+    return false;
+}
+```",150,"```javascript
+['console.assert(does_Contain_B(1,7,3) === true)', 'console.assert(does_Contain_B(1,-3,5) === false)', 'console.assert(does_Contain_B(3,2,5) === false)']
+```"
+170,Write a function to find the perimeter of a pentagon.,"```javascript
+function perimeterPentagon(a) {
+  let perimeter = (5 * a);
+  return perimeter;
+}
+```",171,"```javascript
+['console.assert(perimeter_pentagon(5) === 25)', 'console.assert(perimeter_pentagon(10) === 50)', 'console.assert(perimeter_pentagon(15) === 75)']
+```"
+188,Write a python function to find the first missing positive number.,"```javascript
+function firstMissingPositive(arr, n) {
+    let ptr = 0;
+    for (let i = 0; i < n; i++) {
+        if (arr[i] === 1) {
+            ptr = 1;
+            break;
+        }
+    }
+    if (ptr === 0) {
+        return 1;
+    }
+    for (let i = 0; i < n; i++) {
+        if (arr[i] <= 0 || arr[i] > n) {
+            arr[i] = 1;
+        }
+    }
+    for (let i = 0; i < n; i++) {
+        arr[(arr[i] - 1) % n] += n;
+    }
+    for (let i = 0; i < n; i++) {
+        if (arr[i] <= n) {
+            return i + 1;
+        }
+    }
+    return n + 1;
+}
+```",189,"```javascript
+console.assert(first_Missing_Positive([1,2,3,-1,5],5) === 4);
+console.assert(first_Missing_Positive([0,-1,-2,1,5,8],6) === 2);
+console.assert(first_Missing_Positive([0,1,2,5,-8],5) === 3);
+```"
+196,Write a function to perform the exponentiation of the given two tuples.,"```javascript
+function find_exponentio(test_tup1, test_tup2) {
+  let res = test_tup1.map((ele1, index) => Math.pow(ele1, test_tup2[index]));
+  return res;
+}
+```",197,"```javascript
+['console.assert(find_exponentio([10, 4, 5, 6], [5, 6, 7, 5]) === 100000, 4096, 78125, 7776)', 
+ 'console.assert(find_exponentio([11, 5, 6, 7], [6, 7, 8, 6]) === 1771561, 78125, 1679616, 117649)', 
+ 'console.assert(find_exponentio([12, 6, 7, 8], [7, 8, 9, 7]) === 35831808, 1679616, 40353607, 2097152)'];
+```"
+203,Write a python function to count the occurrence of a given character in a string.,"```javascript
+function count(s, c) {
+    let res = 0;
+    for (let i = 0; i < s.length; i++) {
+        if (s[i] === c) {
+            res++;
+        }
+    }
+    return res;
+}
+```",204,"```javascript
+console.assert(count(""abcc"", ""c"") == 2);
+console.assert(count(""ababca"", ""a"") == 3);
+console.assert(count(""mnmm0pm"", ""m"") == 4);
+```"
+212,Write a function to perform the concatenation of two string tuples.,"```javascript
+function concatenateStrings(testTup1, testTup2) {
+    let res = testTup1.map((ele1, index) => ele1 + testTup2[index]);
+    return res;
+}
+```",213,"```javascript
+['console.assert(concatenate_strings([""Manjeet"", ""Nikhil"", ""Akshat""], ["" Singh"", "" Meherwal"", "" Garg""]) === [""Manjeet Singh"", ""Nikhil Meherwal"", ""Akshat Garg""])', 'console.assert(concatenate_strings([""Shaik"", ""Ayesha"", ""Sanya""], ["" Dawood"", "" Begum"", "" Singh""]) === [""Shaik Dawood"", ""Ayesha Begum"", ""Sanya Singh""])', 'console.assert(concatenate_strings([""Harpreet"", ""Priyanka"", ""Muskan""], [""Kour"", "" Agarwal"", ""Sethi""]) === [""HarpreetKour"", ""Priyanka Agarwal"", ""MuskanSethi""])']
+```"
+217,Write a python function to find the minimum operations required to make two numbers equal.,"```javascript
+function min_Operations(A, B) {  
+    if (A > B) { 
+        [A, B] = [B, A];  
+    } 
+    B = B / gcd(A, B);  
+    return B - 1; 
+}
+
+function gcd(x, y) {
+    while (y !== 0) {
+        let temp = y;
+        y = x % y;
+        x = temp;
+    }
+    return x;
+}
+```",218,"```javascript
+['console.assert(min_Operations(2, 4) === 1)', 'console.assert(min_Operations(4, 10) === 4)', 'console.assert(min_Operations(1, 4) === 3)'];
+```"
+220,Write a python function to find the first even number in a given list of numbers.,"```javascript
+function firstEven(nums) {
+    const firstEven = nums.find(el => el % 2 === 0) || -1;
+    return firstEven;
+}
+```",221,"```javascript
+console.assert(first_even([1, 3, 5, 7, 4, 1, 6, 8]) === 4);
+console.assert(first_even([2, 3, 4]) === 2);
+console.assert(first_even([5, 6, 7]) === 6);
+```"
+226,Write a function to find minimum of three numbers.,"```javascript
+function minOfThree(a, b, c) {
+    let smallest;
+    if (a <= b && a <= c) {
+        smallest = a;
+    } else if (b <= a && b <= c) {
+        smallest = b;
+    } else {
+        smallest = c;
+    }
+    return smallest;
+}
+```",227,"```javascript
+['console.assert(min_of_three(10, 20, 0) === 0)', 'console.assert(min_of_three(19, 15, 18) === 15)', 'console.assert(min_of_three(-10, -20, -30) === -30)']
+```"
+234,Write a python function to set all even bits of a given number.,"```javascript
+function evenBitSetNumber(n) {
+    let count = 0, res = 0, temp = n;
+    while (temp > 0) {
+        if (count % 2 === 1) {
+            res |= (1 << count);
+        }
+        count += 1;
+        temp >>= 1;
+    }
+    return (n | res);
+}
+```",235,"```javascript
+['console.assert(even_bit_set_number(10) === 10)', 'console.assert(even_bit_set_number(20) === 30)', 'console.assert(even_bit_set_number(30) === 30)']
+```"
+281,Write a function to substaract two lists using map and lambda function.,"```javascript
+function subList(nums1, nums2) {
+  const result = nums1.map((x, index) => x - nums2[index]);
+  return result;
+}
+```",282,"```javascript
+['console.assert(JSON.stringify(sub_list([1, 2, 3],[4,5,6])) === JSON.stringify([-3,-3,-3])', 'console.assert(JSON.stringify(sub_list([1,2],[3,4])) === JSON.stringify([-2,-2])', 'console.assert(JSON.stringify(sub_list([90,120],[50,70])) === JSON.stringify([40,50])']
+```"
+283,Write a function to check whether all items of a list are equal to a given string.,"```javascript
+function checkElement(list, element) {
+  const checkElement = list.every(v => v === element);
+  return checkElement;
+}
+```",284,"```javascript
+['console.assert(check_element([""green"", ""orange"", ""black"", ""white""], ""blue"") === false)', 'console.assert(check_element([1, 2, 3, 4], 7) === false)', 'console.assert(check_element([""green"", ""green"", ""green"", ""green""], ""green"") === true)']
+```"
+306,Write a function to get a colon of a tuple.,"```javascript
+function colonTuplex(tuplex, m, n) {
+  let tuplexColon = JSON.parse(JSON.stringify(tuplex));
+  tuplexColon[m].push(n);
+  return tuplexColon;
+}
+```",307,"```javascript
+['console.assert(colon_tuplex([""HELLO"", 5, [], true], 2, 50) === [""HELLO"", 5, [50], true]);', 'console.assert(colon_tuplex([""HELLO"", 5, [], true], 2, 100) === [""HELLO"", 5, [100], true]);', 'console.assert(colon_tuplex([""HELLO"", 5, [], true], 2, 500) === [""HELLO"", 5, [500], true]);']
+```"
+308,Write a python function to find the maximum of two numbers.,"```javascript
+function maximum(a, b) {
+    if (a >= b) {
+        return a;
+    } else {
+        return b;
+    }
+}
+```",309,"```javascript
+['console.assert(maximum(5,10) === 10)', 'console.assert(maximum(-1,-2) === -1)', 'console.assert(maximum(9,7) === 9)']
+```"
+373,Write a function to print all permutations of a given string including duplicates.,"```javascript
+function permuteString(str) {
+    if (str.length === 0) {
+        return [''];
+    }
+    const prevList = permuteString(str.slice(1));
+    const nextList = [];
+    for (let i = 0; i < prevList.length; i++) {
+        for (let j = 0; j <= str.length; j++) {
+            const newStr = prevList[i].slice(0, j) + str[0] + prevList[i].slice(j);
+            if (!nextList.includes(newStr)) {
+                nextList.push(newStr);
+            }
+        }
+    }
+    return nextList;
+}
+```",374,"```javascript
+[""console.assert(permute_string('ab').toString() === ['ab', 'ba'].toString())"", ""console.assert(permute_string('abc').toString() === ['abc', 'bac', 'bca', 'acb', 'cab', 'cba'].toString())"", ""console.assert(permute_string('abcd').toString() === ['abcd', 'bacd', 'bcad', 'bcda', 'acbd', 'cabd', 'cbad', 'cbda', 'acdb', 'cadb', 'cdab', 'cdba', 'abdc', 'badc', 'bdac', 'bdca', 'adbc', 'dabc', 'dbac', 'dbca', 'adcb', 'dacb', 'dcab', 'dcba'].toString())""]
+```"
+383,Write a python function to find the frequency of the smallest value in a given array.,"```javascript
+function frequencyOfSmallest(n, arr) {
+    let mn = arr[0];
+    let freq = 1;
+    for (let i = 1; i < n; i++) {
+        if (arr[i] < mn) {
+            mn = arr[i];
+            freq = 1;
+        } else if (arr[i] === mn) {
+            freq++;
+        }
+    }
+    return [freq];
+}
+```",384,"```javascript
+['console.assert(frequency_Of_Smallest(5, [1, 2, 3, 4, 3]) === 1)', 'console.assert(frequency_Of_Smallest(7, [3, 1, 2, 5, 6, 2, 3]) === 1)', 'console.assert(frequency_Of_Smallest(7, [3, 3, 6, 3, 7, 4, 9]) === 3)']
+```"
+387,Write a python function to find the highest power of 2 that is less than or equal to n.,"```javascript
+function highestPowerOf2(n) {
+    let res = 0;
+    for (let i = n; i > 0; i--) {
+        if ((i & (i - 1)) === 0) {
+            res = i;
+            break;
+        }
+    }
+    return res;
+}
+```",388,"```javascript
+['console.assert(highest_Power_of_2(10) === 8)', 'console.assert(highest_Power_of_2(19) === 16)', 'console.assert(highest_Power_of_2(32) === 32)']
+```"
+395,Write a function to check whether the given string starts and ends with the same character or not using regex.,"```javascript
+const regex = /^[a-z]$|^([a-z]).*\1$/;
+
+function checkChar(string) {
+    if (regex.test(string)) {
+        return ""Valid"";
+    } else {
+        return ""Invalid"";
+    }
+}
+```",396,"```javascript
+['console.assert(check_char(""abba"") === ""Valid"")', 'console.assert(check_char(""a"") === ""Valid"")', 'console.assert(check_char(""abcd"") === ""Invalid"")']
+```"
+409,Write a function to find the minimum value in a given heterogeneous list.,"```javascript
+function minVal(listval) {
+    const minVal = Math.min(...listval.filter(i => Number.isInteger(i)));
+    return minVal;
+}
+```",410,"```javascript
+[""console.assert(min_val(['Python', 3, 2, 4, 5, 'version']) === 2)"", ""console.assert(min_val(['Python', 15, 20, 25]) === 15)"", ""console.assert(min_val(['Python', 30, 20, 40, 50, 'version']) === 20)""]
+```"
+410,Write a function to convert the given snake case string to camel case string by using regex.,"```javascript
+function snakeToCamel(word) {
+  return word.split('_').map(x => x.charAt(0).toUpperCase() + x.slice(1)).join('');
+}
+```",411,"```javascript
+[""console.assert(snake_to_camel('android_tv') === 'AndroidTv')"", ""console.assert(snake_to_camel('google_pixel') === 'GooglePixel')"", ""console.assert(snake_to_camel('apple_watch') === 'AppleWatch')""]
+```"
+425,Write a function to filter odd numbers using lambda function.,"```javascript
+function filterOddNumbers(nums) {
+    const oddNums = nums.filter(x => x % 2 !== 0);
+    return oddNums;
+}
+```",426,"```javascript
+['console.assert(filter_oddnumbers([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).toString() === [1,3,5,7,9].toString())', 'console.assert(filter_oddnumbers([10,20,45,67,84,93]).toString() === [45,67,93].toString())', 'console.assert(filter_oddnumbers([5,7,9,8,6,4,3]).toString() === [5,7,9,3].toString())']
+```"
+448,Write a python function to check whether the triangle is valid or not if 3 points are given.,"```javascript
+function check_Triangle(x1, y1, x2, y2, x3, y3) { 
+    let a = (x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2));   
+    if (a === 0) { 
+        return 'No'; 
+    } else { 
+        return 'Yes'; 
+    }
+}
+```",449,"```javascript
+[""console.assert(check_Triangle(1,5,2,5,4,6) === 'Yes')"", ""console.assert(check_Triangle(1,1,1,4,1,5) === 'No')"", ""console.assert(check_Triangle(1,1,1,1,1,1) === 'No')""]
+```"
+450,Write a function to remove all whitespaces from the given string using regex.,"```javascript
+function removeWhitespaces(text1) {
+  return text1.replace(/\s+/g, '');
+}
+```",451,"```javascript
+console.assert(removeWhitespaces(' Google    Flutter ') === 'GoogleFlutter');
+console.assert(removeWhitespaces(' Google    Dart ') === 'GoogleDart');
+console.assert(removeWhitespaces(' iOS    Swift ') === 'iOSSwift');
+```"
+465,Write a function to find the peak element in the given array.,"```javascript
+function findPeakUtil(arr, low, high, n) { 
+    let mid = low + Math.floor((high - low) / 2); 
+    if ((mid === 0 || arr[mid - 1] <= arr[mid]) &&
+        (mid === n - 1 || arr[mid + 1] <= arr[mid])) { 
+        return mid; 
+    } else if (mid > 0 && arr[mid - 1] > arr[mid]) { 
+        return findPeakUtil(arr, low, mid - 1, n); 
+    } else { 
+        return findPeakUtil(arr, mid + 1, high, n); 
+    } 
+} 
+
+function findPeak(arr, n) { 
+    return findPeakUtil(arr, 0, n - 1, n); 
+}
+```",466,"```javascript
+console.assert(find_peak([1, 3, 20, 4, 1, 0], 6) === 2);
+console.assert(find_peak([2, 3, 4, 5, 6], 5) === 4);
+console.assert(find_peak([8, 9, 11, 12, 14, 15], 6) === 5);
+```"
+478,Write a python function to find the first digit of a given number.,"```javascript
+function firstDigit(n) {
+    while (n >= 10) {
+        n = n / 10;
+    }
+    return Math.floor(n);
+}
+```",479,"```javascript
+console.assert(first_Digit(123) === 1);
+console.assert(first_Digit(456) === 4);
+console.assert(first_Digit(12) === 1);
+```"
+485,Write a function to compute binomial probability for the given number.,"```javascript
+function nCr(n, r) {
+    if (r > n / 2) {
+        r = n - r;
+    }
+    let answer = 1;
+    for (let i = 1; i <= r; i++) {
+        answer *= (n - r + i);
+        answer /= i;
+    }
+    return answer;
+}
+
+function binomialProbability(n, k, p) {
+    return (nCr(n, k) * Math.pow(p, k) * Math.pow(1 - p, n - k));
+}
+```",486,"```javascript
+console.assert(binomial_probability(10, 5, 1.0/3) === 0.13656454808718185);
+console.assert(binomial_probability(11, 6, 2.0/4) === 0.2255859375);
+console.assert(binomial_probability(12, 7, 3.0/5) === 0.227030335488);
+```"
+489,Write a function to extract all the pairs which are symmetric in the given tuple list.,"```javascript
+function extract_symmetric(testList) {
+    const temp = new Set(testList.filter((a, b) => {
+        return testList.some(([x, y]) => x === b && y === a);
+    }));
+    const res = new Set([...temp].filter(([a, b]) => a < b));
+    return res;
+}
+```",490,"```javascript
+['console.assert(extract_symmetric([[6, 7], [2, 3], [7, 6], [9, 8], [10, 2], [8, 9]]) == new Set([[8, 9], [6, 7]]);', 
+ 'console.assert(extract_symmetric([[7, 8], [3, 4], [8, 7], [10, 9], [11, 3], [9, 10]]) == new Set([[9, 10], [7, 8]]);', 
+ 'console.assert(extract_symmetric([[8, 9], [4, 5], [9, 8], [11, 10], [12, 4], [10, 11]]) == new Set([[8, 9], [10, 11]]);']
+```"
+510,Write a python function to find minimum sum of factors of a given number.,"```javascript
+function find_Min_Sum(num) {
+    let sum = 0;
+    let i = 2;
+    while (i * i <= num) {
+        while (num % i === 0) {
+            sum += i;
+            num /= i;
+        }
+        i += 1;
+    }
+    sum += num;
+    return sum;
+}
+```",511,"```javascript
+['console.assert(find_Min_Sum(12) === 7)', 'console.assert(find_Min_Sum(105) === 15)', 'console.assert(find_Min_Sum(2) === 2)']
+```"
+524,Write a python function to check whether two given lines are parallel or not.,"```javascript
+function parallelLines(line1, line2) {
+    return line1[0] / line1[1] === line2[0] / line2[1];
+}
+```",525,"```javascript
+console.assert(parallel_lines([2,3,4], [2,3,8]) === true);
+console.assert(parallel_lines([2,3,4], [4,-3,8]) === false);
+console.assert(parallel_lines([3,3],[5,5]) === true);
+```"
+541,"Write a function to replace all occurrences of spaces, commas, or dots with a colon in the given string by using regex.","```javascript
+function fillSpaces(text) {
+  return text.replace(/[ ,.]/g, "":"");
+}
+```",542,"```javascript
+console.assert(fill_spaces('Boult Curve Wireless Neckband') === 'Boult:Curve:Wireless:Neckband');
+console.assert(fill_spaces('Stereo Sound Sweatproof') === 'Stereo:Sound:Sweatproof');
+console.assert(fill_spaces('Probass Curve Audio') === 'Probass:Curve:Audio');
+```"
+545,Write a function to find the last occurrence of a character in a string.,"```javascript
+function lastOccurrenceChar(string, char) {
+    let flag = -1;
+    for (let i = 0; i < string.length; i++) {
+        if (string[i] === char) {
+            flag = i;
+        }
+    }
+    if (flag === -1) {
+        return null;
+    } else {
+        return flag + 1;
+    }
+}
+```",546,"```javascript
+['console.assert(last_occurence_char(""hello world"",\'l\')===10)', 'console.assert(last_occurence_char(""language"",\'g\')===7)', 'console.assert(last_occurence_char(""little"",\'y\')===null)']
+```"
+565,Write a function to get the sum of a non-negative integer.,"```javascript
+function sumDigits(n) {
+  if (n === 0) {
+    return 0;
+  } else {
+    return n % 10 + sumDigits(Math.floor(n / 10));
+  }
+}
+```",566,"```javascript
+['console.assert(sum_digits(345) === 12)', 'console.assert(sum_digits(12) === 3)', 'console.assert(sum_digits(97) === 16)']
+```"
+568,Write a function to sort each sublist of strings in a given list of lists.,"```javascript
+function sortSublists(list1) {
+    const result = list1.map(sublist => sublist.sort());
+    return result;
+}
+```",569,"```javascript
+[""console.assert(sort_sublists([['green', 'orange'], ['black', 'white'], ['white', 'black', 'orange']]).toString() === [['green', 'orange'], ['black', 'white'], ['black', 'orange', 'white']].toString())"", ""console.assert(sort_sublists([['green', 'orange'], ['black'], ['green', 'orange'], ['white']]).toString() === [['green', 'orange'], ['black'], ['green', 'orange'], ['white']].toString())"", ""console.assert(sort_sublists([['a','b'],['d','c'],['g','h'] , ['f','e']]).toString() === [['a', 'b'], ['c', 'd'], ['g', 'h'], ['e', 'f']].toString())""]
+```"
+570,Write a function to find maximum possible sum of disjoint pairs for the given array of integers and a number k.,"```javascript
+function maxSumPairDiffLessthanK(arr, N, K) {
+    arr.sort((a, b) => a - b);
+    let dp = new Array(N).fill(0);
+    dp[0] = 0;
+    for (let i = 1; i < N; i++) {
+        dp[i] = dp[i - 1];
+        if (arr[i] - arr[i - 1] < K) {
+            if (i >= 2) {
+                dp[i] = Math.max(dp[i], dp[i - 2] + arr[i] + arr[i - 1]);
+            } else {
+                dp[i] = Math.max(dp[i], arr[i] + arr[i - 1]);
+            }
+        }
+    }
+    return dp[N - 1];
+}
+```",571,"```javascript
+['console.assert(max_sum_pair_diff_lessthan_K([3, 5, 10, 15, 17, 12, 9], 7, 4) === 62)', 'console.assert(max_sum_pair_diff_lessthan_K([5, 15, 10, 300], 4, 12) === 25)', 'console.assert(max_sum_pair_diff_lessthan_K([1, 2, 3, 4, 5, 6], 6, 6) === 21)']
+```"
+595,Write a function to find the size of the given tuple.,"```javascript
+function tupleSize(tupleList) {
+  return [tupleList.length * 8]; // Approximation, since JavaScript doesn't have a direct equivalent for sys.getsizeof
+}
+```",596,"```javascript
+console.assert(tupleSize([""A"", 1, ""B"", 2, ""C"", 3]) === getSizeof([""A"", 1, ""B"", 2, ""C"", 3]));
+console.assert(tupleSize([1, ""Raju"", 2, ""Nikhil"", 3, ""Deepanshu""]) === getSizeof([1, ""Raju"", 2, ""Nikhil"", 3, ""Deepanshu""]));
+console.assert(tupleSize([[1, ""Lion""], [2, ""Tiger""], [3, ""Fox""], [4, ""Wolf""]]) === getSizeof([[1, ""Lion""], [2, ""Tiger""], [3, ""Fox""], [4, ""Wolf""]]));
+```"
+599,Write a python function to check whether the given number is even or not using bitwise operator.,"```javascript
+function isEven(n) { 
+    if ((n ^ 1) === (n + 1)) { 
+        return true; 
+    } else { 
+        return false; 
+    } 
+}
+```",600,"```javascript
+['console.assert(is_Even(1) === false)', 'console.assert(is_Even(2) === true)', 'console.assert(is_Even(3) === false)']
+```"
+601,Write a python function to find the first repeated character in a given string.,"```javascript
+function firstRepeatedChar(str1) {
+  for (let index = 0; index < str1.length; index++) {
+    let c = str1[index];
+    if (str1.slice(0, index + 1).split(c).length - 1 > 1) {
+      return c;
+    }
+  }
+  return ""None"";
+}
+```",602,"```javascript
+['console.assert(first_repeated_char(""abcabc"") === ""a"")', 'console.assert(first_repeated_char(""abc"") === ""None"")', 'console.assert(first_repeated_char(""123123"") === ""1"")']
+```"
+603,Write a function to reverse words in a given string.,"```javascript
+function reverseWords(s) {
+    return s.split(' ').reverse().join(' ');
+}
+```",604,"```javascript
+['console.assert(reverseWords(""python program"") === ""program python"")', 'console.assert(reverseWords(""java language"") === ""language java"")', 'console.assert(reverseWords(""indian man"") === ""man indian"")']
+```"
+608,Write a python function to find minimum possible value for the given periodic function.,"```javascript
+function floor_Min(A, B, N) {
+    let x = Math.max(B - 1, N);
+    return Math.floor((A * x) / B);
+}
+```",609,"```javascript
+['console.assert(floor_Min(10, 20, 30) === 15)', 'console.assert(floor_Min(1, 2, 1) === 0)', 'console.assert(floor_Min(11, 10, 9) === 9)'];
+```"
+611,Write a python function to merge the first and last elements separately in a list of lists.,"```javascript
+function merge(lst) {
+    return lst[0].map((_, colIndex) => lst.map(row => row[colIndex]));
+}
+```",612,"```javascript
+[""console.assert(merge([['x', 'y'], ['a', 'b'], ['m', 'n']]).toString() === [['x', 'a', 'm'], ['y', 'b', 'n']].toString())"", ""console.assert(merge([[1, 2], [3, 4], [5, 6], [7, 8]]).toString() === [[1, 3, 5, 7], [2, 4, 6, 8]].toString())"", ""console.assert(merge([['x', 'y','z'], ['a', 'b','c'], ['m', 'n','o']]).toString() === [['x', 'a', 'm'], ['y', 'b', 'n'], ['z', 'c', 'o']].toString())""]
+```"
+638,Write a function to sum the length of the names of a given list of names after removing the names that start with a lowercase letter.,"```javascript
+function sample_nam(sample_names) {
+  sample_names = sample_names.filter(el => el[0].toUpperCase() === el[0] && el.slice(1).toLowerCase() === el.slice(1));
+  return ''.join(sample_names).length;
+}
+```",639,"```javascript
+[""console.assert(sample_nam(['sally', 'Dylan', 'rebecca', 'Diana', 'Joanne', 'keith']) === 16)"", 'console.assert(sample_nam([""php"", ""res"", ""Python"", ""abcd"", ""Java"", ""aaa""]) === 10)', 'console.assert(sample_nam([""abcd"", ""Python"", ""abba"", ""aba""]) === 6)']
+```"
+640,Write a function to find the nth nonagonal number.,"```javascript
+function isNonagonal(n) {
+    return Math.floor(n * (7 * n - 5) / 2);
+}
+```",641,"```javascript
+console.assert(is_nonagonal(10) === 325);
+console.assert(is_nonagonal(15) === 750);
+console.assert(is_nonagonal(18) === 1089);
+```"
+644,Write a function to find the product of it’s kth index in the given tuples.,"```javascript
+function get_product(val) {
+    let res = 1;
+    for (let ele of val) {
+        res *= ele;
+    }
+    return res;
+}
+
+function find_k_product(test_list, K) {
+    let res = get_product(test_list.map(sub => sub[K]));
+    return res;
+}
+```",645,"```javascript
+['console.assert(find_k_product([(5, 6, 7), (1, 3, 5), (8, 9, 19)], 2) === 665)', 'console.assert(find_k_product([(6, 7, 8), (2, 4, 6), (9, 10, 20)], 1) === 280)', 'console.assert(find_k_product([(7, 8, 9), (3, 5, 7), (10, 11, 21)], 0) === 210)']
+```"
+648,Write a python function to calculate the sum of the numbers in a list between the indices of a specified range.,"```javascript
+function sumRangeList(nums, m, n) {
+    let sumRange = 0;
+    for (let i = m; i <= n; i++) {
+        sumRange += nums[i];
+    }
+    return sumRange;
+}
+```",649,"```javascript
+['console.assert(sum_Range_list([2, 1, 5, 6, 8, 3, 4, 9, 10, 11, 8, 12], 8, 10) === 29)', 'console.assert(sum_Range_list([1, 2, 3, 4, 5], 1, 2) === 5)', 'console.assert(sum_Range_list([1, 0, 1, 2, 5, 6], 4, 5) === 11)']
+```"
+658,Write a python function to print duplicants from a list of integers.,"```javascript
+function Repeat(x) {
+    var _size = x.length;
+    var repeated = [];
+    for (var i = 0; i < _size; i++) {
+        var k = i + 1;
+        for (var j = k; j < _size; j++) {
+            if (x[i] === x[j] && repeated.indexOf(x[i]) === -1) {
+                repeated.push(x[i]);
+            }
+        }
+    }
+    return repeated;
+}
+```",659,"```javascript
+['console.assert(Repeat([10, 20, 30, 20, 20, 30, 40, 50, -20, 60, 60, -20, -20]).toString() === [20, 30, -20, 60].toString())', 'console.assert(Repeat([-1, 1, -1, 8]).toString() === [-1].toString())', 'console.assert(Repeat([1, 2, 3, 1, 2]).toString() === [1, 2].toString())']
+```"
+670,Write a python function to set the right most unset bit.,"```javascript
+function get_Pos_Of_Right_most_Set_Bit(n) { 
+    return Math.floor(Math.log2(n & -n)) + 1; 
+}
+
+function set_Right_most_Unset_Bit(n) { 
+    if (n === 0) { 
+        return 1; 
+    } 
+    if ((n & (n + 1)) === 0) {     
+        return n; 
+    } 
+    const pos = get_Pos_Of_Right_most_Set_Bit(~n);      
+    return ((1 << (pos - 1)) | n); 
+}
+```",671,"```javascript
+['console.assert(set_Right_most_Unset_Bit(21) === 23)', 'console.assert(set_Right_most_Unset_Bit(11) === 15)', 'console.assert(set_Right_most_Unset_Bit(15) === 15)']
+```"
+673,Write a function to remove duplicate words from a given string using collections module.,"```javascript
+function removeDuplicate(string) {
+  const result = Array.from(new Set(string.split(' '))).join(' ');
+  return result;
+}
+```",674,"```javascript
+console.assert(remove_duplicate(""Python Exercises Practice Solution Exercises"") === ""Python Exercises Practice Solution"");
+console.assert(remove_duplicate(""Python Exercises Practice Solution Python"") === ""Python Exercises Practice Solution"");
+console.assert(remove_duplicate(""Python Exercises Practice Solution Practice"") === ""Python Exercises Practice Solution"");
+```"
+681,Write a function to multiply two lists using map and lambda function.,"```javascript
+function mulList(nums1, nums2) {
+  return Array.from(nums1.map((x, i) => x * nums2[i]));
+}
+```",682,"```javascript
+['console.assert(mulList([1, 2, 3], [4, 5, 6]).toString() === [4, 10, 18].toString())', 
+ 'console.assert(mulList([1, 2], [3, 4]).toString() === [3, 8].toString())', 
+ 'console.assert(mulList([90, 120], [50, 70]).toString() === [4500, 8400].toString())']
+```"
+686,Write a function to find the greatest common divisor (gcd) of two integers by using recursion.,"```javascript
+function recurGcd(a, b) {
+    const low = Math.min(a, b);
+    const high = Math.max(a, b);
+    if (low === 0) {
+        return high;
+    } else if (low === 1) {
+        return 1;
+    } else {
+        return recurGcd(low, high % low);
+    }
+}
+```",687,"```javascript
+['console.assert(recur_gcd(12, 14) === 2)', 'console.assert(recur_gcd(13, 17) === 1)', 'console.assert(recur_gcd(9, 3) === 3)']
+```"
+708,Write a function to count unique keys for each value present in the tuple.,"```javascript
+function getUnique(testList) {
+    let res = {};
+    for (let sub of testList) {
+        if (!res[sub[1]]) {
+            res[sub[1]] = [];
+        }
+        res[sub[1]].push(sub[0]);
+    }
+    let resDict = {};
+    for (let key in res) {
+        resDict[key] = new Set(res[key]).size;
+    }
+    return JSON.stringify(resDict);
+}
+```",709,"```javascript
+console.assert(get_unique([(3, 4), (1, 2), (2, 4), (8, 2), (7, 2), (8, 1), (9, 1), (8, 4), (10, 4)]) === '{4: 4, 2: 3, 1: 2}');
+console.assert(get_unique([(4, 5), (2, 3), (3, 5), (9, 3), (8, 3), (9, 2), (10, 2), (9, 5), (11, 5)]) === '{5: 4, 3: 3, 2: 2}');
+console.assert(get_unique([(6, 5), (3, 4), (2, 6), (11, 1), (8, 22), (8, 11), (4, 3), (14, 3), (11, 6)]) === '{5: 1, 4: 1, 6: 2, 1: 1, 22: 1, 11: 1, 3: 2}');
+```"
+710,Write a python function to check whether the product of digits of a number at even and odd places is equal or not.,"```javascript
+function productEqual(n) {
+    if (n < 10) {
+        return false;
+    }
+    let prodOdd = 1, prodEven = 1;
+    while (n > 0) {
+        let digit = n % 10;
+        prodOdd *= digit;
+        n = Math.floor(n / 10);
+        if (n == 0) {
+            break;
+        }
+        digit = n % 10;
+        prodEven *= digit;
+        n = Math.floor(n / 10);
+    }
+    return prodOdd === prodEven;
+}
+```",711,"```javascript
+console.assert(product_Equal(2841) === true);
+console.assert(product_Equal(1234) === false);
+console.assert(product_Equal(1212) === false);
+```"
+711,Write a function to remove duplicates from a list of lists.,"```javascript
+function removeDuplicate(list1) {
+    list1.sort();
+    const remove_duplicate = Array.from(new Set(list1));
+    return remove_duplicate;
+}
+```",712,"```javascript
+['console.assert(remove_duplicate([[10, 20], [40], [30, 56, 25], [10, 20], [33], [40]]) === [[10, 20], [30, 56, 25], [33], [40]]);', 
+ 'console.assert(remove_duplicate([""a"", ""b"", ""a"", ""c"", ""c""]) === [""a"", ""b"", ""c""]);', 
+ 'console.assert(remove_duplicate([1, 3, 5, 6, 3, 5, 6, 1]) === [1, 3, 5, 6]);']
+```"
+736,Write a function to check whether the given string is starting with a vowel or not using regex.,"```javascript
+const regex = /^[aeiouAEIOU][A-Za-z0-9_]*$/;
+
+function checkStr(string) {
+    if (regex.test(string)) {
+        return ""Valid"";
+    } else {
+        return ""Invalid"";
+    }
+}
+```",737,"```javascript
+['console.assert(check_str(""annie"") === ""Valid"")', 'console.assert(check_str(""dawood"") === ""Invalid"")', 'console.assert(check_str(""Else"") === ""Valid"")']
+```"
+752,Write a function to find minimum k records from tuple list.,"```javascript
+function min_k(test_list, K) {
+    let res = test_list.sort((a, b) => a[1] - b[1]).slice(0, K);
+    return res;
+}
+```",753,"```javascript
+console.assert(JSON.stringify(min_k([['Manjeet', 10], ['Akshat', 4], ['Akash', 2], ['Nikhil', 8]], 2)) === JSON.stringify([['Akash', 2], ['Akshat', 4]]));
+console.assert(JSON.stringify(min_k([['Sanjeev', 11], ['Angat', 5], ['Akash', 3], ['Nepin', 9]], 3)) === JSON.stringify([['Akash', 3], ['Angat', 5], ['Nepin', 9]]));
+console.assert(JSON.stringify(min_k([['tanmay', 14], ['Amer', 11], ['Ayesha', 9], ['SKD', 16]], 1)) === JSON.stringify([['Ayesha', 9]]));
+```"
+772,Write a function to find the occurrence and position of the substrings within a string.,"```javascript
+function occuranceSubstring(text, pattern) {
+    const regex = new RegExp(pattern, 'g');
+    let match;
+    while ((match = regex.exec(text)) !== null) {
+        const s = match.index;
+        const e = regex.lastIndex;
+        return [text.slice(s, e), s, e];
+    }
+}
+```",773,"```javascript
+[""console.assert(occurance_substring('python programming, python language', 'python')[0] === 'python' && occurance_substring('python programming, python language', 'python')[1] === 0 && occurance_substring('python programming, python language', 'python')[2] === 6)"", ""console.assert(occurance_substring('python programming,programming language', 'programming')[0] === 'programming' && occurance_substring('python programming,programming language', 'programming')[1] === 7 && occurance_substring('python programming,programming language', 'programming')[2] === 18)"", ""console.assert(occurance_substring('python programming,programming language', 'language')[0] === 'language' && occurance_substring('python programming,programming language', 'language')[1] === 31 && occurance_substring('python programming,programming language', 'language')[2] === 39)""]
+```"
+782,Write a function to convert rgb color to hsv color.,"```javascript
+function rgbToHsv(r, g, b) {
+    r /= 255.0;
+    g /= 255.0;
+    b /= 255.0;
+    let mx = Math.max(r, g, b);
+    let mn = Math.min(r, g, b);
+    let df = mx - mn;
+    let h, s, v;
+
+    if (mx === mn) {
+        h = 0;
+    } else if (mx === r) {
+        h = (60 * ((g - b) / df) + 360) % 360;
+    } else if (mx === g) {
+        h = (60 * ((b - r) / df) + 120) % 360;
+    } else if (mx === b) {
+        h = (60 * ((r - g) / df) + 240) % 360;
+    }
+
+    if (mx === 0) {
+        s = 0;
+    } else {
+        s = (df / mx) * 100;
+    }
+    
+    v = mx * 100;
+    return [h, s, v];
+}
+```",783,"```javascript
+console.assert(rgb_to_hsv(255, 255, 255).toString() === (0 + ', ' + 0.0 + ', ' + 100.0).toString());
+console.assert(rgb_to_hsv(0, 215, 0).toString() === (120.0 + ', ' + 100.0 + ', ' + 84.31372549019608).toString());
+console.assert(rgb_to_hsv(10, 215, 110).toString() === (149.26829268292684 + ', ' + 95.34883720930233 + ', ' + 84.31372549019608).toString());
+```"
+805,Write a function to find maximum run of uppercase characters in the given string.,"```javascript
+function maxRunUppercase(testStr) {
+  let cnt = 0;
+  let res = 0;
+  for (let idx = 0; idx < testStr.length; idx++) {
+    if (testStr[idx] === testStr[idx].toUpperCase()) {
+      cnt++;
+    } else {
+      res = cnt;
+      cnt = 0;
+    }
+  }
+  if (testStr[testStr.length - 1] === testStr[testStr.length - 1].toUpperCase()) {
+    res = cnt;
+  }
+  return res;
+}
+```",806,"```javascript
+console.assert(max_run_uppercase('GeMKSForGERksISBESt') === 5);
+console.assert(max_run_uppercase('PrECIOusMOVemENTSYT') === 6);
+console.assert(max_run_uppercase('GooGLEFluTTER') === 4);
+```"
+812,Write a function to find length of the string.,"```javascript
+function stringLength(str1) {
+    let count = 0;
+    for (let char of str1) {
+        count += 1;
+    }
+    return count;
+}
+```",813,"```javascript
+[""console.assert(string_length('python') === 6)"", ""console.assert(string_length('program') === 7)"", ""console.assert(string_length('language') === 8)""]
+```"
+813,Write a function to find the area of a rombus.,"```javascript
+function rombusArea(p, q) {
+    var area = (p * q) / 2;
+    return area;
+}
+```",814,"```javascript
+['console.assert(rombus_area(10, 20) === 100)', 'console.assert(rombus_area(10, 5) === 25)', 'console.assert(rombus_area(4, 2) === 4)']
+```"
+820,Write a function to merge two dictionaries into a single expression.,"```javascript
+function mergeDictionaries(dict1, dict2) {
+    const mergedDict = Object.assign({}, dict2, dict1);
+    return mergedDict;
+}
+```",821,"```javascript
+['console.assert(JSON.stringify(merge_dictionaries({ ""R"": ""Red"", ""B"": ""Black"", ""P"": ""Pink"" }, { ""G"": ""Green"", ""W"": ""White"" })) === JSON.stringify({\'B\': \'Black\', \'R\': \'Red\', \'P\': \'Pink\', \'G\': \'Green\', \'W\': \'White\'}));', 
+ 'console.assert(JSON.stringify(merge_dictionaries({ ""R"": ""Red"", ""B"": ""Black"", ""P"": ""Pink"" }, { ""O"": ""Orange"", ""W"": ""White"", ""B"": ""Black"" })) === JSON.stringify({\'O\': \'Orange\', \'P\': \'Pink\', \'B\': \'Black\', \'W\': \'White\', \'R\': \'Red\'}));', 
+ 'console.assert(JSON.stringify(merge_dictionaries({ ""G"": ""Green"", ""W"": ""White"" }, { ""O"": ""Orange"", ""W"": ""White"", ""B"": ""Black"" })) === JSON.stringify({\'W\': \'White\', \'O\': \'Orange\', \'G\': \'Green\', \'B\': \'Black\'}));']
+```"
+856,Write a function to list out the list of given strings individually using map function.,"```javascript
+function listifyList(list1) {
+  const result = list1.map(item => Array.from(item));
+  return result;
+}
+```",857,"```javascript
+console.assert(JSON.stringify(listifyList(['Red', 'Blue', 'Black', 'White', 'Pink'])) === JSON.stringify([['R', 'e', 'd'], ['B', 'l', 'u', 'e'], ['B', 'l', 'a', 'c', 'k'], ['W', 'h', 'i', 't', 'e'], ['P', 'i', 'n', 'k']]));
+console.assert(JSON.stringify(listifyList(['python'])) === JSON.stringify([['p', 'y', 't', 'h', 'o', 'n']]));
+console.assert(JSON.stringify(listifyList([' red ', 'green',' black', 'blue ',' orange', 'brown'])) === JSON.stringify([[' ', 'r', 'e', 'd', ' '], ['g', 'r', 'e', 'e', 'n'], [' ', 'b', 'l', 'a', 'c', 'k'], ['b', 'l', 'u', 'e', ' '], [' ', 'o', 'r', 'a', 'n', 'g', 'e'], ['b', 'r', 'o', 'w', 'n']]));
+```"
+888,Write a function to reverse each list in a given list of lists.,"```javascript
+function reverseListLists(lists) {
+    for (let l of lists) {
+        l.sort((a, b) => b - a);
+    }
+    return lists;
+}
+```",889,"```javascript
+['console.assert(reverseListLists([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]]) == [[4, 3, 2, 1], [8, 7, 6, 5], [12, 11, 10, 9], [16, 15, 14, 13]]);', 'console.assert(reverseListLists([[1,2],[2,3],[3,4]]) == [[2,1],[3,2],[4,3]]);', 'console.assert(reverseListLists([[10,20],[30,40]]) == [[20,10],[40,30]]);']
+```"
+892,Write a python function to get the last element of each sublist.,"```javascript
+function Extract(lst) { 
+    return lst.map(item => item[item.length - 1]); 
+}
+```",893,"```javascript
+['console.assert(Extract([[1, 2, 3], [4, 5], [6, 7, 8, 9]]) === [3, 5, 9])', ""console.assert(Extract([['x', 'y', 'z'], ['m'], ['a', 'b'], ['u', 'v']]) === ['z', 'm', 'b', 'v'])"", 'console.assert(Extract([[1, 2, 3], [4, 5]]) === [3, 5])']
+```"
+900,Write a function to find the smallest multiple of the first n numbers.,"```javascript
+function smallestMultiple(n) {
+    if (n <= 2) {
+        return n;
+    }
+    let i = n * 2;
+    let factors = [];
+    for (let number = n; number > 1; number--) {
+        if (number * 2 > n) {
+            factors.push(number);
+        }
+    }
+    while (true) {
+        for (let a of factors) {
+            if (i % a !== 0) {
+                i += n;
+                break;
+            }
+            if (a === factors[factors.length - 1] && i % a === 0) {
+                return i;
+            }
+        }
+    }
+}
+```",901,"```javascript
+['console.assert(smallest_multiple(13) === 360360)', 'console.assert(smallest_multiple(2) === 2)', 'console.assert(smallest_multiple(1) === 1)'];
+```"
+902,Write a python function to count the total unset bits from 1 to n.,"```javascript
+function count_Unset_Bits(n) {  
+    let cnt = 0;  
+    for (let i = 1; i <= n; i++) {  
+        let temp = i;  
+        while (temp) {  
+            if (temp % 2 === 0) {  
+                cnt++;  
+            }  
+            temp = Math.floor(temp / 2);  
+        }  
+    }  
+    return cnt;  
+}
+```",903,"```javascript
+['console.assert(count_Unset_Bits(2) === 1)', 'console.assert(count_Unset_Bits(5) === 4)', 'console.assert(count_Unset_Bits(14) === 17)']
+```"
+914,Write a function to rearrange positive and negative numbers in a given array using lambda function.,"```javascript
+function rearrangeNumbs(arrayNums) {
+  const result = arrayNums.sort((a, b) => (a === 0 ? 0 : -1 / a) - (b === 0 ? 0 : -1 / b));
+  return result;
+}
+```",915,"```javascript
+assert(rearrange_numbs([-1, 2, -3, 5, 7, 8, 9, -10]).toString() === [2, 5, 7, 8, 9, -10, -3, -1].toString());
+assert(rearrange_numbs([10, 15, 14, 13, -18, 12, -20]).toString() === [10, 12, 13, 14, 15, -20, -18].toString());
+assert(rearrange_numbs([-20, 20, -10, 10, -30, 30]).toString() === [10, 20, 30, -30, -20, -10].toString());
+```"
+917,Write a function to count coin change.,"```javascript
+function coinChange(S, m, n) {
+    let table = Array.from({ length: n + 1 }, () => Array(m).fill(0));
+    for (let i = 0; i < m; i++) {
+        table[0][i] = 1;
+    }
+    for (let i = 1; i <= n; i++) {
+        for (let j = 0; j < m; j++) {
+            let x = (i - S[j] >= 0) ? table[i - S[j]][j] : 0;
+            let y = (j >= 1) ? table[i][j - 1] : 0;
+            table[i][j] = x + y;
+        }
+    }
+    return table[n][m - 1];
+}
+```",918,"```javascript
+['console.assert(coin_change([1, 2, 3], 3, 4) === 4)', 'console.assert(coin_change([4, 5, 6, 7, 8, 9], 6, 9) === 2)', 'console.assert(coin_change([4, 5, 6, 7, 8, 9], 6, 4) === 1)']
+```"
+927,Write a function to convert a date of yyyy-mm-dd format to dd-mm-yyyy format.,"```javascript
+function changeDateFormat(dt) {
+    return dt.replace(/(\d{4})-(\d{1,2})-(\d{1,2})/, '$3-$2-$1');
+}
+```",928,"```javascript
+[""console.assert(change_date_format('2026-01-02') === '02-01-2026')"", ""console.assert(change_date_format('2021-01-04') === '04-01-2021')"", ""console.assert(change_date_format('2030-06-06') === '06-06-2030')""]
+```"
+940,Write a function to count the elements in a list until an element is a tuple.,"```javascript
+function countElim(num) {
+    let countElim = 0;
+    for (let n of num) {
+        if (Array.isArray(n) && n.length === 2) {
+            break;
+        }
+        countElim += 1;
+    }
+    return countElim;
+}
+```",941,"```javascript
+console.assert(count_elim([10, 20, 30, [10, 20], 40]) === 3);
+console.assert(count_elim([10, [20, 30], [10, 20], 40]) === 1);
+console.assert(count_elim([[10, [20, 30, [10, 20], 40]]]) === 0);
+```"
+956,Write a python function to get the position of rightmost set bit.,"```javascript
+function getFirstSetBitPos(n) {
+    return Math.log2(n & -n) + 1;
+}
+```",957,"```javascript
+['console.assert(get_First_Set_Bit_Pos(12) === 3)', 'console.assert(get_First_Set_Bit_Pos(18) === 2)', 'console.assert(get_First_Set_Bit_Pos(16) === 5)']
+```"
+967,Write a python function to find maximum possible value for the given periodic function.,"```javascript
+function floor_Max(A, B, N) {
+    let x = Math.min(B - 1, N);
+    return Math.floor((A * x) / B);
+}
+```",968,"```javascript
+['console.assert(floor_Max(11,10,9) === 9)', 'console.assert(floor_Max(5,7,4) === 2)', 'console.assert(floor_Max(2,2,1) === 1)']
+```"
+976,"    """""" Given a positive floating point number, it can be decomposed into
+    and integer part (largest integer smaller than given number) and decimals
+    (leftover part always smaller than 1).
+
+    Return the decimal part of the number.
+    >>> truncate_number(3.5)
+    0.5
+    """"""
+","```javascript
+function truncateNumber(number) {
+    return number % 1.0;
+}
+```",977,"```javascript
+['console.assert(truncate_number(3.5) === 0.5)', 'console.assert(Math.abs(truncate_number(1.33) - 0.33) < 1e-6)', 'console.assert(Math.abs(truncate_number(123.456) - 0.456) < 1e-6)']
+```"
+993,"    """""" Input is a space-delimited string of numberals from 'zero' to 'nine'.
+    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.
+    Return the string with numbers sorted from smallest to largest
+    >>> sort_numbers('three one five')
+    'one three five'
+    """"""
+","```javascript
+function sortNumbers(numbers) {
+    const valueMap = {
+        'zero': 0,
+        'one': 1,
+        'two': 2,
+        'three': 3,
+        'four': 4,
+        'five': 5,
+        'six': 6,
+        'seven': 7,
+        'eight': 8,
+        'nine': 9
+    };
+    return Object.keys(valueMap)
+        .filter(x => numbers.split(' ').includes(x))
+        .sort((a, b) => valueMap[a] - valueMap[b])
+        .join(' ');
+}
+```",994,"```javascript
+[""console.assert(sort_numbers('') === '')"", ""console.assert(sort_numbers('three') === 'three')"", ""console.assert(sort_numbers('three five nine') === 'three five nine')"", ""console.assert(sort_numbers('five zero four seven nine eight') === 'zero four five seven eight nine')"", ""console.assert(sort_numbers('six five four three two one zero') === 'zero one two three four five six')""]
+```"
+995,"    """""" Given list of numbers (of at least two elements), apply a linear transform to that list,
+    such that the smallest number will become 0 and the largest will become 1
+    >>> rescale_to_unit([1.0, 2.0, 3.0, 4.0, 5.0])
+    [0.0, 0.25, 0.5, 0.75, 1.0]
+    """"""
+","```javascript
+function rescaleToUnit(numbers) {
+    const minNumber = Math.min(...numbers);
+    const maxNumber = Math.max(...numbers);
+    return numbers.map(x => (x - minNumber) / (maxNumber - minNumber));
+}
+```",996,"```javascript
+['console.assert(JSON.stringify(rescale_to_unit([2.0, 49.9])) === JSON.stringify([0.0, 1.0]))', 
+ 'console.assert(JSON.stringify(rescale_to_unit([100.0, 49.9])) === JSON.stringify([1.0, 0.0]))', 
+ 'console.assert(JSON.stringify(rescale_to_unit([1.0, 2.0, 3.0, 4.0, 5.0])) === JSON.stringify([0.0, 0.25, 0.5, 0.75, 1.0]))', 
+ 'console.assert(JSON.stringify(rescale_to_unit([2.0, 1.0, 5.0, 3.0, 4.0])) === JSON.stringify([0.25, 0.0, 1.0, 0.5, 0.75]))', 
+ 'console.assert(JSON.stringify(rescale_to_unit([12.0, 11.0, 15.0, 13.0, 14.0])) === JSON.stringify([0.25, 0.0, 1.0, 0.5, 0.75]))']
+```"
+997,"    """""" Return length of given string
+    >>> strlen('')
+    0
+    >>> strlen('abc')
+    3
+    """"""
+","```javascript
+function strlen(string) {
+    return string.length;
+}
+```",998,"```javascript
+[""console.assert(''.length === 0)"", ""console.assert('x'.length === 1)"", ""console.assert('asdasnakj'.length === 9)""]
+```"
+1006,"    """"""
+    Evaluates polynomial with coefficients xs at point x.
+    return xs[0] + xs[1] * x + xs[1] * x^2 + .... xs[n] * x^n
+    """"""
+    return sum([coeff * math.pow(x, i) for i, coeff in enumerate(xs)])
+
+
+def find_zero(xs: list):
+    """""" xs are coefficients of a polynomial.
+    find_zero find x such that poly(x) = 0.
+    find_zero returns only only zero point, even if there are many.
+    Moreover, find_zero only takes list xs having even number of coefficients
+    and largest non zero coefficient as it guarantees
+    a solution.
+    >>> round(find_zero([1, 2]), 2) # f(x) = 1 + 2x
+    -0.5
+    >>> round(find_zero([-6, 11, -6, 1]), 2) # (x - 1) * (x - 2) * (x - 3) = -6 + 11x - 6x^2 + x^3
+    1.0
+    """"""
+","```javascript
+function poly(xs, x) {
+    let begin = -1.0, end = 1.0;
+    while (poly(xs, begin) * poly(xs, end) > 0) {
+        begin *= 2.0;
+        end *= 2.0;
+    }
+    while (end - begin > 1e-10) {
+        const center = (begin + end) / 2.0;
+        if (poly(xs, center) * poly(xs, begin) > 0) {
+            begin = center;
+        } else {
+            end = center;
+        }
+    }
+    return begin;
+}
+```",1007,"```javascript
+[
+  'console.assert(Math.abs(poly([-10], sort_third(JSON.parse(JSON.stringify([-10])))) < 1e-4)',
+  'console.assert(Math.abs(poly([-10, -2], sort_third(JSON.parse(JSON.stringify([-10, -2])))) < 1e-4)',
+  'console.assert(Math.abs(poly([-3], sort_third(JSON.parse(JSON.stringify([-3])))) < 1e-4)',
+  'console.assert(Math.abs(poly([-3, -6], sort_third(JSON.parse(JSON.stringify([-3, -6])))) < 1e-4)',
+  'console.assert(Math.abs(poly([-3, -6, -7], sort_third(JSON.parse(JSON.stringify([-3, -6, -7])))) < 1e-4)',
+  'console.assert(Math.abs(poly([-3, -6, -7, 7], sort_third(JSON.parse(JSON.stringify([-3, -6, -7, 7])))) < 1e-4)',
+  'console.assert(Math.abs(poly([8], sort_third(JSON.parse(JSON.stringify([8])))) < 1e-4)',
+  'console.assert(Math.abs(poly([8, 3], sort_third(JSON.parse(JSON.stringify([8, 3])))) < 1e-4)',
+  'console.assert(Math.abs(poly([-10], sort_third(JSON.parse(JSON.stringify([-10])))) < 1e-4)',
+  'console.assert(Math.abs(poly([-10, -8], sort_third(JSON.parse(JSON.stringify([-10, -8])))) < 1e-4)',
+  'console.assert(Math.abs(poly([-3], sort_third(JSON.parse(JSON.stringify([-3])))) < 1e-4)',
+  'console.assert(Math.abs(poly([-3, 6], sort_third(JSON.parse(JSON.stringify([-3, 6])))) < 1e-4)',
+  'console.assert(Math.abs(poly([-3, 6, 9], sort_third(JSON.parse(JSON.stringify([-3, 6, 9])))) < 1e-4)',
+  'console.assert(Math.abs(poly([-3, 6, 9, -10], sort_third(JSON.parse(JSON.stringify([-3, 6, 9, -10])))) < 1e-4)',
+  'console.assert(Math.abs(poly([10], sort_third(JSON.parse(JSON.stringify([10])))) < 1e-4)',
+  'console.assert(Math.abs(poly([10, 7], sort_third(JSON.parse(JSON.stringify([10, 7])))) < 1e-4)',
+  'console.assert(Math.abs(poly([10, 7, 3], sort_third(JSON.parse(JSON.stringify([10, 7, 3])))) < 1e-4)',
+  'console.assert(Math.abs(poly([10, 7, 3, -3], sort_third(JSON.parse(JSON.stringify([10, 7, 3, -3])))) < 1e-4)',
+  'console.assert(Math.abs(poly([8], sort_third(JSON.parse(JSON.stringify([8])))) < 1e-4)',
+  'console.assert(Math.abs(poly([8, -2], sort_third(JSON.parse(JSON.stringify([8, -2])))) < 1e-4)',
+  'console.assert(Math.abs(poly([8, -2, -10], sort_third(JSON.parse(JSON.stringify([8, -2, -10])))) < 1e-4)',
+  'console.assert(Math.abs(poly([8, -2, -10, -5], sort_third(JSON.parse(JSON.stringify([8, -2, -10, -5])))) < 1e-4)',
+  'console.assert(Math.abs(poly([8, -2, -10, -5, 3], sort_third(JSON.parse(JSON.stringify([8, -2, -10, -5, 3])))) < 1e-4)',
+  'console.assert(Math.abs(poly([8, -2, -10, -5, 3, 1], sort_third(JSON.parse(JSON.stringify([8, -2, -10, -5, 3, 1])))) < 1e-4)',
+  'console.assert(Math.abs(poly([8, -2, -10, -5, 3, 1, -2], sort_third(JSON.parse(JSON.stringify([8, -2, -10, -5, 3, 1, -2])))) < 1e-4)',
+  'console.assert(Math.abs(poly([8, -2, -10, -5, 3, 1, -2, -6], sort_third(JSON.parse(JSON.stringify([8, -2, -10, -5, 3, 1, -2, -6])))) < 1e-4)',
+  'console.assert(Math.abs(poly([1], sort_third(JSON.parse(JSON.stringify([1])))) < 1e-4)',
+  'console.assert(Math.abs(poly([1, -7], sort_third(JSON.parse(JSON.stringify([1, -7])))) < 1e-4)',
+  'console.assert(Math.abs(poly([1, -7, -8], sort_third(JSON.parse(JSON.stringify([1, -7, -8])))) < 1e-4)',
+  'console.assert(Math.abs(poly([1, -7, -8, 2], sort_third(JSON.parse(JSON.stringify([1, -7, -8, 2])))) < 1e-4)',
+  'console.assert(Math.abs(poly([1], sort_third(JSON.parse(JSON.stringify([1])))) < 1e-4)',
+  'console.assert(Math.abs(poly([1, 1], sort_third(JSON.parse(JSON.stringify([1, 1])))) < 1e-4)',
+  'console.assert(Math.abs(poly([-9], sort_third(JSON.parse(JSON.stringify([-9])))) < 1e-4)',
+  'console.assert(Math.abs(poly([-9, 4], sort_third(JSON.parse(JSON.stringify([-9, 4])))) < 1e-4)',
+  'console.assert(Math.abs(poly([-9, 4, 7], sort_third(JSON.parse(JSON.stringify([-9, 4, 7])))) < 1e-4)',
+  'console.assert(Math.abs(poly([-9, 4, 7, -7], sort_third(JSON.parse(JSON.stringify([-9, 4, 7, -7])))) < 1e-4)',
+  'console.assert(Math.abs(poly([-9, 4, 7, -7, 2], sort_third(JSON.parse(JSON.stringify([-9, 4, 7, -7, 2])))) < 1e-4)',
+  'console.assert(Math.abs(poly([-9, 4, 7, -7, 2, -8], sort_third(JSON.parse(JSON.stringify([-9, 4, 7, -7, 2, -8])))) < 1e-4)'
+]
+```"
+1016,"    """"""Return list with elements incremented by 1.
+    >>> incr_list([1, 2, 3])
+    [2, 3, 4]
+    >>> incr_list([5, 3, 5, 2, 3, 3, 9, 0, 123])
+    [6, 4, 6, 3, 4, 4, 10, 1, 124]
+    """"""
+","```javascript
+function incrList(l) {
+    return l.map(e => e + 1);
+}
+```",1017,"```javascript
+['console.assert(incr_list([]).toString() === [].toString())', 
+ 'console.assert(incr_list([3, 2, 1]).toString() === [4, 3, 2].toString())', 
+ 'console.assert(incr_list([5, 2, 5, 2, 3, 3, 9, 0, 123]).toString() === [6, 3, 6, 3, 4, 4, 10, 1, 124].toString())']
+```"
+1021,"    """"""Return median of elements in the list l.
+    >>> median([3, 1, 2, 4, 5])
+    3
+    >>> median([-10, 4, 6, 1000, 10, 20])
+    15.0
+    """"""
+","```javascript
+function median(l) {
+    l.sort((a, b) => a - b);
+    if (l.length % 2 === 1) {
+        return l[Math.floor(l.length / 2)];
+    } else {
+        return (l[l.length / 2 - 1] + l[l.length / 2]) / 2.0;
+    }
+}
+```",1022,"```javascript
+['console.assert(median([3, 1, 2, 4, 5]) === 3)', 'console.assert(median([-10, 4, 6, 1000, 10, 20]) === 8.0)', 'console.assert(median([5]) === 5)', 'console.assert(median([6, 5]) === 5.5)', 'console.assert(median([8, 1, 3, 9, 9, 2, 7]) === 7)']
+```"
+1043,"    '''
+    You are given a non-empty list of positive integers. Return the greatest integer that is greater than 
+    zero, and has a frequency greater than or equal to the value of the integer itself. 
+    The frequency of an integer is the number of times it appears in the list.
+    If no such a value exist, return -1.
+    Examples:
+        search([4, 1, 2, 2, 3, 1]) == 2
+        search([1, 2, 2, 3, 3, 3, 4, 4, 4]) == 3
+        search([5, 5, 4, 4, 4]) == -1
+    '''
+","```javascript
+function search(lst) {
+    const frq = Array(Math.max(...lst) + 1).fill(0);
+    for (let i of lst) {
+        frq[i] += 1;
+    }
+
+    let ans = -1;
+    for (let i = 1; i < frq.length; i++) {
+        if (frq[i] >= i) {
+            ans = i;
+        }
+    }
+
+    return ans;
+}
+```",1044,"```javascript
+['console.assert(search([5, 5, 5, 5, 1]) === 1)', 'console.assert(search([4, 1, 4, 1, 4, 4]) === 4)', 'console.assert(search([3, 3]) === -1)', 'console.assert(search([8, 8, 8, 8, 8, 8, 8, 8]) === 8)', 'console.assert(search([2, 3, 3, 2, 2]) === 2)', 'console.assert(search([2, 7, 8, 8, 4, 8, 7, 3, 9, 6, 5, 10, 4, 3, 6, 7, 1, 7, 4, 10, 8, 1]) === 1)', 'console.assert(search([3, 2, 8, 2]) === 2)', 'console.assert(search([6, 7, 1, 8, 8, 10, 5, 8, 5, 3, 10]) === 1)', 'console.assert(search([8, 8, 3, 6, 5, 6, 4]) === -1)', 'console.assert(search([6, 9, 6, 7, 1, 4, 7, 1, 8, 8, 9, 8, 10, 10, 8, 4, 10, 4, 10, 1, 2, 9, 5, 7, 9]) === 1)', 'console.assert(search([1, 9, 10, 1, 3]) === 1)', 'console.assert(search([6, 9, 7, 5, 8, 7, 5, 3, 7, 5, 10, 10, 3, 6, 10, 2, 8, 6, 5, 4, 9, 5, 3, 10]) === 5)', 'console.assert(search([1]) === 1)', 'console.assert(search([8, 8, 10, 6, 4, 3, 5, 8, 2, 4, 2, 8, 4, 6, 10, 4, 2, 1, 10, 2, 1, 1, 5]) === 4)', 'console.assert(search([2, 10, 4, 8, 2, 10, 5, 1, 2, 9, 5, 5, 6, 3, 8, 6, 4, 10]) === 2)', 'console.assert(search([1, 6, 10, 1, 6, 9, 10, 8, 6, 8, 7, 3]) === 1)', 'console.assert(search([9, 2, 4, 1, 5, 1, 5, 2, 5, 7, 7, 7, 3, 10, 1, 5, 4, 2, 8, 4, 1, 9, 10, 7, 10, 2, 8, 10, 9, 4]) === 4)', 'console.assert(search([2, 6, 4, 2, 8, 7, 5, 6, 4, 10, 4, 6, 3, 7, 8, 8, 3, 1, 4, 2, 2, 10, 7]) === 4)', 'console.assert(search([9, 8, 6, 10, 2, 6, 10, 2, 7, 8, 10, 3, 8, 2, 6, 2, 3, 1]) === 2)', 'console.assert(search([5, 5, 3, 9, 5, 6, 3, 2, 8, 5, 6, 10, 10, 6, 8, 4, 10, 7, 7, 10, 8]) === -1)', 'console.assert(search([10]) === -1)', 'console.assert(search([9, 7, 7, 2, 4, 7, 2, 10, 9, 7, 5, 7, 2]) === 2)', 'console.assert(search([5, 4, 10, 2, 1, 1, 10, 3, 6, 1, 8]) === 1)', 'console.assert(search([7, 9, 9, 9, 3, 4, 1, 5, 9, 1, 2, 1, 1, 10, 7, 5, 6, 7, 6, 7, 7, 6]) === 1)', 'console.assert(search([3, 10, 10, 9, 2]) === -1)'];
+```"
+1044,"    '''
+    Given list of integers, return list in strange order.
+    Strange sorting, is when you start with the minimum value,
+    then maximum of the remaining integers, then minimum and so on.
+
+    Examples:
+    strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]
+    strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]
+    strange_sort_list([]) == []
+    '''
+","```javascript
+function strangeSortList(lst) {
+    let res = [];
+    let switcher = true;
+    while (lst.length > 0) {
+        const value = switcher ? Math.min(...lst) : Math.max(...lst);
+        res.push(value);
+        lst.splice(lst.indexOf(value), 1);
+        switcher = !switcher;
+    }
+    return res;
+}
+```",1045,"```javascript
+['console.assert(JSON.stringify(strange_sort_list([1, 2, 3, 4])) === JSON.stringify([1, 4, 2, 3])', 
+ 'console.assert(JSON.stringify(strange_sort_list([5, 6, 7, 8, 9])) === JSON.stringify([5, 9, 6, 8, 7])', 
+ 'console.assert(JSON.stringify(strange_sort_list([1, 2, 3, 4, 5])) === JSON.stringify([1, 5, 2, 4, 3])', 
+ 'console.assert(JSON.stringify(strange_sort_list([5, 6, 7, 8, 9, 1])) === JSON.stringify([1, 9, 5, 8, 6, 7])', 
+ 'console.assert(JSON.stringify(strange_sort_list([5, 5, 5, 5])) === JSON.stringify([5, 5, 5, 5])', 
+ 'console.assert(JSON.stringify(strange_sort_list([])) === JSON.stringify([])', 
+ 'console.assert(JSON.stringify(strange_sort_list([1,2,3,4,5,6,7,8])) === JSON.stringify([1, 8, 2, 7, 3, 6, 4, 5])', 
+ 'console.assert(JSON.stringify(strange_sort_list([0,2,2,2,5,5,-5,-5])) === JSON.stringify([-5, 5, -5, 5, 0, 2, 2, 2])', 
+ 'console.assert(JSON.stringify(strange_sort_list([111111])) === JSON.stringify([111111])', 
+ 'console.assert(true)']
+```"
+1070,"    """"""Implement a function that takes an non-negative integer and returns an array of the first n
+    integers that are prime numbers and less than n.
+    for example:
+    count_up_to(5) => [2,3]
+    count_up_to(11) => [2,3,5,7]
+    count_up_to(0) => []
+    count_up_to(20) => [2,3,5,7,11,13,17,19]
+    count_up_to(1) => []
+    count_up_to(18) => [2,3,5,7,11,13,17]
+    """"""
+","```javascript
+function countUpTo(n) {
+    let primes = [];
+    for (let i = 2; i < n; i++) {
+        let isPrime = true;
+        for (let j = 2; j < i; j++) {
+            if (i % j === 0) {
+                isPrime = false;
+                break;
+            }
+        }
+        if (isPrime) {
+            primes.push(i);
+        }
+    }
+    return primes;
+}
+```",1071,"```javascript
+['console.assert(count_up_to(5).toString() === [2,3].toString())', 'console.assert(count_up_to(6).toString() === [2,3,5].toString())', 'console.assert(count_up_to(7).toString() === [2,3,5].toString())', 'console.assert(count_up_to(10).toString() === [2,3,5,7].toString())', 'console.assert(count_up_to(0).toString() === [].toString())', 'console.assert(count_up_to(22).toString() === [2,3,5,7,11,13,17,19].toString())', 'console.assert(count_up_to(1).toString() === [].toString())', 'console.assert(count_up_to(18).toString() === [2,3,5,7,11,13,17].toString())', 'console.assert(count_up_to(47).toString() === [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43].toString())', 'console.assert(count_up_to(101).toString() === [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97].toString())']
+```"
+1112,"    """"""Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers
+    Example
+    is_equal_to_sum_even(4) == False
+    is_equal_to_sum_even(6) == False
+    is_equal_to_sum_even(8) == True
+    """"""
+","```javascript
+function is_equal_to_sum_even(n) {
+  return n % 2 === 0 && n >= 8;
+}
+```",1113,"```javascript
+console.assert(is_equal_to_sum_even(4) === false);
+console.assert(is_equal_to_sum_even(6) === false);
+console.assert(is_equal_to_sum_even(8) === true);
+console.assert(is_equal_to_sum_even(10) === true);
+console.assert(is_equal_to_sum_even(11) === false);
+console.assert(is_equal_to_sum_even(12) === true);
+console.assert(is_equal_to_sum_even(13) === false);
+console.assert(is_equal_to_sum_even(16) === true);
+```"
+1114,"    """"""
+    Given a string text, replace all spaces in it with underscores, 
+    and if a string has more than 2 consecutive spaces, 
+    then replace all consecutive spaces with - 
+    
+    fix_spaces(""Example"") == ""Example""
+    fix_spaces(""Example 1"") == ""Example_1""
+    fix_spaces("" Example 2"") == ""_Example_2""
+    fix_spaces("" Example   3"") == ""_Example-3""
+    """"""
+","```javascript
+function fixSpaces(text) {
+    let newText = """";
+    let i = 0;
+    let start = 0, end = 0;
+
+    while (i < text.length) {
+        if (text[i] === "" "") {
+            end += 1;
+        } else {
+            if (end - start > 2) {
+                newText += ""-"" + text[i];
+            } else if (end - start > 0) {
+                newText += ""_"".repeat(end - start) + text[i];
+            } else {
+                newText += text[i];
+            }
+            start = i + 1;
+            end = i + 1;
+        }
+        i += 1;
+    }
+    if (end - start > 2) {
+        newText += ""-"";
+    } else if (end - start > 0) {
+        newText += ""_"";
+    }
+    return newText;
+}
+```",1115,"```javascript
+console.assert(fix_spaces(""Example"") === ""Example"", ""This prints if this assert fails 1 (good for debugging!)"");
+console.assert(fix_spaces(""Mudasir Hanif "") === ""Mudasir_Hanif_"", ""This prints if this assert fails 2 (good for debugging!)"");
+console.assert(fix_spaces(""Yellow Yellow  Dirty  Fellow"") === ""Yellow_Yellow__Dirty__Fellow"", ""This prints if this assert fails 3 (good for debugging!)"");
+console.assert(fix_spaces(""Exa   mple"") === ""Exa-mple"", ""This prints if this assert fails 4 (good for debugging!)"");
+console.assert(fix_spaces(""   Exa 1 2 2 mple"") === ""-Exa_1_2_2_mple"", ""This prints if this assert fails 5 (good for debugging!)"");
+```"
+1122,"    '''
+    There are eight planets in our solar system: the closerst to the Sun 
+    is Mercury, the next one is Venus, then Earth, Mars, Jupiter, Saturn, 
+    Uranus, Neptune.
+    Write a function that takes two planet names as strings planet1 and planet2. 
+    The function should return a tuple containing all planets whose orbits are 
+    located between the orbit of planet1 and the orbit of planet2, sorted by 
+    the proximity to the sun. 
+    The function should return an empty tuple if planet1 or planet2
+    are not correct planet names. 
+    Examples
+    bf(""Jupiter"", ""Neptune"") ==> (""Saturn"", ""Uranus"")
+    bf(""Earth"", ""Mercury"") ==> (""Venus"")
+    bf(""Mercury"", ""Uranus"") ==> (""Venus"", ""Earth"", ""Mars"", ""Jupiter"", ""Saturn"")
+    '''
+","```javascript
+function bf(planet1, planet2) {
+    const planetNames = [""Mercury"", ""Venus"", ""Earth"", ""Mars"", ""Jupiter"", ""Saturn"", ""Uranus"", ""Neptune""];
+    if (!planetNames.includes(planet1) || !planetNames.includes(planet2) || planet1 === planet2) {
+        return [];
+    }
+    const planet1Index = planetNames.indexOf(planet1);
+    const planet2Index = planetNames.indexOf(planet2);
+    if (planet1Index < planet2Index) {
+        return planetNames.slice(planet1Index + 1, planet2Index);
+    } else {
+        return planetNames.slice(planet2Index + 1, planet1Index);
+    }
+}
+```",1123,"```javascript
+console.assert(bf(""Jupiter"", ""Neptune"").toString() === [""Saturn"", ""Uranus""].toString(), ""First test error: "" + bf(""Jupiter"", ""Neptune"").length);
+console.assert(bf(""Earth"", ""Mercury"").toString() === [""Venus""].toString(), ""Second test error: "" + bf(""Earth"", ""Mercury"").toString());
+console.assert(bf(""Mercury"", ""Uranus"").toString() === [""Venus"", ""Earth"", ""Mars"", ""Jupiter"", ""Saturn""].toString(), ""Third test error: "" + bf(""Mercury"", ""Uranus"").toString());
+console.assert(bf(""Neptune"", ""Venus"").toString() === [""Earth"", ""Mars"", ""Jupiter"", ""Saturn"", ""Uranus""].toString(), ""Fourth test error: "" + bf(""Neptune"", ""Venus"").toString());
+console.assert(bf(""Earth"", ""Earth"").toString() === [].toString());
+console.assert(bf(""Mars"", ""Earth"").toString() === [].toString());
+console.assert(bf(""Jupiter"", ""Makemake"").toString() === [].toString());
+```"
+1124,"    """"""A simple program which should return the value of x if n is 
+    a prime number and should return the value of y otherwise.
+
+    Examples:
+    for x_or_y(7, 34, 12) == 34
+    for x_or_y(15, 8, 5) == 5
+    
+    """"""
+","```javascript
+function x_or_y(n, x, y) {
+    if (n === 1) {
+        return y;
+    }
+    for (let i = 2; i < n; i++) {
+        if (n % i === 0) {
+            return y;
+            break;
+        }
+    }
+    return x;
+}
+```",1125,"```javascript
+['console.assert(x_or_y(7, 34, 12) === 34)', 'console.assert(x_or_y(15, 8, 5) === 5)', 'console.assert(x_or_y(3, 33, 5212) === 33)', 'console.assert(x_or_y(1259, 3, 52) === 3)', 'console.assert(x_or_y(7919, -1, 12) === -1)', 'console.assert(x_or_y(3609, 1245, 583) === 583)', 'console.assert(x_or_y(91, 56, 129) === 129)', 'console.assert(x_or_y(6, 34, 1234) === 1234)', 'console.assert(x_or_y(1, 2, 0) === 0)', 'console.assert(x_or_y(2, 2, 0) === 2)']
+```"
+1137,"    """"""
+    Given two positive integers a and b, return the even digits between a
+    and b, in ascending order.
+
+    For example:
+    generate_integers(2, 8) => [2, 4, 6, 8]
+    generate_integers(8, 2) => [2, 4, 6, 8]
+    generate_integers(10, 14) => []
+    """"""
+","```javascript
+function generateIntegers(a, b) {
+    const lower = Math.max(2, Math.min(a, b));
+    const upper = Math.min(8, Math.max(a, b));
+
+    const result = [];
+    for (let i = lower; i <= upper; i++) {
+        if (i % 2 === 0) {
+            result.push(i);
+        }
+    }
+    return result;
+}
+```",1138,"```javascript
+console.assert(JSON.stringify(generate_integers(2, 10)) === JSON.stringify([2, 4, 6, 8]), ""Test 1"");
+console.assert(JSON.stringify(generate_integers(10, 2)) === JSON.stringify([2, 4, 6, 8]), ""Test 2"");
+console.assert(JSON.stringify(generate_integers(132, 2)) === JSON.stringify([2, 4, 6, 8]), ""Test 3"");
+console.assert(JSON.stringify(generate_integers(17, 89)) === JSON.stringify([]), ""Test 4"");
+console.assert(true, ""This prints if this assert fails 2 (also good for debugging!)"");
+```"

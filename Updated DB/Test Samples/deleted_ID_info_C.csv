@@ -1,0 +1,3476 @@
+Unnamed: 0,text,code,task_id,test_list
+6,Write a function to find all words which are at least 4 characters long in a string by using regex.,"```cpp
+#include <iostream>
+#include <regex>
+#include <string>
+#include <vector>
+
+std::vector<std::string> find_char_long(const std::string& text) {
+    std::regex word_regex(R""(\b\w{4,}\b)"");
+    std::sregex_iterator iter(text.begin(), text.end(), word_regex);
+    std::sregex_iterator end;
+
+    std::vector<std::string> results;
+    while (iter != end) {
+        results.push_back(iter->str());
+        ++iter;
+    }
+    return results;
+}
+```",7,"```cpp
+#include <cassert>
+#include <vector>
+#include <sstream>
+#include <string>
+
+std::vector<std::string> find_char_long(const std::string& str) {
+    std::istringstream iss(str);
+    std::string word;
+    std::vector<std::string> result;
+    while (iss >> word) {
+        if (word.length() >= 4) {
+            result.push_back(word);
+        }
+    }
+    return result;
+}
+
+int main() {
+    assert(find_char_long(""Please move back to stream"") == std::vector<std::string>{""Please"", ""move"", ""back"", ""stream""});
+    assert(find_char_long(""Jing Eco and Tech"") == std::vector<std::string>{""Jing"", ""Tech""});
+    assert(find_char_long(""Jhingai wulu road Zone 3"") == std::vector<std::string>{""Jhingai"", ""wulu"", ""road"", ""Zone""});
+    return 0;
+}
+```"
+9,Write a function to get the n smallest items from a dataset.,"```cpp
+#include <vector>
+#include <queue>
+#include <algorithm>
+
+std::vector<int> small_nnum(const std::vector<int>& list1, int n) {
+    std::priority_queue<int, std::vector<int>, std::greater<int>> minHeap;
+    for (int num : list1) {
+        minHeap.push(num);
+    }
+    
+    std::vector<int> smallest;
+    for (int i = 0; i < n && !minHeap.empty(); ++i) {
+        smallest.push_back(minHeap.top());
+        minHeap.pop();
+    }
+    
+    return smallest;
+}
+```",10,"```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cassert>
+
+std::vector<int> small_nnum(const std::vector<int>& nums, int n) {
+    std::vector<int> result = nums; 
+    std::sort(result.begin(), result.end());
+    result.resize(n);
+    return result;
+}
+
+int main() {
+    assert((small_nnum({10, 20, 50, 70, 90, 20, 50, 40, 60, 80, 100}, 2) == std::vector<int>{10, 20}));
+    assert((small_nnum({10, 20, 50, 70, 90, 20, 50, 40, 60, 80, 100}, 5) == std::vector<int>{10, 20, 20, 40, 50}));
+    assert((small_nnum({10, 20, 50, 70, 90, 20, 50, 40, 60, 80, 100}, 3) == std::vector<int>{10, 20, 20}));
+    return 0;
+}
+```"
+50,Write a function to print check if the triangle is equilateral or not.,"```cpp
+bool check_equilateral(int x, int y, int z) {
+    if (x == y && y == z) {
+        return true;
+    } else {
+        return false;
+    }
+}
+```",51,"```cpp
+assert(check_equilateral(6, 8, 12) == false);
+assert(check_equilateral(6, 6, 12) == false);
+assert(check_equilateral(6, 6, 6) == true);
+```"
+52,Write a python function to check whether the first and last characters of a given string are equal or not.,"```cpp
+#include <string>
+
+std::string check_Equality(const std::string& str) {
+    if (str[0] == str[str.length() - 1]) {
+        return ""Equal"";
+    } else {
+        return ""Not Equal"";
+    }
+}
+```",53,"```cpp
+#include <cassert>
+#include <string>
+
+void check_Equality(const std::string& str);
+
+int main() {
+    assert(check_Equality(""abcda"") == ""Equal"");
+    assert(check_Equality(""ab"") == ""Not Equal"");
+    assert(check_Equality(""mad"") == ""Not Equal"");
+
+    return 0;
+}
+```"
+58,Write a function to find the nth octagonal number.,"```cpp
+int is_octagonal(int n) {
+    return 3 * n * n - 2 * n;
+}
+```",59,"```cpp
+#include <cassert>
+
+int is_octagonal(int n) {
+    return n * (3 * n - 2);
+}
+
+int main() {
+    assert(is_octagonal(5) == 65);
+    assert(is_octagonal(10) == 280);
+    assert(is_octagonal(15) == 645);
+    return 0;
+}
+```"
+70,Write a function to sort a list of elements using comb sort.,"```cpp
+#include <vector>
+
+std::vector<int> comb_sort(std::vector<int> nums) {
+    double shrink_fact = 1.3;
+    int gaps = nums.size();
+    bool swapped = true;
+    int i = 0;
+    while (gaps > 1 || swapped) {
+        gaps = static_cast<int>(gaps / shrink_fact);
+        swapped = false;
+        i = 0;
+        while (gaps + i < nums.size()) {
+            if (nums[i] > nums[i + gaps]) {
+                std::swap(nums[i], nums[i + gaps]);
+                swapped = true;
+            }
+            i++;
+        }
+    }
+    return nums;
+}
+```",71,"```cpp
+#include <cassert>
+#include <vector>
+#include <algorithm>
+
+std::vector<int> comb_sort(std::vector<int> array) {
+    // Comb sort algorithm implementation
+    // (Implementation not provided in the original code)
+}
+
+int main() {
+    assert(comb_sort({5, 15, 37, 25, 79}) == std::vector<int>({5, 15, 25, 37, 79}));
+    assert(comb_sort({41, 32, 15, 19, 22}) == std::vector<int>({15, 19, 22, 32, 41}));
+    assert(comb_sort({99, 15, 13, 47}) == std::vector<int>({13, 15, 47, 99}));
+    return 0;
+}
+```"
+72,Write a function to split the given string with multiple delimiters by using regex.,"```cpp
+#include <string>
+#include <vector>
+#include <sstream>
+#include <regex>
+
+std::vector<std::string> multiple_split(const std::string& text) {
+    std::regex reg("";/ |, |\\*|\\n"");
+    std::sregex_token_iterator it(text.begin(), text.end(), reg, -1);
+    std::sregex_token_iterator reg_end;
+    return std::vector<std::string>(it, reg_end);
+}
+```",73,"```cpp
+#include <iostream>
+#include <vector>
+#include <string>
+#include <sstream>
+#include <cassert>
+
+std::vector<std::string> multiple_split(const std::string& str) {
+    std::vector<std::string> result;
+    std::string part;
+    std::stringstream ss(str);
+    
+    // Split by '*'
+    while (std::getline(ss, part, '*')) {
+        std::stringstream ss_n(part);
+        std::string sub_part;
+        
+        // Split by '\\n'
+        while (std::getline(ss_n, sub_part, '\\')) {
+            if (sub_part == ""n"") {
+                // Replace with a newline character
+                result.push_back("""");
+            } else {
+                result.back() += sub_part;
+            }
+        }
+    }
+    
+    return result;
+}
+
+int main() {
+    assert(multiple_split(""Forces of the \\ndarkness*are coming into the play."") == std::vector<std::string>{""Forces of the "", ""darkness"", ""are coming into the play.""});
+    assert(multiple_split(""Mi Box runs on the \\n Latest android*which has google assistance and chromecast."") == std::vector<std::string>{""Mi Box runs on the "", "" Latest android"", ""which has google assistance and chromecast.""});
+    assert(multiple_split(""Certain services\\nare subjected to change*over the seperate subscriptions."") == std::vector<std::string>{""Certain services"", ""are subjected to change"", ""over the seperate subscriptions.""});
+    
+    return 0;
+}
+```"
+80,Write a function to zip the two given tuples.,"```cpp
+#include <iostream>
+#include <vector>
+#include <tuple>
+
+std::pair<std::vector<std::tuple<decltype(test_tup1[0]), decltype(test_tup2[0])>>, std::vector<std::tuple<decltype(test_tup1[0]), decltype(test_tup2[0])>>> zip_tuples(const std::vector<decltype(test_tup1[0])>& test_tup1, const std::vector<decltype(test_tup2[0])>& test_tup2) {
+    std::vector<std::tuple<decltype(test_tup1[0]), decltype(test_tup2[0])>> res;
+    for (size_t i = 0; i < test_tup1.size(); ++i) {
+        res.emplace_back(test_tup1[i], test_tup2[i % test_tup2.size()]);
+    }
+    return res;
+}
+```",81,"```cpp
+#include <cassert>
+#include <tuple>
+#include <vector>
+
+std::vector<std::tuple<int, int>> zip_tuples(const std::tuple<int, int, int, int, int, int>& a, const std::tuple<int, int, int>& b) {
+    std::vector<std::tuple<int, int>> result;
+    int a_size = 6;
+    int b_size = 3;
+
+    for (int i = 0; i < a_size; ++i) {
+        for (int j = 0; j < b_size; ++j) {
+            if (i < a_size && j < b_size) {
+                result.emplace_back(std::make_tuple(std::get<i>(a), std::get<j>(b)));
+            }
+        }
+    }
+    
+    return result;
+}
+
+int main() {
+    assert(zip_tuples(std::make_tuple(7, 8, 4, 5, 9, 10), std::make_tuple(1, 5, 6)) == std::vector<std::tuple<int, int>>{{7, 1}, {8, 5}, {4, 6}, {5, 1}, {9, 5}, {10, 6}});
+    assert(zip_tuples(std::make_tuple(8, 9, 5, 6, 10, 11), std::make_tuple(2, 6, 7)) == std::vector<std::tuple<int, int>>{{8, 2}, {9, 6}, {5, 7}, {6, 2}, {10, 6}, {11, 7}});
+    assert(zip_tuples(std::make_tuple(9, 10, 6, 7, 11, 12), std::make_tuple(3, 7, 8)) == std::vector<std::tuple<int, int>>{{9, 3}, {10, 7}, {6, 8}, {7, 3}, {11, 7}, {12, 8}});
+
+    return 0;
+}
+```"
+81,Write a function to find the volume of a sphere.,"```cpp
+#include <cmath>
+
+double volume_sphere(double r) {
+    double volume = (4.0 / 3.0) * M_PI * r * r * r;
+    return volume;
+}
+```",82,"```cpp
+#include <cassert>
+#include <cmath>
+
+double volume_sphere(double radius) {
+    return (4.0 / 3.0) * M_PI * std::pow(radius, 3);
+}
+
+int main() {
+    assert(volume_sphere(10) == 4188.790204786391);
+    assert(volume_sphere(25) == 65449.84694978735);
+    assert(volume_sphere(20) == 33510.32163829113);
+    return 0;
+}
+```"
+88,Write a function to find the closest smaller number than n.,"```cpp
+#include <utility>
+
+std::pair<int, int> closest_num(int N) {
+    return std::make_pair(N - 1, 0);
+}
+```",89,"```cpp
+#include <cassert>
+
+int closest_num(int n) {
+    return n - 1;
+}
+
+int main() {
+    assert(closest_num(11) == 10);
+    assert(closest_num(7) == 6);
+    assert(closest_num(12) == 11);
+    return 0;
+}
+```"
+92,Write a function to calculate the value of 'a' to the power 'b'.,"```cpp
+int power(int a, int b) {
+    if (b == 0) {
+        return 1;
+    } else if (a == 0) {
+        return 0;
+    } else if (b == 1) {
+        return a;
+    } else {
+        return a * power(a, b - 1);
+    }
+}
+```",93,"```cpp
+#include <cassert>
+
+int power(int base, int exp) {
+    // Implementation of power function
+    int result = 1;
+    for(int i = 0; i < exp; i++) {
+        result *= base;
+    }
+    return result;
+}
+
+int main() {
+    assert(power(3, 4) == 81);
+    assert(power(2, 3) == 8);
+    assert(power(5, 5) == 3125);
+    return 0;
+}
+```"
+95,Write a python function to find the number of divisors of a given integer.,"```cpp
+#include <vector>
+
+std::pair<int, int> divisor(int n) {
+    int x = 0;
+    for (int i = 1; i <= n; ++i) {
+        if (n % i == 0) {
+            x++;
+        }
+    }
+    return {x, x}; // returning a pair as there's no second value in original code
+}
+```",96,"```cpp
+#include <cassert>
+
+int divisor(int n) {
+    // Function implementation here
+}
+
+int main() {
+    assert(divisor(15) == 4);
+    assert(divisor(12) == 6);
+    assert(divisor(9) == 3);
+    return 0;
+}
+```"
+125,Write a python function to find the sum of common divisors of two given numbers.,"```cpp
+#include <iostream>
+#include <algorithm>
+
+std::pair<int, int> sum(int a, int b) {
+    int sum = 0;
+    for (int i = 1; i < std::min(a, b); ++i) {
+        if (a % i == 0 && b % i == 0) {
+            sum += i;
+        }
+    }
+    return std::make_pair(sum, 0);
+}
+```",126,"```cpp
+#include <cassert>
+
+int sum(int a, int b) {
+    // Assuming the sum function implementation here
+    return (a + b) % 100; // Placeholder for the logic that was implied in the Python code
+}
+
+int main() {
+    assert(sum(10, 15) == 6);
+    assert(sum(100, 150) == 93);
+    assert(sum(4, 6) == 3);
+    return 0;
+}
+```"
+128,Write a function to calculate magic square.,"```cpp
+#include <vector>
+#include <numeric>
+#include <set>
+
+bool magic_square_test(const std::vector<std::vector<int>>& my_matrix) {
+    int iSize = my_matrix[0].size();
+    std::vector<int> sum_list;
+
+    for (const auto& lines : my_matrix) {
+        sum_list.push_back(std::accumulate(lines.begin(), lines.end(), 0));
+    }
+
+    for (int col = 0; col < iSize; ++col) {
+        int col_sum = 0;
+        for (int row = 0; row < my_matrix.size(); ++row) {
+            col_sum += my_matrix[row][col];
+        }
+        sum_list.push_back(col_sum);
+    }
+
+    int result1 = 0;
+    for (int i = 0; i < iSize; ++i) {
+        result1 += my_matrix[i][i];
+    }
+    sum_list.push_back(result1);
+
+    int result2 = 0;
+    for (int i = iSize - 1; i >= 0; --i) {
+        result2 += my_matrix[i][i];
+    }
+    sum_list.push_back(result2);
+
+    return std::set<int>(sum_list.begin(), sum_list.end()).size() <= 1;
+}
+```",129,"```cpp
+#include <cassert>
+#include <vector>
+
+bool magic_square_test(const std::vector<std::vector<int>>& square);
+
+int main() {
+    assert(magic_square_test({{7, 12, 1, 14}, {2, 13, 8, 11}, {16, 3, 10, 5}, {9, 6, 15, 4}}) == true);
+    assert(magic_square_test({{2, 7, 6}, {9, 5, 1}, {4, 3, 8}}) == true);
+    assert(magic_square_test({{2, 7, 6}, {9, 5, 1}, {4, 3, 7}}) == false);
+    return 0;
+}
+```"
+149,Write a python function to find whether the given number is present in the infinite sequence or not.,"```cpp
+bool does_Contain_B(int a, int b, int c) { 
+    if (a == b) { 
+        return true; 
+    } 
+    if ((b - a) * c > 0 && (b - a) % c == 0) { 
+        return true; 
+    } 
+    return false; 
+}
+```",150,"```cpp
+#include <cassert>
+
+int does_Contain_B(int a, int b, int c) {
+    // Function implementation goes here
+}
+
+int main() {
+    assert(does_Contain_B(1, 7, 3) == true);
+    assert(does_Contain_B(1, -3, 5) == false);
+    assert(does_Contain_B(3, 2, 5) == false);
+    return 0;
+}
+```"
+170,Write a function to find the perimeter of a pentagon.,"```cpp
+#include <iostream>
+
+double perimeter_pentagon(double a) {
+    double perimeter = 5 * a;
+    return perimeter;
+}
+```",171,"```cpp
+#include <cassert>
+
+int perimeter_pentagon(int side_length) {
+    return 5 * side_length;
+}
+
+int main() {
+    assert(perimeter_pentagon(5) == 25);
+    assert(perimeter_pentagon(10) == 50);
+    assert(perimeter_pentagon(15) == 75);
+    return 0;
+}
+```"
+188,Write a python function to find the first missing positive number.,"```cpp
+#include <vector>
+using namespace std;
+
+int first_Missing_Positive(vector<int>& arr, int n) {
+    int ptr = 0;
+    for (int i = 0; i < n; i++) {
+        if (arr[i] == 1) {
+            ptr = 1;
+            break;
+        }
+    }
+    if (ptr == 0) {
+        return 1;
+    }
+    for (int i = 0; i < n; i++) {
+        if (arr[i] <= 0 || arr[i] > n) {
+            arr[i] = 1;
+        }
+    }
+    for (int i = 0; i < n; i++) {
+        arr[(arr[i] - 1) % n] += n;
+    }
+    for (int i = 0; i < n; i++) {
+        if (arr[i] <= n) {
+            return i + 1;
+        }
+    }
+    return n + 1;
+}
+```",189,"```cpp
+#include <cassert>
+#include <vector>
+
+int first_Missing_Positive(std::vector<int> nums, int n) {
+    // Function implementation goes here
+}
+
+int main() {
+    assert(first_Missing_Positive({1, 2, 3, -1, 5}, 5) == 4);
+    assert(first_Missing_Positive({0, -1, -2, 1, 5, 8}, 6) == 2);
+    assert(first_Missing_Positive({0, 1, 2, 5, -8}, 5) == 3);
+    return 0;
+}
+```"
+196,Write a function to perform the exponentiation of the given two tuples.,"```cpp
+#include <tuple>
+#include <vector>
+#include <cmath>
+
+std::tuple<int, int> find_exponentio(const std::tuple<int, int>& test_tup1, const std::tuple<int, int>& test_tup2) {
+    return std::make_tuple(std::pow(std::get<0>(test_tup1), std::get<0>(test_tup2)),
+                           std::pow(std::get<1>(test_tup1), std::get<1>(test_tup2)));
+}
+```",197,"```cpp
+#include <cassert>
+#include <tuple>
+#include <cmath>
+#include <vector>
+
+std::tuple<int, int, int, int> find_exponentio(std::tuple<int, int, int, int> bases, std::tuple<int, int, int, int> exponents) {
+    return std::make_tuple(
+        std::pow(std::get<0>(bases), std::get<0>(exponents)),
+        std::pow(std::get<1>(bases), std::get<1>(exponents)),
+        std::pow(std::get<2>(bases), std::get<2>(exponents)),
+        std::pow(std::get<3>(bases), std::get<3>(exponents))
+    );
+}
+
+int main() {
+    assert(find_exponentio(std::make_tuple(10, 4, 5, 6), std::make_tuple(5, 6, 7, 5)) == std::make_tuple(100000, 4096, 78125, 7776));
+    assert(find_exponentio(std::make_tuple(11, 5, 6, 7), std::make_tuple(6, 7, 8, 6)) == std::make_tuple(1771561, 78125, 1679616, 117649));
+    assert(find_exponentio(std::make_tuple(12, 6, 7, 8), std::make_tuple(7, 8, 9, 7)) == std::make_tuple(35831808, 1679616, 40353607, 2097152));
+    return 0;
+}
+```"
+203,Write a python function to count the occurrence of a given character in a string.,"```cpp
+#include <string>
+
+std::pair<int, int> count(const std::string& s, char c) {
+    int res = 0;
+    for (size_t i = 0; i < s.length(); ++i) {
+        if (s[i] == c) {
+            res = res + 1;
+        }
+    }
+    return {res, 0}; // Returning 0 as the second value since it's not defined in Python code
+}
+```",204,"```cpp
+#include <cassert>
+#include <string>
+
+int count(const std::string& str, char ch) {
+    return std::count(str.begin(), str.end(), ch);
+}
+
+int main() {
+    assert(count(""abcc"", 'c') == 2);
+    assert(count(""ababca"", 'a') == 3);
+    assert(count(""mnmm0pm"", 'm') == 4);
+    return 0;
+}
+```"
+212,Write a function to perform the concatenation of two string tuples.,"```cpp
+#include <tuple>
+#include <vector>
+#include <string>
+#include <iostream>
+
+std::tuple<std::string> concatenate_strings(const std::tuple<std::string>& test_tup1, const std::tuple<std::string>& test_tup2) {
+    std::vector<std::string> res;
+    for (size_t i = 0; i < std::tuple_size<decltype(test_tup1)>::value; ++i) {
+        res.push_back(std::get<i>(test_tup1) + std::get<i>(test_tup2));
+    }
+    return std::make_tuple(res);
+}
+```",213,"```cpp
+#include <cassert>
+#include <string>
+#include <tuple>
+
+std::tuple<std::string, std::string, std::string> concatenate_strings(
+    const std::tuple<std::string, std::string, std::string>& names,
+    const std::tuple<std::string, std::string, std::string>& surnames) {
+    
+    return std::make_tuple(
+        std::get<0>(names) + std::get<0>(surnames),
+        std::get<1>(names) + std::get<1>(surnames),
+        std::get<2>(names) + std::get<2>(surnames)
+    );
+}
+
+int main() {
+    assert(concatenate_strings(std::make_tuple(""Manjeet"", ""Nikhil"", ""Akshat""), 
+                               std::make_tuple("" Singh"", "" Meherwal"", "" Garg"")) == 
+           std::make_tuple(""Manjeet Singh"", ""Nikhil Meherwal"", ""Akshat Garg""));
+
+    assert(concatenate_strings(std::make_tuple(""Shaik"", ""Ayesha"", ""Sanya""), 
+                               std::make_tuple("" Dawood"", "" Begum"", "" Singh"")) == 
+           std::make_tuple(""Shaik Dawood"", ""Ayesha Begum"", ""Sanya Singh""));
+
+    assert(concatenate_strings(std::make_tuple(""Harpreet"", ""Priyanka"", ""Muskan""), 
+                               std::make_tuple(""Kour"", "" Agarwal"", ""Sethi"")) == 
+           std::make_tuple(""HarpreetKour"", ""Priyanka Agarwal"", ""MuskanSethi""));
+
+    return 0;
+}
+```"
+217,Write a python function to find the minimum operations required to make two numbers equal.,"```cpp
+#include <iostream>
+#include <algorithm>
+#include <numeric>
+
+std::pair<int, int> min_Operations(int A, int B) {
+    if (A > B) {
+        std::swap(A, B);
+    }
+    B = B / std::gcd(A, B);
+    return {B - 1, 0}; // Since there was no second return value in the original Python code
+}
+```",218,"```cpp
+#include <cassert>
+
+int min_Operations(int x, int y); // Assuming the function is defined elsewhere
+
+int main() {
+    assert(min_Operations(2, 4) == 1);
+    assert(min_Operations(4, 10) == 4);
+    assert(min_Operations(1, 4) == 3);
+    return 0;
+}
+```"
+220,Write a python function to find the first even number in a given list of numbers.,"```cpp
+#include <vector>
+#include <algorithm>
+
+std::pair<int, int> first_even(const std::vector<int>& nums) {
+    auto it = std::find_if(nums.begin(), nums.end(), [](int el) { return el % 2 == 0; });
+    int first_even = (it != nums.end()) ? *it : -1;
+    return {first_even, 0}; // Assuming the second value is not relevant as per the original function
+}
+```",221,"```cpp
+#include <iostream>
+#include <vector>
+#include <cassert>
+
+int first_even(const std::vector<int>& nums) {
+    for (int num : nums) {
+        if (num % 2 == 0) {
+            return num;
+        }
+    }
+    return -1; // assuming -1 if no even number found
+}
+
+int main() {
+    assert(first_even({1, 3, 5, 7, 4, 1, 6, 8}) == 4);
+    assert(first_even({2, 3, 4}) == 2);
+    assert(first_even({5, 6, 7}) == 6);
+    return 0;
+}
+```"
+226,Write a function to find minimum of three numbers.,"```cpp
+#include <tuple>
+
+std::tuple<int> min_of_three(int a, int b, int c) {
+    int smallest;
+    if ((a <= b) && (a <= c)) {
+        smallest = a;
+    } else if ((b <= a) && (b <= c)) {
+        smallest = b;
+    } else {
+        smallest = c;
+    }
+    return std::make_tuple(smallest);
+}
+```",227,"```cpp
+#include <cassert>
+#include <algorithm>
+
+int min_of_three(int a, int b, int c) {
+    return std::min({a, b, c});
+}
+
+int main() {
+    assert(min_of_three(10, 20, 0) == 0);
+    assert(min_of_three(19, 15, 18) == 15);
+    assert(min_of_three(-10, -20, -30) == -30);
+    return 0;
+}
+```"
+234,Write a python function to set all even bits of a given number.,"```cpp
+#include <iostream>
+
+std::pair<int, int> even_bit_set_number(int n) {
+    int count = 0, res = 0, temp = n;
+    while (temp > 0) {
+        if (count % 2 == 1) {
+            res |= (1 << count);
+        }
+        count++;
+        temp >>= 1;
+    }
+    return {n | res, res};
+}
+```",235,"```cpp
+#include <cassert>
+
+int even_bit_set_number(int num) {
+    // Implement the logic for even bit set number
+}
+
+int main() {
+    assert(even_bit_set_number(10) == 10);
+    assert(even_bit_set_number(20) == 30);
+    assert(even_bit_set_number(30) == 30);
+    return 0;
+}
+```"
+281,Write a function to substaract two lists using map and lambda function.,"```cpp
+#include <vector>
+#include <algorithm>
+
+std::vector<int> sub_list(const std::vector<int>& nums1, const std::vector<int>& nums2) {
+    std::vector<int> result(nums1.size());
+    std::transform(nums1.begin(), nums1.end(), nums2.begin(), result.begin(), std::minus<int>());
+    return result;
+}
+```",282,"```cpp
+#include <cassert>
+#include <vector>
+
+std::vector<int> sub_list(const std::vector<int>& a, const std::vector<int>& b) {
+    std::vector<int> result;
+    for (size_t i = 0; i < a.size(); ++i) {
+        result.push_back(a[i] - b[i]);
+    }
+    return result;
+}
+
+int main() {
+    assert(sub_list({1, 2, 3}, {4, 5, 6}) == std::vector<int>{-3, -3, -3});
+    assert(sub_list({1, 2}, {3, 4}) == std::vector<int>{-2, -2});
+    assert(sub_list({90, 120}, {50, 70}) == std::vector<int>{40, 50});
+    return 0;
+}
+```"
+283,Write a function to check whether all items of a list are equal to a given string.,"```cpp
+#include <vector>
+
+std::pair<bool, bool> check_element(const std::vector<int>& list, int element) {
+    bool check_element = std::all_of(list.begin(), list.end(), [element](int v) { return v == element; });
+    return {check_element, check_element};
+}
+```",284,"```cpp
+#include <cassert>
+#include <vector>
+#include <string>
+
+bool check_element(const std::vector<std::string>& vec, const std::string& element) {
+    return std::find(vec.begin(), vec.end(), element) != vec.end();
+}
+
+bool check_element(const std::vector<int>& vec, int element) {
+    return std::find(vec.begin(), vec.end(), element) != vec.end();
+}
+
+int main() {
+    assert(check_element({""green"", ""orange"", ""black"", ""white""}, ""blue"") == false);
+    assert(check_element({1, 2, 3, 4}, 7) == false);
+    assert(check_element({""green"", ""green"", ""green"", ""green""}, ""green"") == true);
+}
+```"
+306,Write a function to get a colon of a tuple.,"```cpp
+#include <vector>
+#include <algorithm>
+
+std::pair<std::vector<std::vector<int>>, std::vector<int>> colon_tuplex(std::vector<std::vector<int>> tuplex, int m, int n) {
+    std::vector<std::vector<int>> tuplex_colon = tuplex;
+    tuplex_colon[m].push_back(n);
+    return {tuplex_colon, tuplex_colon[m]};
+}
+```",307,"```cpp
+#include <cassert>
+#include <tuple>
+#include <vector>
+
+std::tuple<std::string, int, std::vector<int>, bool> colon_tuplex(std::tuple<std::string, int, std::vector<int>, bool> input, int index, int value) {
+    auto [str, num, vec, boolean] = input;
+    vec.insert(vec.begin() + index, value);
+    return std::make_tuple(str, num, vec, boolean);
+}
+
+int main() {
+    assert(colon_tuplex(std::make_tuple(""HELLO"", 5, std::vector<int>{}, true), 2, 50) == std::make_tuple(""HELLO"", 5, std::vector<int>{50}, true));
+    assert(colon_tuplex(std::make_tuple(""HELLO"", 5, std::vector<int>{}, true), 2, 100) == std::make_tuple(""HELLO"", 5, std::vector<int>{100}, true));
+    assert(colon_tuplex(std::make_tuple(""HELLO"", 5, std::vector<int>{}, true), 2, 500) == std::make_tuple(""HELLO"", 5, std::vector<int>{500}, true));
+    
+    return 0;
+}
+```"
+308,Write a python function to find the maximum of two numbers.,"```cpp
+int maximum(int a, int b) {   
+    if (a >= b) 
+        return a; 
+    else 
+        return b; 
+}
+```",309,"```cpp
+#include <cassert>
+
+int maximum(int a, int b) {
+    return (a > b) ? a : b;
+}
+
+int main() {
+    assert(maximum(5, 10) == 10);
+    assert(maximum(-1, -2) == -1);
+    assert(maximum(9, 7) == 9);
+    return 0;
+}
+```"
+373,Write a function to print all permutations of a given string including duplicates.,"```cpp
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+std::vector<std::string> permute_string(const std::string& str) {
+    if (str.length() == 0) {
+        return {""""};
+    }
+    std::vector<std::string> prev_list = permute_string(str.substr(1));
+    std::vector<std::string> next_list;
+    for (const auto& s : prev_list) {
+        for (size_t j = 0; j <= str.length(); ++j) {
+            std::string new_str = s.substr(0, j) + str[0] + s.substr(j);
+            if (std::find(next_list.begin(), next_list.end(), new_str) == next_list.end()) {
+                next_list.push_back(new_str);
+            }
+        }
+    }
+    return next_list;
+}
+```",374,"```cpp
+#include <cassert>
+#include <vector>
+#include <string>
+
+std::vector<std::string> permute_string(const std::string &s) {
+    // Implementation of the permutation function goes here
+}
+
+int main() {
+    assert(permute_string(""ab"") == std::vector<std::string>{""ab"", ""ba""});
+    assert(permute_string(""abc"") == std::vector<std::string>{""abc"", ""bac"", ""bca"", ""acb"", ""cab"", ""cba""});
+    assert(permute_string(""abcd"") == std::vector<std::string>{""abcd"", ""bacd"", ""bcad"", ""bcda"", ""acbd"", ""cabd"", ""cbad"", ""cbda"", ""acdb"", ""cadb"", ""cdab"", ""cdba"", ""abdc"", ""badc"", ""bdac"", ""bdca"", ""adbc"", ""dabc"", ""dbac"", ""dbca"", ""adcb"", ""dacb"", ""dcab"", ""dcba""});
+    return 0;
+}
+```"
+383,Write a python function to find the frequency of the smallest value in a given array.,"```cpp
+#include <vector>
+using namespace std;
+
+pair<int, int> frequency_Of_Smallest(int n, vector<int>& arr) { 
+    int mn = arr[0]; 
+    int freq = 1;
+    for (int i = 1; i < n; i++) { 
+        if (arr[i] < mn) { 
+            mn = arr[i]; 
+            freq = 1;
+        } else if (arr[i] == mn) { 
+            freq++;
+        }
+    }
+    return {freq, mn};
+}
+```",384,"```cpp
+#include <cassert>
+#include <vector>
+#include <algorithm>
+
+int frequency_Of_Smallest(int n, const std::vector<int>& arr) {
+    int min_value = *std::min_element(arr.begin(), arr.end());
+    return std::count(arr.begin(), arr.end(), min_value);
+}
+
+int main() {
+    assert(frequency_Of_Smallest(5, {1, 2, 3, 4, 3}) == 1);
+    assert(frequency_Of_Smallest(7, {3, 1, 2, 5, 6, 2, 3}) == 1);
+    assert(frequency_Of_Smallest(7, {3, 3, 6, 3, 7, 4, 9}) == 3);
+    return 0;
+}
+```"
+387,Write a python function to find the highest power of 2 that is less than or equal to n.,"```cpp
+int highest_Power_of_2(int n) { 
+    int res = 0; 
+    for (int i = n; i > 0; --i) { 
+        if ((i & (i - 1)) == 0) { 
+            res = i; 
+            break; 
+        } 
+    } 
+    return res; 
+}
+```",388,"```cpp
+#include <cassert>
+
+int highest_Power_of_2(int n) {
+    int power = 1;
+    while (power <= n) {
+        power <<= 1; // equivalent to power *= 2
+    }
+    return power >> 1; // return the last valid power of 2
+}
+
+int main() {
+    assert(highest_Power_of_2(10) == 8);
+    assert(highest_Power_of_2(19) == 16);
+    assert(highest_Power_of_2(32) == 32);
+    return 0;
+}
+```"
+395,Write a function to check whether the given string starts and ends with the same character or not using regex.,"```cpp
+#include <iostream>
+#include <regex>
+#include <string>
+
+std::string check_char(const std::string& str) {
+    std::regex regex(""^[a-z]$|^([a-z]).*\\1$"");
+    if (std::regex_search(str, regex)) {
+        return ""Valid"";
+    } else {
+        return ""Invalid"";
+    }
+}
+```",396,"```cpp
+#include <cassert>
+#include <string>
+
+int main() {
+    assert(check_char(""abba"") == ""Valid"");
+    assert(check_char(""a"") == ""Valid"");
+    assert(check_char(""abcd"") == ""Invalid"");
+    return 0;
+}
+```"
+409,Write a function to find the minimum value in a given heterogeneous list.,"```cpp
+#include <vector>
+#include <limits>
+#include <type_traits>
+
+std::pair<int, bool> min_val(const std::vector<int>& listval) {
+    int min_val = std::numeric_limits<int>::max();
+    bool found = false;
+
+    for (const auto& i : listval) {
+        if (std::is_same<decltype(i), int>::value) {
+            if (i < min_val) {
+                min_val = i;
+                found = true;
+            }
+        }
+    }
+
+    return found ? std::make_pair(min_val, true) : std::make_pair(0, false);
+}
+```",410,"```cpp
+#include <cassert>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <type_traits>
+
+int min_val(const std::vector<std::variant<int, std::string>>& values) {
+    int minimum = std::numeric_limits<int>::max();
+    for (const auto& value : values) {
+        if (std::holds_alternative<int>(value)) {
+            minimum = std::min(minimum, std::get<int>(value));
+        }
+    }
+    return minimum;
+}
+
+int main() {
+    assert(min_val({""Python"", 3, 2, 4, 5, ""version""}) == 2);
+    assert(min_val({""Python"", 15, 20, 25}) == 15);
+    assert(min_val({""Python"", 30, 20, 40, 50, ""version""}) == 20);
+    return 0;
+}
+```"
+410,Write a function to convert the given snake case string to camel case string by using regex.,"```cpp
+#include <string>
+#include <sstream>
+#include <algorithm>
+
+std::string snake_to_camel(const std::string& word) {
+    std::stringstream ss(word);
+    std::string item;
+    std::string result;
+
+    while (std::getline(ss, item, '_')) {
+        if (!result.empty()) {
+            result += std::toupper(item[0]);
+        } else {
+            result += item;
+        }
+        if (item.size() > 1) {
+            result += item.substr(1);
+        }
+    }
+    return result;
+}
+```",411,"```cpp
+#include <cassert>
+#include <string>
+
+int main() {
+    assert(snake_to_camel(""android_tv"") == ""AndroidTv"");
+    assert(snake_to_camel(""google_pixel"") == ""GooglePixel"");
+    assert(snake_to_camel(""apple_watch"") == ""AppleWatch"");
+    return 0;
+}
+```"
+425,Write a function to filter odd numbers using lambda function.,"```cpp
+#include <vector>
+#include <algorithm>
+
+std::pair<std::vector<int>, std::vector<int>> filter_oddnumbers(const std::vector<int>& nums) {
+    std::vector<int> odd_nums;
+    std::copy_if(nums.begin(), nums.end(), std::back_inserter(odd_nums), [](int x) { return x % 2 != 0; });
+    return {odd_nums};
+}
+```",426,"```cpp
+#include <vector>
+#include <cassert>
+
+std::vector<int> filter_oddnumbers(const std::vector<int>& numbers) {
+    std::vector<int> result;
+    for (int num : numbers) {
+        if (num % 2 != 0) {
+            result.push_back(num);
+        }
+    }
+    return result;
+}
+
+int main() {
+    assert(filter_oddnumbers({1, 2, 3, 4, 5, 6, 7, 8, 9, 10}) == std::vector<int>{1, 3, 5, 7, 9});
+    assert(filter_oddnumbers({10, 20, 45, 67, 84, 93}) == std::vector<int>{45, 67, 93});
+    assert(filter_oddnumbers({5, 7, 9, 8, 6, 4, 3}) == std::vector<int>{5, 7, 9, 3});
+    return 0;
+}
+```"
+448,Write a python function to check whether the triangle is valid or not if 3 points are given.,"```cpp
+#include <iostream>
+
+std::string check_Triangle(double x1, double y1, double x2, double y2, double x3, double y3) { 
+    double a = (x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2));   
+    if (a == 0) { 
+        return ""No""; 
+    } else { 
+        return ""Yes""; 
+    }
+}
+```",449,"```cpp
+#include <cassert>
+#include <string>
+
+std::string check_Triangle(int x1, int y1, int x2, int y2, int x3, int y3) {
+    // Triangle check implementation
+}
+
+int main() {
+    assert(check_Triangle(1, 5, 2, 5, 4, 6) == ""Yes"");
+    assert(check_Triangle(1, 1, 1, 4, 1, 5) == ""No"");
+    assert(check_Triangle(1, 1, 1, 1, 1, 1) == ""No"");
+}
+```"
+450,Write a function to remove all whitespaces from the given string using regex.,"```cpp
+#include <string>
+#include <regex>
+
+std::string remove_whitespaces(const std::string &text1) {
+    return std::regex_replace(text1, std::regex(""\\s+""), """");
+}
+```",451,"```cpp
+#include <cassert>
+#include <string>
+#include <algorithm>
+#include <cctype>
+
+std::string remove_whitespaces(const std::string& str) {
+    std::string result;
+    std::remove_copy_if(str.begin(), str.end(), std::back_inserter(result), ::isspace);
+    return result;
+}
+
+int main() {
+    assert(remove_whitespaces("" Google    Flutter "") == ""GoogleFlutter"");
+    assert(remove_whitespaces("" Google    Dart "") == ""GoogleDart"");
+    assert(remove_whitespaces("" iOS    Swift "") == ""iOSSwift"");
+    return 0;
+}
+```"
+465,Write a function to find the peak element in the given array.,"```cpp
+#include <vector>
+
+int find_peak_util(const std::vector<int>& arr, int low, int high, int n) {
+    int mid = low + (high - low) / 2;
+    
+    if ((mid == 0 || arr[mid - 1] <= arr[mid]) &&
+        (mid == n - 1 || arr[mid + 1] <= arr[mid])) {
+        return mid;
+    } else if (mid > 0 && arr[mid - 1] > arr[mid]) {
+        return find_peak_util(arr, low, mid - 1, n);
+    } else {
+        return find_peak_util(arr, mid + 1, high, n);
+    }
+}
+
+int find_peak(const std::vector<int>& arr, int n) {
+    return find_peak_util(arr, 0, n - 1, n);
+}
+```",466,"```cpp
+#include <cassert>
+#include <vector>
+
+int find_peak(const std::vector<int>& nums, int n) {
+    // Implementation of find_peak function
+}
+
+int main() {
+    assert(find_peak({1, 3, 20, 4, 1, 0}, 6) == 2);
+    assert(find_peak({2, 3, 4, 5, 6}, 5) == 4);
+    assert(find_peak({8, 9, 11, 12, 14, 15}, 6) == 5);
+    return 0;
+}
+```"
+478,Write a python function to find the first digit of a given number.,"```cpp
+int first_Digit(int n) {
+    while (n >= 10) {
+        n = n / 10;
+    }
+    return n;
+}
+```",479,"```cpp
+assert(first_Digit(123) == 1);
+assert(first_Digit(456) == 4);
+assert(first_Digit(12) == 1);
+```"
+485,Write a function to compute binomial probability for the given number.,"```cpp
+#include <cmath>
+
+double nCr(int n, int r) {
+    if (r > n / 2) {
+        r = n - r;
+    }
+    double answer = 1;
+    for (int i = 1; i <= r; ++i) {
+        answer *= (n - r + i);
+        answer /= i;
+    }
+    return answer;
+}
+
+double binomial_probability(int n, int k, double p) {
+    return nCr(n, k) * pow(p, k) * pow(1 - p, n - k);
+}
+```",486,"```cpp
+#include <cassert>
+
+int main() {
+    assert(binomial_probability(10, 5, 1.0/3) == 0.13656454808718185);
+    assert(binomial_probability(11, 6, 2.0/4) == 0.2255859375);
+    assert(binomial_probability(12, 7, 3.0/5) == 0.227030335488);
+    return 0;
+}
+```"
+489,Write a function to extract all the pairs which are symmetric in the given tuple list.,"```cpp
+#include <iostream>
+#include <set>
+#include <vector>
+#include <utility>
+
+std::pair<std::set<std::pair<int, int>>, std::set<std::pair<int, int>>> extract_symmetric(const std::vector<std::pair<int, int>>& test_list) {
+    std::set<std::pair<int, int>> temp;
+    std::set<std::pair<int, int>> res;
+
+    for (const auto& p : test_list) {
+        temp.insert(p);
+        temp.insert(std::make_pair(p.second, p.first));
+    }
+
+    for (const auto& p : temp) {
+        if (p.first < p.second) {
+            res.insert(p);
+        }
+    }
+    
+    return {res};
+}
+```",490,"```cpp
+#include <cassert>
+#include <set>
+#include <vector>
+#include <utility>
+
+std::set<std::pair<int, int>> extract_symmetric(const std::vector<std::pair<int, int>>& pairs) {
+    std::set<std::pair<int, int>> result;
+    std::set<std::pair<int, int>> seen;
+    
+    for (const auto& p : pairs) {
+        if (seen.count(std::make_pair(p.second, p.first))) {
+            result.insert(p);
+        } else {
+            seen.insert(p);
+        }
+    }
+    
+    return result;
+}
+
+int main() {
+    assert(extract_symmetric({{6, 7}, {2, 3}, {7, 6}, {9, 8}, {10, 2}, {8, 9}}) == std::set<std::pair<int, int>>{{8, 9}, {6, 7}});
+    assert(extract_symmetric({{7, 8}, {3, 4}, {8, 7}, {10, 9}, {11, 3}, {9, 10}}) == std::set<std::pair<int, int>>{{9, 10}, {7, 8}});
+    assert(extract_symmetric({{8, 9}, {4, 5}, {9, 8}, {11, 10}, {12, 4}, {10, 11}}) == std::set<std::pair<int, int>>{{8, 9}, {10, 11}});
+    
+    return 0;
+}
+```"
+510,Write a python function to find minimum sum of factors of a given number.,"```cpp
+#include <iostream>
+
+std::pair<int, int> find_Min_Sum(int num) {
+    int sum = 0;
+    int i = 2;
+    while (i * i <= num) {
+        while (num % i == 0) {
+            sum += i;
+            num /= i;
+        }
+        i += 1;
+    }
+    sum += num;
+    return {sum, 0}; // Assuming you want to return a second value as 0
+}
+
+int main() {
+    int num = 100; // Example input
+    auto result = find_Min_Sum(num);
+    std::cout << ""Sum: "" << result.first << std::endl;
+    return 0;
+}
+```",511,"```cpp
+#include <cassert>
+
+int find_Min_Sum(int n);
+
+int main() {
+    assert(find_Min_Sum(12) == 7);
+    assert(find_Min_Sum(105) == 15);
+    assert(find_Min_Sum(2) == 2);
+    return 0;
+}
+```"
+524,Write a python function to check whether two given lines are parallel or not.,"```cpp
+#include <utility>
+
+std::pair<bool, bool> parallel_lines(std::pair<double, double> line1, std::pair<double, double> line2) {
+    return line1.first / line1.second == line2.first / line2.second;
+}
+```",525,"```cpp
+#include <assert.h>
+#include <vector>
+
+bool parallel_lines(std::vector<int> a, std::vector<int> b) {
+    // Implementation of parallel_lines function
+}
+
+int main() {
+    assert(parallel_lines({2,3,4}, {2,3,8}) == true);
+    assert(parallel_lines({2,3,4}, {4,-3,8}) == false);
+    assert(parallel_lines({3,3}, {5,5}) == true);
+
+    return 0;
+}
+```"
+541,"Write a function to replace all occurrences of spaces, commas, or dots with a colon in the given string by using regex.","```cpp
+#include <string>
+#include <regex>
+
+std::string fill_spaces(const std::string& text) {
+    return std::regex_replace(text, std::regex(""[ ,.](?!\\w)""), "":"");
+}
+```",542,"```cpp
+#include <cassert>
+#include <string>
+#include <sstream>
+#include <vector>
+
+std::string fill_spaces(const std::string& input) {
+    std::istringstream iss(input);
+    std::string word;
+    std::vector<std::string> words;
+
+    while (iss >> word) {
+        words.push_back(word);
+    }
+
+    std::ostringstream oss;
+    for (size_t i = 0; i < words.size(); ++i) {
+        oss << words[i];
+        if (i < words.size() - 1) {
+            oss << "":"";
+        }
+    }
+
+    return oss.str();
+}
+
+int main() {
+    assert(fill_spaces(""Boult Curve Wireless Neckband"") == ""Boult:Curve:Wireless:Neckband"");
+    assert(fill_spaces(""Stereo Sound Sweatproof"") == ""Stereo:Sound:Sweatproof"");
+    assert(fill_spaces(""Probass Curve Audio"") == ""Probass:Curve:Audio"");
+    return 0;
+}
+```"
+545,Write a function to find the last occurrence of a character in a string.,"```cpp
+#include <string>
+
+std::pair<int, int> last_occurrence_char(const std::string& str, char ch) {
+    int flag = -1;
+    for (int i = 0; i < str.length(); i++) {
+        if (str[i] == ch) {
+            flag = i;
+        }
+    }
+    if (flag == -1) {
+        return {-1, -1}; // Returning -1, -1 to indicate None
+    } else {
+        return {flag + 1, 0}; // Returning the position + 1 and a second value (0 for consistency)
+    }
+}
+```",546,"```cpp
+#include <cassert>
+#include <string>
+
+int last_occurence_char(const std::string &str, char ch) {
+    size_t pos = str.find_last_of(ch);
+    return pos != std::string::npos ? static_cast<int>(pos) : -1; // Return -1 for None
+}
+
+int main() {
+    assert(last_occurence_char(""hello world"", 'l') == 10);
+    assert(last_occurence_char(""language"", 'g') == 7);
+    assert(last_occurence_char(""little"", 'y') == -1); // Adjusted for None
+    return 0;
+}
+```"
+565,Write a function to get the sum of a non-negative integer.,"```cpp
+#include <iostream>
+
+int sum_digits(int n) {
+    if (n == 0) {
+        return 0;
+    } else {
+        return n % 10 + sum_digits(n / 10);
+    }
+}
+```",566,"```cpp
+#include <cassert>
+
+int sum_digits(int n) {
+    int sum = 0;
+    while (n > 0) {
+        sum += n % 10;
+        n /= 10;
+    }
+    return sum;
+}
+
+int main() {
+    assert(sum_digits(345) == 12);
+    assert(sum_digits(12) == 3);
+    assert(sum_digits(97) == 16);
+    return 0;
+}
+```"
+568,Write a function to sort each sublist of strings in a given list of lists.,"```cpp
+#include <algorithm>
+#include <vector>
+
+std::vector<std::vector<int>> sort_sublists(const std::vector<std::vector<int>>& list1) {
+    std::vector<std::vector<int>> result = list1;
+    for (auto& sublist : result) {
+        std::sort(sublist.begin(), sublist.end());
+    }
+    return result;
+}
+```",569,"```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+std::vector<std::vector<std::string>> sort_sublists(const std::vector<std::vector<std::string>>& input) {
+    std::vector<std::vector<std::string>> sorted_list = input;
+    for (auto& sublist : sorted_list) {
+        std::sort(sublist.begin(), sublist.end());
+    }
+    std::sort(sorted_list.begin(), sorted_list.end());
+    return sorted_list;
+}
+
+int main() {
+    assert(sort_sublists({{""green"", ""orange""}, {""black"", ""white""}, {""white"", ""black"", ""orange""}}) ==
+           (std::vector<std::vector<std::string>>{{""green"", ""orange""}, {""black"", ""white""}, {""black"", ""orange"", ""white""}}));
+    
+    assert(sort_sublists({{""green"", ""orange""}, {""black""}, {""green"", ""orange""}, {""white""}}) ==
+           (std::vector<std::vector<std::string>>{{""green"", ""orange""}, {""black""}, {""green"", ""orange""}, {""white""}}));
+    
+    assert(sort_sublists({{""a"",""b""}, {""d"",""c""}, {""g"",""h""}, {""f"",""e""}}) ==
+           (std::vector<std::vector<std::string>>{{""a"", ""b""}, {""c"", ""d""}, {""g"", ""h""}, {""e"", ""f""}}));
+    
+    return 0;
+}
+```"
+570,Write a function to find maximum possible sum of disjoint pairs for the given array of integers and a number k.,"```cpp
+#include <vector>
+#include <algorithm>
+
+std::pair<int, int> max_sum_pair_diff_lessthan_K(std::vector<int>& arr, int N, int K) {
+    std::sort(arr.begin(), arr.end());
+    std::vector<int> dp(N, 0);
+    dp[0] = 0;
+    for (int i = 1; i < N; ++i) {
+        dp[i] = dp[i - 1];
+        if (arr[i] - arr[i - 1] < K) {
+            if (i >= 2) {
+                dp[i] = std::max(dp[i], dp[i - 2] + arr[i] + arr[i - 1]);
+            } else {
+                dp[i] = std::max(dp[i], arr[i] + arr[i - 1]);
+            }
+        }
+    }
+    return {dp[N - 1], 0}; // Returning a second value as 0 to match the return type
+}
+```",571,"```cpp
+#include <cassert>
+#include <vector>
+
+int max_sum_pair_diff_lessthan_K(const std::vector<int>& arr, int K, int diff);
+
+int main() {
+    assert(max_sum_pair_diff_lessthan_K({3, 5, 10, 15, 17, 12, 9}, 7, 4) == 62);
+    assert(max_sum_pair_diff_lessthan_K({5, 15, 10, 300}, 4, 12) == 25);
+    assert(max_sum_pair_diff_lessthan_K({1, 2, 3, 4, 5, 6}, 6, 6) == 21);
+    return 0;
+}
+```"
+595,Write a function to find the size of the given tuple.,"```cpp
+#include <iostream>
+#include <tuple>
+#include <vector>
+
+size_t tuple_size(const std::vector<std::tuple<>>& tuple_list) {
+    return sizeof(tuple_list);
+}
+```",596,"```cpp
+#include <tuple>
+#include <iostream>
+#include <cassert>
+
+int main() {
+    assert(std::tuple_size<std::tuple<const char*, int, const char*, int, const char*, int>>::value == sizeof(std::tuple<const char*, int, const char*, int, const char*, int>));
+    assert(std::tuple_size<std::tuple<int, const char*, int, const char*, int, const char*>>::value == sizeof(std::tuple<int, const char*, int, const char*, int, const char*>));
+    assert(std::tuple_size<std::tuple<std::pair<int, const char*>, std::pair<int, const char*>, std::pair<int, const char*>, std::pair<int, const char*>>>::value == sizeof(std::tuple<std::pair<int, const char*>, std::pair<int, const char*>, std::pair<int, const char*>, std::pair<int, const char*>>));
+    
+    return 0;
+}
+```"
+599,Write a python function to check whether the given number is even or not using bitwise operator.,"```cpp
+bool is_Even(int n) {
+    if ((n ^ 1) == (n + 1)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+```",600,"```cpp
+assert(is_Even(1) == false);
+assert(is_Even(2) == true);
+assert(is_Even(3) == false);
+```"
+601,Write a python function to find the first repeated character in a given string.,"```cpp
+#include <string>
+#include <unordered_map>
+
+std::string first_repeated_char(const std::string& str1) {
+    std::unordered_map<char, int> char_count;
+    for (size_t index = 0; index < str1.length(); ++index) {
+        char c = str1[index];
+        char_count[c]++;
+        if (char_count[c] > 1) {
+            return std::string(1, c);
+        }
+    }
+    return ""None"";
+}
+```",602,"```cpp
+#include <cassert>
+#include <string>
+
+std::string first_repeated_char(const std::string& str) {
+    std::unordered_set<char> seen;
+    for (char c : str) {
+        if (seen.count(c)) {
+            return std::string(1, c);
+        }
+        seen.insert(c);
+    }
+    return ""None"";
+}
+
+int main() {
+    assert(first_repeated_char(""abcabc"") == ""a"");
+    assert(first_repeated_char(""abc"") == ""None"");
+    assert(first_repeated_char(""123123"") == ""1"");
+    return 0;
+}
+```"
+603,Write a function to reverse words in a given string.,"```cpp
+#include <iostream>
+#include <sstream>
+#include <vector>
+#include <algorithm>
+
+std::string reverse_words(const std::string& s) {
+    std::istringstream iss(s);
+    std::vector<std::string> words;
+    std::string word;
+
+    while (iss >> word) {
+        words.push_back(word);
+    }
+
+    std::reverse(words.begin(), words.end());
+
+    std::ostringstream oss;
+    for (const auto& w : words) {
+        oss << w << "" "";
+    }
+
+    std::string result = oss.str();
+    if (!result.empty()) {
+        result.pop_back(); // remove the trailing space
+    }
+
+    return result;
+}
+```",604,"```cpp
+#include <cassert>
+#include <string>
+#include <sstream>
+
+std::string reverse_words(const std::string& str) {
+    std::istringstream iss(str);
+    std::string word;
+    std::string result;
+    while (iss >> word) {
+        result = word + (result.empty() ? """" : "" "") + result;
+    }
+    return result;
+}
+
+int main() {
+    assert(reverse_words(""python program"") == ""program python"");
+    assert(reverse_words(""java language"") == ""language java"");
+    assert(reverse_words(""indian man"") == ""man indian"");
+    return 0;
+}
+```"
+608,Write a python function to find minimum possible value for the given periodic function.,"```cpp
+#include <algorithm>
+
+std::pair<int, int> floor_Min(int A, int B, int N) {
+    int x = std::max(B - 1, N);
+    return std::make_pair((A * x) / B, 0);
+}
+```",609,"```cpp
+#include <cassert>
+#include <algorithm>
+
+int floor_Min(int a, int b, int c) {
+    return std::max({a, b, c}) - std::min({a, b, c});
+}
+
+int main() {
+    assert(floor_Min(10, 20, 30) == 15);
+    assert(floor_Min(1, 2, 1) == 0);
+    assert(floor_Min(11, 10, 9) == 9);
+    return 0;
+}
+```"
+611,Write a python function to merge the first and last elements separately in a list of lists.,"```cpp
+#include <vector>
+#include <tuple>
+#include <algorithm>
+
+std::vector<std::vector<int>> merge(const std::vector<std::vector<int>>& lst) {
+    std::vector<std::vector<int>> result;
+    if (lst.empty()) return result;
+
+    size_t numberOfRows = lst.size();
+    size_t numberOfCols = lst[0].size();
+    result.resize(numberOfCols, std::vector<int>(numberOfRows));
+
+    for (size_t j = 0; j < numberOfCols; ++j) {
+        for (size_t i = 0; i < numberOfRows; ++i) {
+            result[j][i] = lst[i][j];
+        }
+    }
+
+    return result;
+}
+```",612,"```cpp
+#include <cassert>
+#include <vector>
+#include <string>
+
+std::vector<std::vector<std::string>> merge(const std::vector<std::vector<std::string>>& input) {
+    std::vector<std::vector<std::string>> result(input[0].size());
+    for (size_t i = 0; i < input.size(); ++i) {
+        for (size_t j = 0; j < input[i].size(); ++j) {
+            result[j].push_back(input[i][j]);
+        }
+    }
+    return result;
+}
+
+int main() {
+    assert(merge({{""x"", ""y""}, {""a"", ""b""}, {""m"", ""n""}}) == std::vector<std::vector<std::string>>{{""x"", ""a"", ""m""}, {""y"", ""b"", ""n""}});
+    assert(merge({{1, 2}, {3, 4}, {5, 6}, {7, 8}}) == std::vector<std::vector<int>>{{1, 3, 5, 7}, {2, 4, 6, 8}});
+    assert(merge({{""x"", ""y"", ""z""}, {""a"", ""b"", ""c""}, {""m"", ""n"", ""o""}}) == std::vector<std::vector<std::string>>{{""x"", ""a"", ""m""}, {""y"", ""b"", ""n""}, {""z"", ""c"", ""o""}});
+    
+    return 0;
+}
+```"
+638,Write a function to sum the length of the names of a given list of names after removing the names that start with a lowercase letter.,"```cpp
+#include <string>
+#include <vector>
+#include <algorithm>
+
+std::pair<int, int> sample_nam(std::vector<std::string>& sample_names) {
+    sample_names.erase(std::remove_if(sample_names.begin(), sample_names.end(), [](const std::string& el) {
+        return !(std::isupper(el[0]) && std::all_of(el.begin() + 1, el.end(), [](char c) { return std::islower(c); }));
+    }), sample_names.end());
+    
+    std::string joined;
+    for (const auto& name : sample_names) {
+        joined += name;
+    }
+    return {static_cast<int>(joined.length()), 0}; // Return 0 as the second value as it's not specified in the original code.
+}
+```",639,"```cpp
+#include <cassert>
+#include <vector>
+#include <string>
+
+int sample_nam(const std::vector<std::string>& names);
+
+int main() {
+    assert(sample_nam({""sally"", ""Dylan"", ""rebecca"", ""Diana"", ""Joanne"", ""keith""}) == 16);
+    assert(sample_nam({""php"", ""res"", ""Python"", ""abcd"", ""Java"", ""aaa""}) == 10);
+    assert(sample_nam({""abcd"", ""Python"", ""abba"", ""aba""}) == 6);
+    return 0;
+}
+```"
+640,Write a function to find the nth nonagonal number.,"```cpp
+int is_nonagonal(int n) {
+    return static_cast<int>(n * (7 * n - 5) / 2);
+}
+```",641,"```cpp
+#include <cassert>
+
+int is_nonagonal(int n) {
+    return n * (7 * n - 5) / 2;
+}
+
+int main() {
+    assert(is_nonagonal(10) == 325);
+    assert(is_nonagonal(15) == 750);
+    assert(is_nonagonal(18) == 1089);
+    return 0;
+}
+```"
+644,Write a function to find the product of it’s kth index in the given tuples.,"```cpp
+#include <vector>
+
+long long get_product(const std::vector<int>& val) {
+    long long res = 1;
+    for (const auto& ele : val) {
+        res *= ele;
+    }
+    return res;
+}
+
+std::pair<long long> find_k_product(const std::vector<std::vector<int>>& test_list, int K) {
+    std::vector<int> sub_k_values;
+    for (const auto& sub : test_list) {
+        sub_k_values.push_back(sub[K]);
+    }
+    long long res = get_product(sub_k_values);
+    return {res};
+}
+```",645,"```cpp
+#include <cassert>
+#include <vector>
+#include <tuple>
+
+int find_k_product(const std::vector<std::tuple<int, int, int>>& tuples, int k) {
+    int product = 1;
+    for (const auto& t : tuples) {
+        if (k == 0) {
+            product *= std::get<0>(t);
+        } else if (k == 1) {
+            product *= std::get<1>(t);
+        } else if (k == 2) {
+            product *= std::get<2>(t);
+        }
+    }
+    return product;
+}
+
+int main() {
+    assert(find_k_product({{5, 6, 7}, {1, 3, 5}, {8, 9, 19}}, 2) == 665);
+    assert(find_k_product({{6, 7, 8}, {2, 4, 6}, {9, 10, 20}}, 1) == 280);
+    assert(find_k_product({{7, 8, 9}, {3, 5, 7}, {10, 11, 21}}, 0) == 210);
+    return 0;
+}
+```"
+648,Write a python function to calculate the sum of the numbers in a list between the indices of a specified range.,"```cpp
+#include <vector>
+
+int sum_Range_list(const std::vector<int>& nums, int m, int n) {
+    int sum_range = 0;
+    for (int i = m; i <= n; ++i) {
+        sum_range += nums[i];
+    }
+    return sum_range;
+}
+```",649,"```cpp
+#include <cassert>
+#include <vector>
+
+int sum_Range_list(const std::vector<int>& nums, int start, int end) {
+    int sum = 0;
+    for (int i = start; i <= end; ++i) {
+        sum += nums[i];
+    }
+    return sum;
+}
+
+int main() {
+    assert(sum_Range_list({2, 1, 5, 6, 8, 3, 4, 9, 10, 11, 8, 12}, 8, 10) == 29);
+    assert(sum_Range_list({1, 2, 3, 4, 5}, 1, 2) == 5);
+    assert(sum_Range_list({1, 0, 1, 2, 5, 6}, 4, 5) == 11);
+    return 0;
+}
+```"
+658,Write a python function to print duplicants from a list of integers.,"```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+std::pair<std::vector<int>, std::vector<int>> Repeat(const std::vector<int>& x) {
+    int _size = x.size();
+    std::vector<int> repeated;
+
+    for (int i = 0; i < _size; ++i) {
+        int k = i + 1;
+        for (int j = k; j < _size; ++j) {
+            if (x[i] == x[j] && std::find(repeated.begin(), repeated.end(), x[i]) == repeated.end()) {
+                repeated.push_back(x[i]);
+            }
+        }
+    }
+    return {repeated};
+}
+```",659,"```cpp
+#include <vector>
+#include <cassert>
+#include <unordered_map>
+
+std::vector<int> Repeat(const std::vector<int>& nums) {
+    std::unordered_map<int, int> count;
+    std::vector<int> result;
+
+    for (int num : nums) {
+        count[num]++;
+    }
+
+    for (const auto& pair : count) {
+        if (pair.second > 1) {
+            result.push_back(pair.first);
+        }
+    }
+
+    return result;
+}
+
+int main() {
+    assert(Repeat({10, 20, 30, 20, 20, 30, 40, 50, -20, 60, 60, -20, -20}) == std::vector<int>{20, 30, -20, 60});
+    assert(Repeat({-1, 1, -1, 8}) == std::vector<int>{-1});
+    assert(Repeat({1, 2, 3, 1, 2}) == std::vector<int>{1, 2});
+}
+```"
+670,Write a python function to set the right most unset bit.,"```cpp
+#include <cmath>
+
+int get_Pos_Of_Right_most_Set_Bit(int n) { 
+    return static_cast<int>(log2(n & -n) + 1);   
+}
+
+int set_Right_most_Unset_Bit(int n) { 
+    if (n == 0) { 
+        return 1; 
+    }
+    if ((n & (n + 1)) == 0) {     
+        return n; 
+    }
+    int pos = get_Pos_Of_Right_most_Set_Bit(~n);      
+    return ((1 << (pos - 1)) | n); 
+}
+```",671,"```cpp
+#include <cassert>
+
+int set_Right_most_Unset_Bit(int num) {
+    return num | (num + 1);
+}
+
+int main() {
+    assert(set_Right_most_Unset_Bit(21) == 23);
+    assert(set_Right_most_Unset_Bit(11) == 15);
+    assert(set_Right_most_Unset_Bit(15) == 15);
+    return 0;
+}
+```"
+673,Write a function to remove duplicate words from a given string using collections module.,"```cpp
+#include <iostream>
+#include <sstream>
+#include <unordered_map>
+#include <vector>
+
+std::string remove_duplicate(const std::string& str) {
+    std::istringstream iss(str);
+    std::unordered_map<std::string, bool> wordMap;
+    std::vector<std::string> uniqueWords;
+    std::string word;
+    
+    while (iss >> word) {
+        if (wordMap.find(word) == wordMap.end()) {
+            wordMap[word] = true;
+            uniqueWords.push_back(word);
+        }
+    }
+
+    std::string result;
+    for (const auto& w : uniqueWords) {
+        result += w + "" "";
+    }
+    
+    if (!result.empty()) {
+        result.pop_back(); // remove the trailing space
+    }
+    
+    return result;
+}
+```",674,"```cpp
+#include <cassert>
+#include <string>
+#include <set>
+#include <sstream>
+
+std::string remove_duplicate(const std::string &input) {
+    std::set<std::string> words;
+    std::stringstream ss(input);
+    std::string word;
+    std::string result;
+
+    while (ss >> word) {
+        if (words.find(word) == words.end()) {
+            if (!result.empty()) {
+                result += "" "";
+            }
+            result += word;
+            words.insert(word);
+        }
+    }
+    return result;
+}
+
+int main() {
+    assert(remove_duplicate(""Python Exercises Practice Solution Exercises"") == ""Python Exercises Practice Solution"");
+    assert(remove_duplicate(""Python Exercises Practice Solution Python"") == ""Python Exercises Practice Solution"");
+    assert(remove_duplicate(""Python Exercises Practice Solution Practice"") == ""Python Exercises Practice Solution"");
+}
+```"
+681,Write a function to multiply two lists using map and lambda function.,"```cpp
+#include <vector>
+#include <algorithm>
+
+std::vector<int> mul_list(const std::vector<int>& nums1, const std::vector<int>& nums2) {
+    std::vector<int> result;
+    std::transform(nums1.begin(), nums1.end(), nums2.begin(), std::back_inserter(result), std::multiplies<int>());
+    return result;
+}
+```",682,"```cpp
+#include <cassert>
+#include <vector>
+
+std::vector<int> mul_list(const std::vector<int>& a, const std::vector<int>& b) {
+    std::vector<int> result;
+    for (size_t i = 0; i < a.size(); i++) {
+        result.push_back(a[i] * b[i]);
+    }
+    return result;
+}
+
+int main() {
+    assert(mul_list({1, 2, 3}, {4, 5, 6}) == std::vector<int>({4, 10, 18}));
+    assert(mul_list({1, 2}, {3, 4}) == std::vector<int>({3, 8}));
+    assert(mul_list({90, 120}, {50, 70}) == std::vector<int>({4500, 8400}));
+    return 0;
+}
+```"
+686,Write a function to find the greatest common divisor (gcd) of two integers by using recursion.,"```cpp
+#include <iostream>
+#include <algorithm>
+
+int recur_gcd(int a, int b) {
+    int low = std::min(a, b);
+    int high = std::max(a, b);
+    if (low == 0) {
+        return high;
+    } else if (low == 1) {
+        return 1;
+    } else {
+        return recur_gcd(low, high % low);
+    }
+}
+```",687,"```cpp
+#include <cassert>
+
+int recur_gcd(int a, int b) {
+    if (b == 0) return a;
+    return recur_gcd(b, a % b);
+}
+
+int main() {
+    assert(recur_gcd(12, 14) == 2);
+    assert(recur_gcd(13, 17) == 1);
+    assert(recur_gcd(9, 3) == 3);
+    return 0;
+}
+```"
+708,Write a function to count unique keys for each value present in the tuple.,"```cpp
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+#include <set>
+#include <sstream>
+
+std::pair<std::string, std::unordered_map<int, int>> get_unique(const std::vector<std::pair<int, int>>& test_list) {
+    std::unordered_map<int, std::vector<int>> res;
+
+    for (const auto& sub : test_list) {
+        res[sub.second].push_back(sub.first);
+    }
+
+    std::unordered_map<int, int> res_dict;
+    for (const auto& pair : res) {
+        std::set<int> unique_elements(pair.second.begin(), pair.second.end());
+        res_dict[pair.first] = unique_elements.size();
+    }
+
+    std::ostringstream oss;
+    for (const auto& pair : res_dict) {
+        oss << pair.first << "":"" << pair.second << "" "";
+    }
+
+    return {oss.str(), res_dict};
+}
+```",709,"```cpp
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+#include <string>
+#include <cassert>
+
+std::string get_unique(const std::vector<std::pair<int, int>>& pairs) {
+    std::unordered_map<int, int> counts;
+    for (const auto& p : pairs) {
+        counts[p.second]++;
+    }
+    
+    std::string result = ""{"";
+    for (auto it = counts.begin(); it != counts.end(); ++it) {
+        if (it != counts.begin()) {
+            result += "", "";
+        }
+        result += std::to_string(it->first) + "": "" + std::to_string(it->second);
+    }
+    result += ""}"";
+    
+    return result;
+}
+
+int main() {
+    assert(get_unique({{3, 4}, {1, 2}, {2, 4}, {8, 2}, {7, 2}, {8, 1}, {9, 1}, {8, 4}, {10, 4}}) == ""{4: 4, 2: 3, 1: 2}"");
+    assert(get_unique({{4, 5}, {2, 3}, {3, 5}, {9, 3}, {8, 3}, {9, 2}, {10, 2}, {9, 5}, {11, 5}}) == ""{5: 4, 3: 3, 2: 2}"");
+    assert(get_unique({{6, 5}, {3, 4}, {2, 6}, {11, 1}, {8, 22}, {8, 11}, {4, 3}, {14, 3}, {11, 6}}) == ""{5: 1, 4: 1, 6: 2, 1: 1, 22: 1, 11: 1, 3: 2}"");
+    
+    return 0;
+}
+```"
+710,Write a python function to check whether the product of digits of a number at even and odd places is equal or not.,"```cpp
+#include <iostream>
+using namespace std;
+
+bool product_Equal(int n) {
+    if (n < 10) {
+        return false;
+    }
+    int prodOdd = 1, prodEven = 1;
+    while (n > 0) {
+        int digit = n % 10;
+        prodOdd *= digit;
+        n = n / 10;
+        if (n == 0) {
+            break;
+        }
+        digit = n % 10;
+        prodEven *= digit;
+        n = n / 10;
+    }
+    return prodOdd == prodEven;
+}
+```",711,"```cpp
+#include <cassert>
+
+assert(product_Equal(2841) == true);
+assert(product_Equal(1234) == false);
+assert(product_Equal(1212) == false);
+```"
+711,Write a function to remove duplicates from a list of lists.,"```cpp
+#include <algorithm>
+#include <vector>
+
+std::vector<int> remove_duplicate(std::vector<int>& list1) {
+    std::sort(list1.begin(), list1.end());
+    std::vector<int> remove_duplicate;
+    auto last = std::unique(list1.begin(), list1.end());
+    remove_duplicate.insert(remove_duplicate.end(), list1.begin(), last);
+    return remove_duplicate;
+}
+```",712,"```cpp
+#include <vector>
+#include <string>
+#include <cassert>
+#include <algorithm>
+
+std::vector<std::vector<int>> remove_duplicate(const std::vector<std::vector<int>>& input) {
+    std::vector<std::vector<int>> result;
+    for (const auto& vec : input) {
+        if (std::find(result.begin(), result.end(), vec) == result.end()) {
+            result.push_back(vec);
+        }
+    }
+    return result;
+}
+
+std::vector<std::string> remove_duplicate_strings(const std::vector<std::string>& input) {
+    std::vector<std::string> result;
+    for (const auto& str : input) {
+        if (std::find(result.begin(), result.end(), str) == result.end()) {
+            result.push_back(str);
+        }
+    }
+    return result;
+}
+
+int main() {
+    assert(remove_duplicate({{10, 20}, {40}, {30, 56, 25}, {10, 20}, {33}, {40}}) == std::vector<std::vector<int>>{{10, 20}, {30, 56, 25}, {33}, {40}});
+    assert(remove_duplicate_strings({""a"", ""b"", ""a"", ""c"", ""c""}) == std::vector<std::string>{""a"", ""b"", ""c""});
+    assert(remove_duplicate({1, 3, 5, 6, 3, 5, 6, 1}) == std::vector<int>{1, 3, 5, 6});
+    return 0;
+}
+```"
+736,Write a function to check whether the given string is starting with a vowel or not using regex.,"```cpp
+#include <iostream>
+#include <regex>
+#include <string>
+
+std::string check_str(const std::string& str) {
+    std::regex regex(""^[aeiouAEIOU][A-Za-z0-9_]*"");
+    if (std::regex_search(str, regex)) {
+        return ""Valid"";
+    } else {
+        return ""Invalid"";
+    }
+}
+```",737,"```cpp
+#include <cassert>
+
+assert(check_str(""annie"") == ""Valid"");
+assert(check_str(""dawood"") == ""Invalid"");
+assert(check_str(""Else"") == ""Valid"");
+```"
+752,Write a function to find minimum k records from tuple list.,"```cpp
+#include <vector>
+#include <algorithm>
+
+std::vector<std::pair<int, int>> min_k(const std::vector<std::pair<int, int>>& test_list, int K) {
+    std::vector<std::pair<int, int>> res = test_list;
+    std::sort(res.begin(), res.end(), [](const std::pair<int, int>& a, const std::pair<int, int>& b) {
+        return a.second < b.second;
+    });
+    res.resize(K);
+    return res;
+}
+```",753,"```cpp
+#include <cassert>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+std::vector<std::pair<std::string, int>> min_k(const std::vector<std::pair<std::string, int>>& data, int k) {
+    std::vector<std::pair<std::string, int>> result = data;
+    std::sort(result.begin(), result.end(), [](const auto& a, const auto& b) {
+        return a.second < b.second;
+    });
+    result.resize(k);
+    return result;
+}
+
+int main() {
+    assert(min_k({{""Manjeet"", 10}, {""Akshat"", 4}, {""Akash"", 2}, {""Nikhil"", 8}}, 2) == std::vector<std::pair<std::string, int>>{{""Akash"", 2}, {""Akshat"", 4}});
+    assert(min_k({{""Sanjeev"", 11}, {""Angat"", 5}, {""Akash"", 3}, {""Nepin"", 9}}, 3) == std::vector<std::pair<std::string, int>>{{""Akash"", 3}, {""Angat"", 5}, {""Nepin"", 9}});
+    assert(min_k({{""tanmay"", 14}, {""Amer"", 11}, {""Ayesha"", 9}, {""SKD"", 16}}, 1) == std::vector<std::pair<std::string, int>>{{""Ayesha"", 9}});
+    return 0;
+}
+```"
+772,Write a function to find the occurrence and position of the substrings within a string.,"```cpp
+#include <iostream>
+#include <string>
+#include <regex>
+
+std::tuple<std::string, size_t, size_t> occurance_substring(const std::string& text, const std::string& pattern) {
+    std::regex re(pattern);
+    std::smatch match;
+    if (std::regex_search(text, match, re)) {
+        size_t s = match.position();
+        size_t e = s + match.length();
+        return std::make_tuple(match.str(), s, e);
+    }
+    return std::make_tuple("""", 0, 0); // Return empty tuple if no match found
+}
+```",773,"```cpp
+#include <cassert>
+#include <string>
+#include <tuple>
+
+std::tuple<std::string, int, int> occurance_substring(const std::string& str, const std::string& sub) {
+    size_t pos = str.find(sub);
+    if (pos != std::string::npos) {
+        return std::make_tuple(sub, pos, pos + sub.length());
+    }
+    return std::make_tuple("""", -1, -1);
+}
+
+int main() {
+    assert(occurance_substring(""python programming, python language"", ""python"") == std::make_tuple(""python"", 0, 6));
+    assert(occurance_substring(""python programming,programming language"", ""programming"") == std::make_tuple(""programming"", 7, 18));
+    assert(occurance_substring(""python programming,programming language"", ""language"") == std::make_tuple(""language"", 31, 39));
+    return 0;
+}
+```"
+782,Write a function to convert rgb color to hsv color.,"```cpp
+#include <algorithm>
+#include <tuple>
+
+std::tuple<double, double, double> rgb_to_hsv(int r, int g, int b) {
+    r /= 255.0;
+    g /= 255.0;
+    b /= 255.0;
+    double mx = std::max({r, g, b});
+    double mn = std::min({r, g, b});
+    double df = mx - mn;
+    double h, s, v;
+
+    if (mx == mn) {
+        h = 0;
+    } else if (mx == r) {
+        h = fmod((60 * ((g - b) / df) + 360), 360);
+    } else if (mx == g) {
+        h = fmod((60 * ((b - r) / df) + 120), 360);
+    } else if (mx == b) {
+        h = fmod((60 * ((r - g) / df) + 240), 360);
+    }
+
+    if (mx == 0) {
+        s = 0;
+    } else {
+        s = (df / mx) * 100;
+    }
+    v = mx * 100;
+
+    return std::make_tuple(h, s, v);
+}
+```",783,"```cpp
+#include <cassert>
+#include <tuple>
+
+std::tuple<double, double, double> rgb_to_hsv(int r, int g, int b);
+
+int main() {
+    assert(rgb_to_hsv(255, 255, 255) == std::make_tuple(0.0, 0.0, 100.0));
+    assert(rgb_to_hsv(0, 215, 0) == std::make_tuple(120.0, 100.0, 84.31372549019608));
+    assert(rgb_to_hsv(10, 215, 110) == std::make_tuple(149.26829268292684, 95.34883720930233, 84.31372549019608));
+    return 0;
+}
+```"
+805,Write a function to find maximum run of uppercase characters in the given string.,"```cpp
+#include <iostream>
+#include <string>
+
+std::pair<int, int> max_run_uppercase(const std::string& test_str) {
+    int cnt = 0;
+    int res = 0;
+    for (size_t idx = 0; idx < test_str.length(); idx++) {
+        if (isupper(test_str[idx])) {
+            cnt++;
+        } else {
+            res = cnt;
+            cnt = 0;
+        }
+    }
+    if (isupper(test_str[test_str.length() - 1])) {
+        res = cnt;
+    }
+    return std::make_pair(res, 0);
+}
+```",806,"```cpp
+#include <cassert>
+#include <string>
+
+int max_run_uppercase(const std::string &s);
+
+int main() {
+    assert(max_run_uppercase(""GeMKSForGERksISBESt"") == 5);
+    assert(max_run_uppercase(""PrECIOusMOVemENTSYT"") == 6);
+    assert(max_run_uppercase(""GooGLEFluTTER"") == 4);
+    return 0;
+}
+```"
+812,Write a function to find length of the string.,"```cpp
+#include <string>
+
+std::pair<int, int> string_length(const std::string& str1) {
+    int count = 0;
+    for (char char : str1) {
+        count += 1;
+    }
+    return {count, 0}; // Assuming the second return value should be 0 as a placeholder
+}
+```",813,"```cpp
+#include <cassert>
+#include <string>
+
+int string_length(const std::string& str) {
+    return str.length();
+}
+
+int main() {
+    assert(string_length(""python"") == 6);
+    assert(string_length(""program"") == 7);
+    assert(string_length(""language"") == 8);
+    return 0;
+}
+```"
+813,Write a function to find the area of a rombus.,"```cpp
+double rombus_area(double p, double q) {
+    double area = (p * q) / 2;
+    return area;
+}
+```",814,"```cpp
+#include <cassert>
+
+double rombus_area(double d1, double d2) {
+    return (d1 * d2) / 2;
+}
+
+int main() {
+    assert(rombus_area(10, 20) == 100);
+    assert(rombus_area(10, 5) == 25);
+    assert(rombus_area(4, 2) == 4);
+    return 0;
+}
+```"
+820,Write a function to merge two dictionaries into a single expression.,"```cpp
+#include <iostream>
+#include <map>
+#include <unordered_map>
+
+std::map<std::string, std::string> merge_dictionaries(const std::map<std::string, std::string>& dict1, const std::map<std::string, std::string>& dict2) {
+    std::map<std::string, std::string> merged_dict = dict2;
+    merged_dict.insert(dict1.begin(), dict1.end());
+    return merged_dict;
+}
+```",821,"```cpp
+#include <cassert>
+#include <unordered_map>
+#include <string>
+
+std::unordered_map<std::string, std::string> merge_dictionaries(const std::unordered_map<std::string, std::string>& dict1, const std::unordered_map<std::string, std::string>& dict2) {
+    std::unordered_map<std::string, std::string> merged = dict1;
+
+    for (const auto& pair : dict2) {
+        merged[pair.first] = pair.second;
+    }
+
+    return merged;
+}
+
+int main() {
+    assert(merge_dictionaries({{""R"", ""Red""}, {""B"", ""Black""}, {""P"", ""Pink""}},
+                               {{""G"", ""Green""}, {""W"", ""White""}}) == 
+           (std::unordered_map<std::string, std::string>{{""B"", ""Black""}, {""R"", ""Red""}, {""P"", ""Pink""}, {""G"", ""Green""}, {""W"", ""White""}}));
+
+    assert(merge_dictionaries({{""R"", ""Red""}, {""B"", ""Black""}, {""P"", ""Pink""}},
+                               {{""O"", ""Orange""}, {""W"", ""White""}, {""B"", ""Black""}}) == 
+           (std::unordered_map<std::string, std::string>{{""O"", ""Orange""}, {""P"", ""Pink""}, {""B"", ""Black""}, {""W"", ""White""}, {""R"", ""Red""}}));
+
+    assert(merge_dictionaries({{""G"", ""Green""}, {""W"", ""White""}},
+                               {{""O"", ""Orange""}, {""W"", ""White""}, {""B"", ""Black""}}) == 
+           (std::unordered_map<std::string, std::string>{{""W"", ""White""}, {""O"", ""Orange""}, {""G"", ""Green""}, {""B"", ""Black""}}));
+
+    return 0;
+}
+```"
+856,Write a function to list out the list of given strings individually using map function.,"```cpp
+#include <vector>
+#include <list>
+
+std::vector<std::list<int>> listify_list(const std::vector<std::vector<int>>& list1) {
+    std::vector<std::list<int>> result;
+    for (const auto& sublist : list1) {
+        result.emplace_back(sublist.begin(), sublist.end());
+    }
+    return result;
+}
+```",857,"```cpp
+#include <vector>
+#include <string>
+#include <cassert>
+
+std::vector<std::vector<char>> listify_list(const std::vector<std::string>& input) {
+    std::vector<std::vector<char>> result;
+    for (const auto& str : input) {
+        result.push_back(std::vector<char>(str.begin(), str.end()));
+    }
+    return result;
+}
+
+int main() {
+    assert(listify_list({""Red"", ""Blue"", ""Black"", ""White"", ""Pink""}) == std::vector<std::vector<char>>{{'R', 'e', 'd'}, {'B', 'l', 'u', 'e'}, {'B', 'l', 'a', 'c', 'k'}, {'W', 'h', 'i', 't', 'e'}, {'P', 'i', 'n', 'k'}});
+    assert(listify_list({""python""}) == std::vector<std::vector<char>>{{'p', 'y', 't', 'h', 'o', 'n'}});
+    assert(listify_list({"" red "", ""green"", "" black"", ""blue "", "" orange"", ""brown""}) == std::vector<std::vector<char>>{{' ', 'r', 'e', 'd', ' '}, {'g', 'r', 'e', 'e', 'n'}, {' ', 'b', 'l', 'a', 'c', 'k'}, {'b', 'l', 'u', 'e', ' '}, {' ', 'o', 'r', 'a', 'n', 'g', 'e'}, {'b', 'r', 'o', 'w', 'n'}});
+    
+    return 0;
+}
+```"
+888,Write a function to reverse each list in a given list of lists.,"```cpp
+#include <algorithm>
+#include <vector>
+
+std::pair<std::vector<std::vector<int>>, std::vector<std::vector<int>>> reverse_list_lists(std::vector<std::vector<int>>& lists) {
+    for (auto& l : lists) {
+        std::sort(l.rbegin(), l.rend());
+    }
+    return {lists, lists};
+}
+```",889,"```cpp
+#include <cassert>
+#include <vector>
+#include <algorithm>
+
+std::vector<std::vector<int>> reverse_list_lists(const std::vector<std::vector<int>>& input) {
+    std::vector<std::vector<int>> result = input;
+    for (auto& sublist : result) {
+        std::reverse(sublist.begin(), sublist.end());
+    }
+    return result;
+}
+
+int main() {
+    assert(reverse_list_lists({{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}}) == std::vector<std::vector<int>>{{4, 3, 2, 1}, {8, 7, 6, 5}, {12, 11, 10, 9}, {16, 15, 14, 13}});
+    assert(reverse_list_lists({{1, 2}, {2, 3}, {3, 4}}) == std::vector<std::vector<int>>{{2, 1}, {3, 2}, {4, 3}});
+    assert(reverse_list_lists({{10, 20}, {30, 40}}) == std::vector<std::vector<int>>{{20, 10}, {40, 30}});
+    
+    return 0;
+}
+```"
+892,Write a python function to get the last element of each sublist.,"```cpp
+#include <vector>
+#include <string>
+
+std::vector<std::string> Extract(const std::vector<std::vector<std::string>>& lst) {
+    std::vector<std::string> result;
+    for (const auto& item : lst) {
+        if (!item.empty()) {
+            result.push_back(item.back());
+        }
+    }
+    return result;
+}
+```",893,"```cpp
+#include <cassert>
+#include <vector>
+#include <string>
+
+std::vector<int> Extract(const std::vector<std::vector<int>>& input) {
+    std::vector<int> result;
+    for (const auto& vec : input) {
+        if (!vec.empty()) {
+            result.push_back(vec.back());
+        }
+    }
+    return result;
+}
+
+int main() {
+    assert(Extract({{1, 2, 3}, {4, 5}, {6, 7, 8, 9}}) == std::vector<int>{3, 5, 9});
+    assert(Extract({{""x"", ""y"", ""z""}, {""m""}, {""a"", ""b""}, {""u"", ""v""}}) == std::vector<std::string>{""z"", ""m"", ""b"", ""v""});
+    assert(Extract({{1, 2, 3}, {4, 5}}) == std::vector<int>{3, 5});
+}
+```"
+900,Write a function to find the smallest multiple of the first n numbers.,"```cpp
+#include <iostream>
+#include <vector>
+
+std::pair<int, int> smallest_multiple(int n) {
+    if (n <= 2) {
+        return {n, 0};
+    }
+    
+    int i = n * 2;
+    std::vector<int> factors;
+    for (int number = n; number > 1; --number) {
+        if (number * 2 > n) {
+            factors.push_back(number);
+        }
+    }
+    
+    while (true) {
+        for (auto a : factors) {
+            if (i % a != 0) {
+                i += n;
+                break;
+            }
+            if (a == factors.back() && i % a == 0) {
+                return {i, 0};
+            }
+        }
+    }
+}
+```",901,"```cpp
+#include <cassert>
+
+int smallest_multiple(int n) {
+    // Function implementation goes here
+}
+
+int main() {
+    assert(smallest_multiple(13) == 360360);
+    assert(smallest_multiple(2) == 2);
+    assert(smallest_multiple(1) == 1);
+    return 0;
+}
+```"
+902,Write a python function to count the total unset bits from 1 to n.,"```cpp
+int count_Unset_Bits(int n) {  
+    int cnt = 0;  
+    for (int i = 1; i <= n; i++) {  
+        int temp = i;  
+        while (temp) {  
+            if (temp % 2 == 0) {  
+                cnt++;  
+            }  
+            temp = temp / 2;  
+        }  
+    }  
+    return cnt;  
+}
+```",903,"```cpp
+#include <cassert>
+
+int count_Unset_Bits(int n) {
+    // Function implementation to count unset bits
+}
+
+int main() {
+    assert(count_Unset_Bits(2) == 1);
+    assert(count_Unset_Bits(5) == 4);
+    assert(count_Unset_Bits(14) == 17);
+    return 0;
+}
+```"
+914,Write a function to rearrange positive and negative numbers in a given array using lambda function.,"```cpp
+#include <vector>
+#include <algorithm>
+
+std::vector<int> rearrange_numbs(const std::vector<int>& array_nums) {
+    std::vector<int> result = array_nums;
+    std::sort(result.begin(), result.end(), [](int i) { return i == 0 ? 0 : -1.0 / i; });
+    return result;
+}
+```",915,"```cpp
+#include <vector>
+#include <cassert>
+#include <algorithm>
+
+std::vector<int> rearrange_numbs(std::vector<int> nums) {
+    std::vector<int> positives, negatives;
+    for (int num : nums) {
+        if (num >= 0) {
+            positives.push_back(num);
+        } else {
+            negatives.push_back(num);
+        }
+    }
+    std::sort(positives.begin(), positives.end());
+    std::sort(negatives.begin(), negatives.end(), std::greater<int>());
+    positives.insert(positives.end(), negatives.begin(), negatives.end());
+    return positives;
+}
+
+int main() {
+    assert(rearrange_numbs({-1, 2, -3, 5, 7, 8, 9, -10}) == std::vector<int>{2, 5, 7, 8, 9, -10, -3, -1});
+    assert(rearrange_numbs({10, 15, 14, 13, -18, 12, -20}) == std::vector<int>{10, 12, 13, 14, 15, -20, -18});
+    assert(rearrange_numbs({-20, 20, -10, 10, -30, 30}) == std::vector<int>{10, 20, 30, -30, -20, -10});
+    return 0;
+}
+```"
+917,Write a function to count coin change.,"```cpp
+#include <vector>
+
+std::pair<int, int> coin_change(std::vector<int>& S, int m, int n) {
+    std::vector<std::vector<int>> table(n + 1, std::vector<int>(m, 0));
+    for (int i = 0; i < m; i++) {
+        table[0][i] = 1;
+    }
+    for (int i = 1; i <= n; i++) {
+        for (int j = 0; j < m; j++) {
+            int x = (i - S[j] >= 0) ? table[i - S[j]][j] : 0;
+            int y = (j >= 1) ? table[i][j - 1] : 0;
+            table[i][j] = x + y;
+        }
+    }
+    return {table[n][m - 1]};
+}
+```",918,"```cpp
+#include <cassert>
+
+int coin_change(const std::vector<int>& coins, int n, int amount);
+
+int main() {
+    assert(coin_change({1, 2, 3}, 3, 4) == 4);
+    assert(coin_change({4, 5, 6, 7, 8, 9}, 6, 9) == 2);
+    assert(coin_change({4, 5, 6, 7, 8, 9}, 6, 4) == 1);
+    return 0;
+}
+```"
+927,Write a function to convert a date of yyyy-mm-dd format to dd-mm-yyyy format.,"```cpp
+#include <iostream>
+#include <regex>
+#include <string>
+
+std::string change_date_format(const std::string &dt) {
+    return std::regex_replace(dt, std::regex(R""((\d{4})-(\d{1,2})-(\d{1,2}))""), ""$3-$2-$1"");
+}
+```",928,"```cpp
+#include <cassert>
+#include <string>
+
+std::string change_date_format(const std::string& date);
+
+int main() {
+    assert(change_date_format(""2026-01-02"") == ""02-01-2026"");
+    assert(change_date_format(""2021-01-04"") == ""04-01-2021"");
+    assert(change_date_format(""2030-06-06"") == ""06-06-2030"");
+    return 0;
+}
+```"
+940,Write a function to count the elements in a list until an element is a tuple.,"```cpp
+#include <iostream>
+#include <vector>
+#include <variant>
+
+std::pair<int, int> count_elim(const std::vector<std::variant<int, std::tuple<>>> &num) {
+    int count_elim = 0;
+    for (const auto &n : num) {
+        if (std::holds_alternative<std::tuple<>>(n)) {
+            break;
+        }
+        count_elim += 1;
+    }
+    return {count_elim, 0};
+}
+```",941,"```cpp
+#include <cassert>
+#include <vector>
+#include <tuple>
+
+int count_elim(const std::vector<std::variant<int, std::tuple<int, int>>> &elements);
+
+int main() {
+    assert(count_elim({10, 20, 30, std::make_tuple(10, 20), 40}) == 3);
+    assert(count_elim({10, std::make_tuple(20, 30), std::make_tuple(10, 20), 40}) == 1);
+    assert(count_elim({std::make_tuple(10, std::make_tuple(20, 30, std::make_tuple(10, 20), 40))}) == 0);
+    return 0;
+}
+```"
+956,Write a python function to get the position of rightmost set bit.,"```cpp
+#include <cmath>
+
+std::pair<double, double> get_First_Set_Bit_Pos(int n) {
+    return {log2(n & -n) + 1, 0}; // The second value can be adjusted if needed
+}
+```",957,"```cpp
+#include <cassert>
+
+int get_First_Set_Bit_Pos(int n) {
+    // Implementation of the function goes here
+}
+
+int main() {
+    assert(get_First_Set_Bit_Pos(12) == 3);
+    assert(get_First_Set_Bit_Pos(18) == 2);
+    assert(get_First_Set_Bit_Pos(16) == 5);
+    return 0;
+}
+```"
+967,Write a python function to find maximum possible value for the given periodic function.,"```cpp
+#include <algorithm>
+
+std::pair<int, int> floor_Max(int A, int B, int N) {
+    int x = std::min(B - 1, N);
+    return { (A * x) / B, 0 }; // The second value is kept as 0 for consistency with the original function
+}
+```",968,"```cpp
+#include <cassert>
+#include <algorithm>
+
+int floor_Max(int a, int b, int c) {
+    return std::min({a, b, c});
+}
+
+int main() {
+    assert(floor_Max(11, 10, 9) == 9);
+    assert(floor_Max(5, 7, 4) == 4);
+    assert(floor_Max(2, 2, 1) == 1);
+    return 0;
+}
+```"
+976,"    """""" Given a positive floating point number, it can be decomposed into
+    and integer part (largest integer smaller than given number) and decimals
+    (leftover part always smaller than 1).
+
+    Return the decimal part of the number.
+    >>> truncate_number(3.5)
+    0.5
+    """"""
+","```cpp
+#include <cmath>
+
+double truncate_number(double number) {
+    return fmod(number, 1.0);
+}
+```",977,"```cpp
+#include <cassert>
+#include <cmath>
+
+int main() {
+    assert(truncate_number(3.5) == 0.5);
+    assert(abs(truncate_number(1.33) - 0.33) < 1e-6);
+    assert(abs(truncate_number(123.456) - 0.456) < 1e-6);
+    return 0;
+}
+```"
+993,"    """""" Input is a space-delimited string of numberals from 'zero' to 'nine'.
+    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.
+    Return the string with numbers sorted from smallest to largest
+    >>> sort_numbers('three one five')
+    'one three five'
+    """"""
+","```cpp
+#include <iostream>
+#include <map>
+#include <sstream>
+#include <vector>
+#include <algorithm>
+
+std::string sort_numbers(const std::string& numbers) {
+    std::map<std::string, int> value_map = {
+        {""zero"", 0},
+        {""one"", 1},
+        {""two"", 2},
+        {""three"", 3},
+        {""four"", 4},
+        {""five"", 5},
+        {""six"", 6},
+        {""seven"", 7},
+        {""eight"", 8},
+        {""nine"", 9}
+    };
+    
+    std::istringstream iss(numbers);
+    std::vector<std::string> num_vector;
+    std::string num;
+
+    while (iss >> num) {
+        if (!num.empty()) {
+            num_vector.push_back(num);
+        }
+    }
+
+    std::sort(num_vector.begin(), num_vector.end(), [&](const std::string& a, const std::string& b) {
+        return value_map[a] < value_map[b];
+    });
+
+    std::ostringstream oss;
+    for (const auto& n : num_vector) {
+        oss << n << ' ';
+    }
+
+    std::string result = oss.str();
+    if (!result.empty()) {
+        result.pop_back(); // Remove trailing space
+    }
+    
+    return result;
+}
+```",994,"```cpp
+#include <cassert>
+#include <string>
+
+int main() {
+    assert(sort_numbers("""") == """");
+    assert(sort_numbers(""three"") == ""three"");
+    assert(sort_numbers(""three five nine"") == ""three five nine"");
+    assert(sort_numbers(""five zero four seven nine eight"") == ""zero four five seven eight nine"");
+    assert(sort_numbers(""six five four three two one zero"") == ""zero one two three four five six"");
+    return 0;
+}
+```"
+995,"    """""" Given list of numbers (of at least two elements), apply a linear transform to that list,
+    such that the smallest number will become 0 and the largest will become 1
+    >>> rescale_to_unit([1.0, 2.0, 3.0, 4.0, 5.0])
+    [0.0, 0.25, 0.5, 0.75, 1.0]
+    """"""
+","```cpp
+#include <vector>
+#include <algorithm>
+
+std::vector<float> rescale_to_unit(const std::vector<float>& numbers) {
+    float min_number = *std::min_element(numbers.begin(), numbers.end());
+    float max_number = *std::max_element(numbers.begin(), numbers.end());
+    std::vector<float> scaled_numbers;
+    for (float x : numbers) {
+        scaled_numbers.push_back((x - min_number) / (max_number - min_number));
+    }
+    return scaled_numbers;
+}
+```",996,"```cpp
+#include <cassert>
+#include <vector>
+#include <algorithm>
+
+std::vector<double> rescale_to_unit(const std::vector<double>& input) {
+    double min_val = *std::min_element(input.begin(), input.end());
+    double max_val = *std::max_element(input.begin(), input.end());
+    std::vector<double> output;
+
+    for (double value : input) {
+        output.push_back((value - min_val) / (max_val - min_val));
+    }
+    return output;
+}
+
+int main() {
+    assert(rescale_to_unit({2.0, 49.9}) == std::vector<double>({0.0, 1.0}));
+    assert(rescale_to_unit({100.0, 49.9}) == std::vector<double>({1.0, 0.0}));
+    assert(rescale_to_unit({1.0, 2.0, 3.0, 4.0, 5.0}) == std::vector<double>({0.0, 0.25, 0.5, 0.75, 1.0}));
+    assert(rescale_to_unit({2.0, 1.0, 5.0, 3.0, 4.0}) == std::vector<double>({0.25, 0.0, 1.0, 0.5, 0.75}));
+    assert(rescale_to_unit({12.0, 11.0, 15.0, 13.0, 14.0}) == std::vector<double>({0.25, 0.0, 1.0, 0.5, 0.75}));
+
+    return 0;
+}
+```"
+997,"    """""" Return length of given string
+    >>> strlen('')
+    0
+    >>> strlen('abc')
+    3
+    """"""
+","```cpp
+#include <string>
+
+int strlen(const std::string& str) {
+    return str.length();
+}
+```",998,"```cpp
+#include <cassert>
+#include <cstring>
+
+int main() {
+    assert(strlen("""") == 0);
+    assert(strlen(""x"") == 1);
+    assert(strlen(""asdasnakj"") == 9);
+    return 0;
+}
+```"
+1006,"    """"""
+    Evaluates polynomial with coefficients xs at point x.
+    return xs[0] + xs[1] * x + xs[1] * x^2 + .... xs[n] * x^n
+    """"""
+    return sum([coeff * math.pow(x, i) for i, coeff in enumerate(xs)])
+
+
+def find_zero(xs: list):
+    """""" xs are coefficients of a polynomial.
+    find_zero find x such that poly(x) = 0.
+    find_zero returns only only zero point, even if there are many.
+    Moreover, find_zero only takes list xs having even number of coefficients
+    and largest non zero coefficient as it guarantees
+    a solution.
+    >>> round(find_zero([1, 2]), 2) # f(x) = 1 + 2x
+    -0.5
+    >>> round(find_zero([-6, 11, -6, 1]), 2) # (x - 1) * (x - 2) * (x - 3) = -6 + 11x - 6x^2 + x^3
+    1.0
+    """"""
+","```cpp
+#include <vector>
+
+double poly(const std::vector<double>& xs, double x) {
+    double begin = -1.0, end = 1.0;
+    while (poly(xs, begin) * poly(xs, end) > 0) {
+        begin *= 2.0;
+        end *= 2.0;
+    }
+    while (end - begin > 1e-10) {
+        double center = (begin + end) / 2.0;
+        if (poly(xs, center) * poly(xs, begin) > 0) {
+            begin = center;
+        } else {
+            end = center;
+        }
+    }
+    return begin;
+}
+```",1007,"```cpp
+#include <cassert>
+#include <cmath>
+#include <vector>
+#include <algorithm>
+#include <limits>
+#include <sstream>
+
+double poly(const std::vector<double>& vec);
+std::vector<double> sort_third(const std::vector<double>& vec);
+
+int main() {
+    assert(std::fabs(poly(std::vector<double>{-10}, sort_third(std::vector<double>{-10}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{-10, -2}, sort_third(std::vector<double>{-10, -2}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{-3}, sort_third(std::vector<double>{-3}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{-3, -6}, sort_third(std::vector<double>{-3, -6}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{-3, -6, -7}, sort_third(std::vector<double>{-3, -6, -7}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{-3, -6, -7, 7}, sort_third(std::vector<double>{-3, -6, -7, 7}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{8}, sort_third(std::vector<double>{8}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{8, 3}, sort_third(std::vector<double>{8, 3}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{-10}, sort_third(std::vector<double>{-10}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{-10, -8}, sort_third(std::vector<double>{-10, -8}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{-3}, sort_third(std::vector<double>{-3}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{-3, 6}, sort_third(std::vector<double>{-3, 6}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{-3, 6, 9}, sort_third(std::vector<double>{-3, 6, 9}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{-3, 6, 9, -10}, sort_third(std::vector<double>{-3, 6, 9, -10}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{10}, sort_third(std::vector<double>{10}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{10, 7}, sort_third(std::vector<double>{10, 7}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{10, 7, 3}, sort_third(std::vector<double>{10, 7, 3}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{10, 7, 3, -3}, sort_third(std::vector<double>{10, 7, 3, -3}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{8}, sort_third(std::vector<double>{8}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{8, -2}, sort_third(std::vector<double>{8, -2}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{8, -2, -10}, sort_third(std::vector<double>{8, -2, -10}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{8, -2, -10, -5}, sort_third(std::vector<double>{8, -2, -10, -5}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{8, -2, -10, -5, 3}, sort_third(std::vector<double>{8, -2, -10, -5, 3}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{8, -2, -10, -5, 3, 1}, sort_third(std::vector<double>{8, -2, -10, -5, 3, 1}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{8, -2, -10, -5, 3, 1, -2}, sort_third(std::vector<double>{8, -2, -10, -5, 3, 1, -2}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{8, -2, -10, -5, 3, 1, -2, -6}, sort_third(std::vector<double>{8, -2, -10, -5, 3, 1, -2, -6}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{1}, sort_third(std::vector<double>{1}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{1, -7}, sort_third(std::vector<double>{1, -7}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{1, -7, -8}, sort_third(std::vector<double>{1, -7, -8}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{1, -7, -8, 2}, sort_third(std::vector<double>{1, -7, -8, 2}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{1}, sort_third(std::vector<double>{1}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{1, 1}, sort_third(std::vector<double>{1, 1}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{-9}, sort_third(std::vector<double>{-9}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{-9, 4}, sort_third(std::vector<double>{-9, 4}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{-9, 4, 7}, sort_third(std::vector<double>{-9, 4, 7}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{-9, 4, 7, -7}, sort_third(std::vector<double>{-9, 4, 7, -7}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{-9, 4, 7, -7, 2}, sort_third(std::vector<double>{-9, 4, 7, -7, 2}))) < 1e-4);
+    assert(std::fabs(poly(std::vector<double>{-9, 4, 7, -7, 2, -8}, sort_third(std::vector<double>{-9, 4, 7, -7, 2, -8}))) < 1e-4);
+
+    return 0;
+}
+```"
+1016,"    """"""Return list with elements incremented by 1.
+    >>> incr_list([1, 2, 3])
+    [2, 3, 4]
+    >>> incr_list([5, 3, 5, 2, 3, 3, 9, 0, 123])
+    [6, 4, 6, 3, 4, 4, 10, 1, 124]
+    """"""
+","```cpp
+#include <vector>
+
+std::vector<int> incr_list(const std::vector<int>& l) {
+    std::vector<int> result;
+    for (int e : l) {
+        result.push_back(e + 1);
+    }
+    return result;
+}
+```",1017,"```cpp
+#include <cassert>
+#include <vector>
+
+std::vector<int> incr_list(const std::vector<int>& lst) {
+    std::vector<int> result;
+    for (int num : lst) {
+        result.push_back(num + 1);
+    }
+    return result;
+}
+
+int main() {
+    assert(incr_list({}) == std::vector<int>{});
+    assert(incr_list({3, 2, 1}) == std::vector<int>{4, 3, 2});
+    assert(incr_list({5, 2, 5, 2, 3, 3, 9, 0, 123}) == std::vector<int>{6, 3, 6, 3, 4, 4, 10, 1, 124});
+    return 0;
+}
+```"
+1021,"    """"""Return median of elements in the list l.
+    >>> median([3, 1, 2, 4, 5])
+    3
+    >>> median([-10, 4, 6, 1000, 10, 20])
+    15.0
+    """"""
+","```cpp
+#include <vector>
+#include <algorithm>
+
+double median(std::vector<int>& l) {
+    std::sort(l.begin(), l.end());
+    if (l.size() % 2 == 1) {
+        return l[l.size() / 2];
+    } else {
+        return (l[l.size() / 2 - 1] + l[l.size() / 2]) / 2.0;
+    }
+}
+```",1022,"```cpp
+#include <cassert>
+#include <vector>
+#include <algorithm>
+
+double median(std::vector<int> nums) {
+    std::sort(nums.begin(), nums.end());
+    size_t size = nums.size();
+    if (size % 2 == 0) {
+        return (nums[size / 2 - 1] + nums[size / 2]) / 2.0;
+    } else {
+        return nums[size / 2];
+    }
+}
+
+int main() {
+    assert(median({3, 1, 2, 4, 5}) == 3);
+    assert(median({-10, 4, 6, 1000, 10, 20}) == 8.0);
+    assert(median({5}) == 5);
+    assert(median({6, 5}) == 5.5);
+    assert(median({8, 1, 3, 9, 9, 2, 7}) == 7);
+    return 0;
+}
+```"
+1043,"    '''
+    You are given a non-empty list of positive integers. Return the greatest integer that is greater than 
+    zero, and has a frequency greater than or equal to the value of the integer itself. 
+    The frequency of an integer is the number of times it appears in the list.
+    If no such a value exist, return -1.
+    Examples:
+        search([4, 1, 2, 2, 3, 1]) == 2
+        search([1, 2, 2, 3, 3, 3, 4, 4, 4]) == 3
+        search([5, 5, 4, 4, 4]) == -1
+    '''
+","```cpp
+#include <vector>
+#include <algorithm> 
+
+int search(const std::vector<int>& lst) {
+    std::vector<int> frq(*std::max_element(lst.begin(), lst.end()) + 1, 0);
+    for (int i : lst) {
+        frq[i] += 1;
+    }
+
+    int ans = -1;
+    for (int i = 1; i < frq.size(); i++) {
+        if (frq[i] >= i) {
+            ans = i;
+        }
+    }
+
+    return ans;
+}
+```",1044,"```cpp
+#include <cassert>
+#include <vector>
+
+int search(const std::vector<int>& arr) {
+    // Implement the search function logic here
+}
+
+int main() {
+    assert(search({5, 5, 5, 5, 1}) == 1);
+    assert(search({4, 1, 4, 1, 4, 4}) == 4);
+    assert(search({3, 3}) == -1);
+    assert(search({8, 8, 8, 8, 8, 8, 8, 8}) == 8);
+    assert(search({2, 3, 3, 2, 2}) == 2);
+    assert(search({2, 7, 8, 8, 4, 8, 7, 3, 9, 6, 5, 10, 4, 3, 6, 7, 1, 7, 4, 10, 8, 1}) == 1);
+    assert(search({3, 2, 8, 2}) == 2);
+    assert(search({6, 7, 1, 8, 8, 10, 5, 8, 5, 3, 10}) == 1);
+    assert(search({8, 8, 3, 6, 5, 6, 4}) == -1);
+    assert(search({6, 9, 6, 7, 1, 4, 7, 1, 8, 8, 9, 8, 10, 10, 8, 4, 10, 4, 10, 1, 2, 9, 5, 7, 9}) == 1);
+    assert(search({1, 9, 10, 1, 3}) == 1);
+    assert(search({6, 9, 7, 5, 8, 7, 5, 3, 7, 5, 10, 10, 3, 6, 10, 2, 8, 6, 5, 4, 9, 5, 3, 10}) == 5);
+    assert(search({1}) == 1);
+    assert(search({8, 8, 10, 6, 4, 3, 5, 8, 2, 4, 2, 8, 4, 6, 10, 4, 2, 1, 10, 2, 1, 1, 5}) == 4);
+    assert(search({2, 10, 4, 8, 2, 10, 5, 1, 2, 9, 5, 5, 6, 3, 8, 6, 4, 10}) == 2);
+    assert(search({1, 6, 10, 1, 6, 9, 10, 8, 6, 8, 7, 3}) == 1);
+    assert(search({9, 2, 4, 1, 5, 1, 5, 2, 5, 7, 7, 7, 3, 10, 1, 5, 4, 2, 8, 4, 1, 9, 10, 7, 10, 2, 8, 10, 9, 4}) == 4);
+    assert(search({2, 6, 4, 2, 8, 7, 5, 6, 4, 10, 4, 6, 3, 7, 8, 8, 3, 1, 4, 2, 2, 10, 7}) == 4);
+    assert(search({9, 8, 6, 10, 2, 6, 10, 2, 7, 8, 10, 3, 8, 2, 6, 2, 3, 1}) == 2);
+    assert(search({5, 5, 3, 9, 5, 6, 3, 2, 8, 5, 6, 10, 10, 6, 8, 4, 10, 7, 7, 10, 8}) == -1);
+    assert(search({10}) == -1);
+    assert(search({9, 7, 7, 2, 4, 7, 2, 10, 9, 7, 5, 7, 2}) == 2);
+    assert(search({5, 4, 10, 2, 1, 1, 10, 3, 6, 1, 8}) == 1);
+    assert(search({7, 9, 9, 9, 3, 4, 1, 5, 9, 1, 2, 1, 1, 10, 7, 5, 6, 7, 6, 7, 7, 6}) == 1);
+    assert(search({3, 10, 10, 9, 2}) == -1);
+    return 0;
+}
+```"
+1044,"    '''
+    Given list of integers, return list in strange order.
+    Strange sorting, is when you start with the minimum value,
+    then maximum of the remaining integers, then minimum and so on.
+
+    Examples:
+    strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]
+    strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]
+    strange_sort_list([]) == []
+    '''
+","```cpp
+#include <vector>
+#include <algorithm>
+
+std::vector<int> strange_sort_list(std::vector<int>& lst) {
+    std::vector<int> res;
+    bool switch_flag = true;
+    while (!lst.empty()) {
+        if (switch_flag) {
+            auto min_it = std::min_element(lst.begin(), lst.end());
+            res.push_back(*min_it);
+            lst.erase(min_it);
+        } else {
+            auto max_it = std::max_element(lst.begin(), lst.end());
+            res.push_back(*max_it);
+            lst.erase(max_it);
+        }
+        switch_flag = !switch_flag;
+    }
+    return res;
+}
+```",1045,"```cpp
+#include <cassert>
+#include <vector>
+#include <algorithm>
+
+std::vector<int> strange_sort_list(std::vector<int> lst) {
+    std::vector<int> result;
+    if (lst.empty()) return result;
+
+    std::sort(lst.begin(), lst.end()); // Sort the list
+    int left = 0, right = lst.size() - 1;
+
+    while (left <= right) {
+        if (left == right) {
+            result.push_back(lst[left]);
+        } else {
+            result.push_back(lst[left++]);
+            result.push_back(lst[right--]);
+        }
+    }
+
+    return result;
+}
+
+int main() {
+    assert(strange_sort_list({1, 2, 3, 4}) == std::vector<int>{1, 4, 2, 3});
+    assert(strange_sort_list({5, 6, 7, 8, 9}) == std::vector<int>{5, 9, 6, 8, 7});
+    assert(strange_sort_list({1, 2, 3, 4, 5}) == std::vector<int>{1, 5, 2, 4, 3});
+    assert(strange_sort_list({5, 6, 7, 8, 9, 1}) == std::vector<int>{1, 9, 5, 8, 6, 7});
+    assert(strange_sort_list({5, 5, 5, 5}) == std::vector<int>{5, 5, 5, 5});
+    assert(strange_sort_list({}) == std::vector<int>{});
+    assert(strange_sort_list({1, 2, 3, 4, 5, 6, 7, 8}) == std::vector<int>{1, 8, 2, 7, 3, 6, 4, 5});
+    assert(strange_sort_list({0, 2, 2, 2, 5, 5, -5, -5}) == std::vector<int>{-5, 5, -5, 5, 0, 2, 2, 2});
+    assert(strange_sort_list({111111}) == std::vector<int>{111111});
+    assert(true);
+}
+```"
+1070,"    """"""Implement a function that takes an non-negative integer and returns an array of the first n
+    integers that are prime numbers and less than n.
+    for example:
+    count_up_to(5) => [2,3]
+    count_up_to(11) => [2,3,5,7]
+    count_up_to(0) => []
+    count_up_to(20) => [2,3,5,7,11,13,17,19]
+    count_up_to(1) => []
+    count_up_to(18) => [2,3,5,7,11,13,17]
+    """"""
+","```cpp
+#include <vector>
+
+std::vector<int> count_up_to(int n) {
+    std::vector<int> primes;
+    for (int i = 2; i < n; i++) {
+        bool is_prime = true;
+        for (int j = 2; j < i; j++) {
+            if (i % j == 0) {
+                is_prime = false;
+                break;
+            }
+        }
+        if (is_prime) {
+            primes.push_back(i);
+        }
+    }
+    return primes;
+}
+```",1071,"```cpp
+#include <cassert>
+#include <vector>
+
+std::vector<int> count_up_to(int n) {
+    std::vector<int> primes;
+    if (n < 2) return primes;
+    for (int i = 2; i <= n; ++i) {
+        bool is_prime = true;
+        for (int j = 2; j * j <= i; ++j) {
+            if (i % j == 0) {
+                is_prime = false;
+                break;
+            }
+        }
+        if (is_prime) {
+            primes.push_back(i);
+        }
+    }
+    return primes;
+}
+
+int main() {
+    assert(count_up_to(5) == std::vector<int>{2, 3});
+    assert(count_up_to(6) == std::vector<int>{2, 3, 5});
+    assert(count_up_to(7) == std::vector<int>{2, 3, 5});
+    assert(count_up_to(10) == std::vector<int>{2, 3, 5, 7});
+    assert(count_up_to(0) == std::vector<int>{});
+    assert(count_up_to(22) == std::vector<int>{2, 3, 5, 7, 11, 13, 17, 19});
+    assert(count_up_to(1) == std::vector<int>{});
+    assert(count_up_to(18) == std::vector<int>{2, 3, 5, 7, 11, 13, 17});
+    assert(count_up_to(47) == std::vector<int>{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43});
+    assert(count_up_to(101) == std::vector<int>{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97});
+    return 0;
+}
+```"
+1112,"    """"""Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers
+    Example
+    is_equal_to_sum_even(4) == False
+    is_equal_to_sum_even(6) == False
+    is_equal_to_sum_even(8) == True
+    """"""
+","```cpp
+bool is_equal_to_sum_even(int n) {
+    return n % 2 == 0 && n >= 8;
+}
+```",1113,"```cpp
+#include <cassert>
+
+bool is_equal_to_sum_even(int n) {
+    // Add your implementation of the function here.
+}
+
+int main() {
+    assert(is_equal_to_sum_even(4) == false);
+    assert(is_equal_to_sum_even(6) == false);
+    assert(is_equal_to_sum_even(8) == true);
+    assert(is_equal_to_sum_even(10) == true);
+    assert(is_equal_to_sum_even(11) == false);
+    assert(is_equal_to_sum_even(12) == true);
+    assert(is_equal_to_sum_even(13) == false);
+    assert(is_equal_to_sum_even(16) == true);
+    return 0;
+}
+```"
+1114,"    """"""
+    Given a string text, replace all spaces in it with underscores, 
+    and if a string has more than 2 consecutive spaces, 
+    then replace all consecutive spaces with - 
+    
+    fix_spaces(""Example"") == ""Example""
+    fix_spaces(""Example 1"") == ""Example_1""
+    fix_spaces("" Example 2"") == ""_Example_2""
+    fix_spaces("" Example   3"") == ""_Example-3""
+    """"""
+","```cpp
+#include <string>
+
+std::string fix_spaces(const std::string& text) {
+    std::string new_text = """";
+    size_t i = 0;
+    size_t start = 0, end = 0;
+    
+    while (i < text.length()) {
+        if (text[i] == ' ') {
+            end++;
+        } else {
+            if (end - start > 2) {
+                new_text += ""-"" + std::string(1, text[i]);
+            } else if (end - start > 0) {
+                new_text += std::string(end - start, '_') + text[i];
+            } else {
+                new_text += text[i];
+            }
+            start = i + 1;
+            end = i + 1;
+        }
+        i++;
+    }
+    
+    if (end - start > 2) {
+        new_text += ""-"";
+    } else if (end - start > 0) {
+        new_text += ""_"";
+    }
+    
+    return new_text;
+}
+```",1115,"```cpp
+#include <cassert>
+#include <iostream>
+#include <string>
+
+std::string fix_spaces(const std::string& input) {
+    // Implement the fix_spaces function logic here
+    // This is just a placeholder for the actual implementation
+    return input; // Replace this with the actual conversion logic
+}
+
+int main() {
+    assert(fix_spaces(""Example"") == ""Example"" && ""This prints if this assert fails 1 (good for debugging!)"");
+    assert(fix_spaces(""Mudasir Hanif "") == ""Mudasir_Hanif_"" && ""This prints if this assert fails 2 (good for debugging!)"");
+    assert(fix_spaces(""Yellow Yellow  Dirty  Fellow"") == ""Yellow_Yellow__Dirty__Fellow"" && ""This prints if this assert fails 3 (good for debugging!)"");
+    assert(fix_spaces(""Exa   mple"") == ""Exa-mple"" && ""This prints if this assert fails 4 (good for debugging!)"");
+    assert(fix_spaces(""   Exa 1 2 2 mple"") == ""-Exa_1_2_2_mple"" && ""This prints if this assert fails 5 (good for debugging!)"");
+    
+    return 0;
+}
+```"
+1122,"    '''
+    There are eight planets in our solar system: the closerst to the Sun 
+    is Mercury, the next one is Venus, then Earth, Mars, Jupiter, Saturn, 
+    Uranus, Neptune.
+    Write a function that takes two planet names as strings planet1 and planet2. 
+    The function should return a tuple containing all planets whose orbits are 
+    located between the orbit of planet1 and the orbit of planet2, sorted by 
+    the proximity to the sun. 
+    The function should return an empty tuple if planet1 or planet2
+    are not correct planet names. 
+    Examples
+    bf(""Jupiter"", ""Neptune"") ==> (""Saturn"", ""Uranus"")
+    bf(""Earth"", ""Mercury"") ==> (""Venus"")
+    bf(""Mercury"", ""Uranus"") ==> (""Venus"", ""Earth"", ""Mars"", ""Jupiter"", ""Saturn"")
+    '''
+","```cpp
+#include <iostream>
+#include <vector>
+#include <string>
+#include <tuple>
+
+std::tuple<std::vector<std::string>> bf(const std::string& planet1, const std::string& planet2) {
+    std::vector<std::string> planet_names = {""Mercury"", ""Venus"", ""Earth"", ""Mars"", ""Jupiter"", ""Saturn"", ""Uranus"", ""Neptune""};
+    
+    if (std::find(planet_names.begin(), planet_names.end(), planet1) == planet_names.end() || 
+        std::find(planet_names.begin(), planet_names.end(), planet2) == planet_names.end() || 
+        planet1 == planet2) {
+        return {};
+    }
+    
+    auto planet1_index = std::find(planet_names.begin(), planet_names.end(), planet1) - planet_names.begin();
+    auto planet2_index = std::find(planet_names.begin(), planet_names.end(), planet2) - planet_names.begin();
+    
+    if (planet1_index < planet2_index) {
+        return {std::vector<std::string>(planet_names.begin() + planet1_index + 1, planet_names.begin() + planet2_index)};
+    } else {
+        return {std::vector<std::string>(planet_names.begin() + planet2_index + 1, planet_names.begin() + planet1_index)};
+    }
+}
+```",1123,"```cpp
+#include <cassert>
+#include <iostream>
+#include <string>
+#include <tuple>
+
+std::tuple<std::string, std::string, std::string, std::string> bf(const std::string& planet1, const std::string& planet2) {
+    // Implement the function logic here
+}
+
+int main() {
+    assert(bf(""Jupiter"", ""Neptune"") == std::make_tuple(""Saturn"", ""Uranus"") && ""First test error: "" + std::to_string(std::tuple_size<decltype(bf(""Jupiter"", ""Neptune""))>::value));
+    assert(bf(""Earth"", ""Mercury"") == std::make_tuple(""Venus"") && ""Second test error: "" + std::to_string(bf(""Earth"", ""Mercury"")));
+    assert(bf(""Mercury"", ""Uranus"") == std::make_tuple(""Venus"", ""Earth"", ""Mars"", ""Jupiter"", ""Saturn"") && ""Third test error: "" + std::to_string(bf(""Mercury"", ""Uranus"")));
+    assert(bf(""Neptune"", ""Venus"") == std::make_tuple(""Earth"", ""Mars"", ""Jupiter"", ""Saturn"", ""Uranus"") && ""Fourth test error: "" + std::to_string(bf(""Neptune"", ""Venus"")));
+    assert(bf(""Earth"", ""Earth"") == std::make_tuple() && ""Fifth test error."");
+    assert(bf(""Mars"", ""Earth"") == std::make_tuple() && ""Sixth test error."");
+    assert(bf(""Jupiter"", ""Makemake"") == std::make_tuple() && ""Seventh test error."");
+    
+    return 0;
+}
+```"
+1124,"    """"""A simple program which should return the value of x if n is 
+    a prime number and should return the value of y otherwise.
+
+    Examples:
+    for x_or_y(7, 34, 12) == 34
+    for x_or_y(15, 8, 5) == 5
+    
+    """"""
+","```cpp
+int x_or_y(int n, int x, int y) {
+    if (n == 1) {
+        return y;
+    }
+    for (int i = 2; i < n; i++) {
+        if (n % i == 0) {
+            return y;
+            break;
+        }
+    }
+    return x;
+}
+```",1125,"```cpp
+#include <cassert>
+
+int x_or_y(int x, int y, int z) {
+    return (x > y) ? y : (y > z) ? z : y;
+}
+
+int main() {
+    assert(x_or_y(7, 34, 12) == 34);
+    assert(x_or_y(15, 8, 5) == 5);
+    assert(x_or_y(3, 33, 5212) == 33);
+    assert(x_or_y(1259, 3, 52) == 3);
+    assert(x_or_y(7919, -1, 12) == -1);
+    assert(x_or_y(3609, 1245, 583) == 583);
+    assert(x_or_y(91, 56, 129) == 129);
+    assert(x_or_y(6, 34, 1234) == 1234);
+    assert(x_or_y(1, 2, 0) == 0);
+    assert(x_or_y(2, 2, 0) == 2);
+    return 0;
+}
+```"
+1137,"    """"""
+    Given two positive integers a and b, return the even digits between a
+    and b, in ascending order.
+
+    For example:
+    generate_integers(2, 8) => [2, 4, 6, 8]
+    generate_integers(8, 2) => [2, 4, 6, 8]
+    generate_integers(10, 14) => []
+    """"""
+","```cpp
+#include <vector>
+#include <algorithm>
+
+std::vector<int> generate_integers(int a, int b) {
+    int lower = std::max(2, std::min(a, b));
+    int upper = std::min(8, std::max(a, b));
+    
+    std::vector<int> result;
+    for (int i = lower; i <= upper; ++i) {
+        if (i % 2 == 0) {
+            result.push_back(i);
+        }
+    }
+    return result;
+}
+```",1138,"```cpp
+#include <cassert>
+#include <vector>
+
+std::vector<int> generate_integers(int start, int end) {
+    std::vector<int> result;
+    if (start > end) {
+        return result;
+    }
+    for (int i = start; i < end; i += 2) {
+        result.push_back(i);
+    }
+    return result;
+}
+
+int main() {
+    assert(generate_integers(2, 10) == std::vector<int>{2, 4, 6, 8});
+    assert(generate_integers(10, 2) == std::vector<int>{});
+    assert(generate_integers(132, 2) == std::vector<int>{});
+    assert(generate_integers(17, 89) == std::vector<int>{});
+    assert(true && ""This prints if this assert fails 2 (also good for debugging!)"");
+    return 0;
+}
+```"
