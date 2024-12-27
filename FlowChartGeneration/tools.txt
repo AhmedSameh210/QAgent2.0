@@ -1,0 +1,3 @@
+ClangFormat:
+    sudo apt-get install clang-format  # For Linux
+    brew install clang-format          # For macOS
