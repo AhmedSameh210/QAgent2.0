@@ -1,0 +1,1815 @@
+Unnamed: 0,text,code,task_id,test_list
+6,The given code finds all words in a string that have four or more characters using regular expressions.,"
+import java.util.regex.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+    public static List<String> findCharLong(String text) {
+        List<String> result = new ArrayList<>();
+        Matcher matcher = Pattern.compile(""\\b\\w{4,}\\b"").matcher(text);
+        while (matcher.find()) {
+            result.add(matcher.group());
+        }
+        return result;
+    }
+}
+",7,"
+assert findCharLong(""Please move back to stream"").equals(Arrays.asList(""Please"", ""move"", ""back"", ""stream""));
+assert findCharLong(""Jing Eco and Tech"").equals(Arrays.asList(""Jing"", ""Tech""));
+assert findCharLong(""Jhingai wulu road Zone 3"").equals(Arrays.asList(""Jhingai"", ""wulu"", ""road"", ""Zone""));
+"
+9,The given code retrieves the n smallest numbers from a given list of integers.,"
+import java.util.Arrays;
+import java.util.PriorityQueue;
+
+public class Main {
+    public static int[] smallNNum(int[] list1, int n) {
+        PriorityQueue<Integer> heap = new PriorityQueue<>();
+        for (int num : list1) {
+            heap.offer(num);
+        }
+        
+        int[] smallest = new int[n];
+        for (int i = 0; i < n; i++) {
+            smallest[i] = heap.poll();
+        }
+        
+        return smallest;
+    }
+}
+",10,"
+assert Arrays.equals(smallNNum(new int[]{10, 20, 50, 70, 90, 20, 50, 40, 60, 80, 100}, 2), new int[]{10, 20});
+assert Arrays.equals(smallNNum(new int[]{10, 20, 50, 70, 90, 20, 50, 40, 60, 80, 100}, 5), new int[]{10, 20, 20, 40, 50});
+assert Arrays.equals(smallNNum(new int[]{10, 20, 50, 70, 90, 20, 50, 40, 60, 80, 100}, 3), new int[]{10, 20, 20});
+"
+50,The given code checks if a triangle is equilateral by verifying if all three sides have equal lengths.,"
+public static boolean checkEquilateral(int x, int y, int z) {
+	if (x == y && y == z) {
+        return true;
+    } 
+    else {
+	    return false;
+	}
+}
+",51,"
+assert checkEquilateral(6, 8, 12) == false;
+assert checkEquilateral(6, 6, 12) == false;
+assert checkEquilateral(6, 6, 6) == true;
+"
+52,"The given code checks whether the first and last characters of a given string are equal, returning ""Equal"" if they are and ""Not Equal"" if they are not.","
+public static String checkEquality(String str) {
+        if (str.charAt(0) == str.charAt(str.length() - 1)) {
+            return ""Equal"";
+        } else {
+            return ""Not Equal"";
+        }
+    }
+",53,"
+assert checkEquality(""abcda"").equals(""Equal"");
+assert checkEquality(""ab"").equals(""Not Equal"");
+assert checkEquality(""mad"").equals(""Not Equal"");
+"
+58,The given code calculates the nth octagonal number using the formula 3n^2 - 2n.,"
+public class Main {
+    public static int isOctagonal(int n) {
+        return 3 * n * n - 2 * n;
+    }
+}
+",59,"
+assert isOctagonal(5) == 65;
+assert isOctagonal(10) == 280;
+assert isOctagonal(15) == 645;
+"
+70,"The given code sorts a list of integers in ascending order using the comb sort algorithm, which is an improved version of the bubble sort algorithm.","
+public static int[] combSort(int[] nums) {
+        double shrinkFact = 1.3;
+        int gaps = nums.length;
+        boolean swapped = true;
+        int i = 0;
+        
+        while (gaps > 1 || swapped) {
+            gaps = (int) Math.floor(gaps / shrinkFact);
+            swapped = false;
+            i = 0;
+            while (gaps + i < nums.length) {
+                if (nums[i] > nums[i + gaps]) {
+                    int temp = nums[i];
+                    nums[i] = nums[i + gaps];
+                    nums[i + gaps] = temp;
+                    swapped = true;
+                }
+                i++;
+            }
+        }
+        return nums;
+    }
+",71,"
+assert getEqual(new int[][]{{11, 22, 33}, {44, 55, 66}}, 3).equals(""All tuples have same length"");
+assert getEqual(new int[][]{{1, 2, 3}, {4, 5, 6, 7}}, 3).equals(""All tuples do not have same length"");
+assert getEqual(new int[][]{{1, 2}, {3, 4}}, 2).equals(""All tuples have same length"");
+"
+72,"The given Java function splits a given string into an array of substrings using multiple delimiters including semicolon, comma, asterisk, and newline.","
+public static String[] multipleSplit(String text) {
+        return text.split(""; |, |\*|\n"");
+    }
+",73,"
+assert Arrays.equals(multipleSplit(""Forces of the \n darkness*are coming into the play.""), new String[]{""Forces of the \n darkness"", ""are coming into the play.""});
+assert Arrays.equals(multipleSplit(""Mi Box runs on the \n Latest android*which has google assistance and chromecast.""),new String[]{""Mi Box runs on the \n Latest android"", ""which has google assistance and chromecast.""});
+assert Arrays.equals(multipleSplit(""Certain services\nare subjected to change*over the seperate subscriptions.""),new String[]{""Certain services\nare subjected to change"", ""over the seperate subscriptions.""});
+"
+80,"The given code combines two arrays of tuples into a single list of tuples, where each tuple in the resulting list contains one element from each of the input arrays, cycling through the second array if it is shorter.","
+	public static List<Tuple> zipTuples(int[] testTup1, int[] testTup2) {
+        List<Tuple> res = new ArrayList<>();
+        for (int i = 0; i < testTup1.length; i++) {
+            res.add(new Tuple(testTup1[i], testTup2[i % testTup2.length]));
+        }
+        return res;
+    }
+	static class Tuple {
+        Object first;
+        Object second;
+
+        Tuple(Object first, Object second) {
+            this.first = first;
+            this.second = second;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) return true;
+            if (obj == null || getClass() != obj.getClass()) return false;
+            Tuple tuple = (Tuple) obj;
+            return Objects.equals(first, tuple.first) && Objects.equals(second, tuple.second);
+        }
+    }
+",81,"
+	    	assert zipTuples(new int[]{7, 8, 4, 5, 9, 10}, new int[]{1, 5, 6}).equals(Arrays.asList(
+	                new Tuple(7, 1), new Tuple(8, 5), new Tuple(4, 6), new Tuple(5, 1), new Tuple(9, 5), new Tuple(10, 6)
+	            ));
+	        assert zipTuples(new int[]{8, 9, 5, 6, 10, 11}, new int[]{2, 6, 7}).equals(Arrays.asList(
+	                new Tuple(8, 2), new Tuple(9, 6), new Tuple(5, 7), new Tuple(6, 2), new Tuple(10, 6), new Tuple(11, 7)
+	            ));
+	         assert zipTuples(new int[]{9, 10, 6, 7, 11, 12}, new int[]{3, 7, 8}).equals(Arrays.asList(
+	                new Tuple(9, 3), new Tuple(10, 7), new Tuple(6, 8), new Tuple(7, 3), new Tuple(11, 7), new Tuple(12, 8)
+	            ));
+"
+81,The given code calculates the volume of a sphere given its radius using the formula for the volume of a sphere.,"
+public static double volumeSphere(double r) {
+    double volume = (4.0 / 3.0) * Math.PI * r * r * r;
+    return volume;
+}
+",82,"
+assert volumeSphere(10) == 4188.790204786391;
+assert volumeSphere(25) == 65449.84694978735;
+assert volumeSphere(20) == 33510.32163829113;
+"
+88,The given code subtracts 1 from the input number to find the closest smaller number.,"
+public static int closestNum(int N) {
+        return N - 1;
+    }
+",89,"
+[
+assert closestNum(11) == 10;
+,
+assert closestNum(7) == 6;
+,
+assert closestNum(12) == 11;]
+"
+92,The code calculates the value of a number raised to a certain power using a recursive function.,"
+public static int power(int a, int b) {
+        if (b == 0) {
+            return 1;
+        } else if (a == 0) {
+            return 0;
+        } else if (b == 1) {
+            return a;
+        } else {
+            return a * power(a, b - 1);
+        }
+}
+",93,"
+[assert power(3, 4) == 81;
+,
+assert power(2, 3) == 8;
+,
+assert power(5, 5) == 3125;
+]
+"
+95,The given code calculates the number of divisors of a given integer by checking all numbers from 1 up to the given number to see if they divide evenly into it.,"
+public static int divisor(int n) {
+        int x = 0;
+        for (int i = 1; i <= n; i++) {
+            if (n % i == 0) {
+                x++;
+            }
+        }
+        return x;
+}
+",96,"
+[assert divisor(15) == 4;
+,
+assert divisor(12) == 6;
+,
+assert divisor(9) == 3;]
+"
+125,The given code calculates the sum of common divisors of two given numbers by iterating through all possible divisors and checking if they are common to both numbers.,"
+public static int sum(int a, int b) {
+        int sum = 0;
+        for (int i = 1; i < Math.min(a, b); i++) {
+            if (a % i == 0 && b % i == 0) {
+                sum += i;
+            }
+        }
+        return sum;
+}
+",126,"
+[assert sum(10, 15) == 6
+,
+assert sum(100, 150) == 93;
+,
+assert sum(4, 6) == 3;]
+"
+128,"The given code checks if a given square matrix is a magic square by verifying that the sum of all rows, columns, and diagonals are equal.","
+public static boolean magicSquareTest(int[][] myMatrix) {
+        int iSize = myMatrix[0].length;
+        int[] sumList = new int[2 * iSize + 2];
+        int index = 0;
+
+        for (int[] lines : myMatrix) {
+            int sum = 0;
+            for (int value : lines) {
+                sum += value;
+            }
+            sumList[index++] = sum;
+        }
+
+        for (int col = 0; col < iSize; col++) {
+            int sum = 0;
+            for (int row = 0; row < iSize; row++) {
+                sum += myMatrix[row][col];
+            }
+            sumList[index++] = sum;
+        }
+
+        int result1 = 0;
+        for (int i = 0; i < iSize; i++) {
+            result1 += myMatrix[i][i];
+        }
+        sumList[index++] = result1;
+
+        int result2 = 0;
+        for (int i = iSize - 1; i >= 0; i--) {
+            result2 += myMatrix[i][i];
+        }
+        sumList[index++] = result2;
+
+        Set<Integer> uniqueSums = new HashSet<>();
+        for (int sum : sumList) {
+            uniqueSums.add(sum);
+        }
+
+        return uniqueSums.size() <= 1;
+}
+",129,"
+[assert magicSquareTest(new int[][]{{7, 12, 1, 14}, {2, 13, 8, 11}, {16, 3, 10, 5}, {9, 6, 15, 4}}) == true;
+,
+assert magicSquareTest(new int[][]{{2, 7, 6}, {9, 5, 1}, {4, 3, 8}}) == true;
+,
+assert magicSquareTest(new int[][]{{2, 7, 6}, {9, 5, 1}, {4, 3, 7}}) == false;]
+"
+149,The given Java code checks if a number b is present in an infinite arithmetic sequence that starts with a and has a common difference of c.,"
+public static boolean doesContainB(int a, int b, int c) { 
+	    if (a == b) { 
+	        return true; 
+	    } 
+	    if ((b - a) * c > 0 && (b - a) % c == 0) { 
+	        return true; 
+	    } 
+	    return false; 
+}
+",150,"
+[assert doesContainB(1, 7, 3) == true;
+,
+assert doesContainB(1, -3, 5) == false;
+,
+assert doesContainB(3, 2, 5) == false;]
+"
+170,The given code calculates the perimeter of a regular pentagon by multiplying the length of one side by 5.,"
+public static double perimeterPentagon(double a) {
+        double perimeter = 5 * a;
+        return perimeter;
+}
+",171,"
+[assert perimeterPentagon(5) == 25;
+,
+assert perimeterPentagon(10) == 50;
+,
+assert perimeterPentagon(15) == 75;]
+"
+188,The given code finds the first missing positive integer in an array by modifying the array in-place and utilizing the sign of the elements to mark presence of numbers.,"
+public static int firstMissingPositive(int[] arr, int n) {
+        int ptr = 0;
+        for (int i = 0; i < n; i++) {
+            if (arr[i] == 1) {
+                ptr = 1;
+                break;
+            }
+        }
+        if (ptr == 0) {
+            return 1;
+        }
+        for (int i = 0; i < n; i++) {
+            if (arr[i] <= 0 || arr[i] > n) {
+                arr[i] = 1;
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            arr[(arr[i] - 1) % n] += n;
+        }
+        for (int i = 0; i < n; i++) {
+            if (arr[i] <= n) {
+                return i + 1;
+            }
+        }
+        return n + 1;
+    }
+",189,"
+[assert firstMissingPositive(new int[]{1, 2, 3, -1, 5}, 5) == 4;
+,
+assert firstMissingPositive(new int[]{0, -1, -2, 1, 5, 8}, 6) == 2;
+,
+assert firstMissingPositive(new int[]{0, 1, 2, 5, -8}, 5) == 3;]
+"
+196,The given code calculates the exponentiation of corresponding elements from two input arrays and returns the results as a new array.,"
+public static int[] findExponentio(int[] testTup1, int[] testTup2) {
+		int[] res = new int[testTup1.length];
+        for (int i = 0; i < testTup1.length; i++) {
+            res[i] = (int) Math.pow(testTup1[i], testTup2[i]);
+        }
+        return res;
+    }
+",197,"
+[assert Arrays.equals(findExponentio(new int[]{10, 4, 5, 6}, new int[]{5, 6, 7, 5}), new int[]{100000, 4096, 78125, 7776});
+,
+assert Arrays.equals(findExponentio(new int[]{11, 5, 6, 7}, new int[]{6, 7, 8, 6}), new int[]{1771561, 78125, 1679616, 117649});
+,
+assert Arrays.equals(findExponentio(new int[]{12, 6, 7, 8}, new int[]{7, 8, 9, 7}), new int[]{35831808, 1679616, 40353607, 2097152});]
+"
+203,The given code counts the number of times a specific character appears in a given string.,"
+public static int count(String s, char c) {
+        int res = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == c) {
+                res++;
+            }
+        }
+        return res;
+    }
+",204,"
+[assert count(""abcc"", 'c') == 2;
+,
+assert count(""ababca"", 'a') == 3;
+,
+assert count(""mnmm0pm"", 'm') == 4;]
+"
+212,The given code takes two arrays of string tuples as input and returns a new array where each string tuple is the concatenation of the corresponding tuples from the input arrays.,"
+public static String[] concatenateStrings(String[] testTup1, String[] testTup2) {
+    String[] res = new String[testTup1.length];
+        for (int i = 0; i < testTup1.length; i++) {
+            res[i] = testTup1[i] + testTup2[i];
+        }
+        return res;
+    }
+",213,"
+[assert Arrays.equals(concatenateStrings(new String[]{""Manjeet"", ""Nikhil"", ""Akshat""}, new String[]{"" Singh"", "" Meherwal"", "" Garg""}),new String[]{""Manjeet Singh"", ""Nikhil Meherwal"", ""Akshat Garg""});
+,
+assert Arrays.equals(concatenateStrings(new String[]{""Shaik"", ""Ayesha"", ""Sanya""}, new String[]{"" Dawood"", "" Begum"", "" Singh""}),new String[]{""Shaik Dawood"", ""Ayesha Begum"", ""Sanya Singh""});
+,
+assert Arrays.equals(concatenateStrings(new String[]{""Harpreet"", ""Priyanka"", ""Muskan""}, new String[]{""Kour"", "" Agarwal"", ""Sethi""}),new String[]{""HarpreetKour"", ""Priyanka Agarwal"", ""MuskanSethi""});]
+"
+217,The given code calculates the minimum number of operations required to make two numbers equal by finding the greatest common divisor and then subtracting one from the result of the larger number divided by the greatest common divisor.,"
+public static int minOperations(int A, int B) {
+        if (A > B) {
+            int temp = A;
+            A = B;
+            B = temp;
+        }
+        B = B / gcd(A, B);
+        return B - 1;
+    }
+
+    private static int gcd(int a, int b) {
+        while (b != 0) {
+            int temp = b;
+            b = a % b;
+            a = temp;
+        }
+        return a;
+    }
+",218,"
+[assert minOperations(2, 4) == 1;
+,
+assert minOperations(4, 10) == 4;
+,
+assert minOperations(1, 4) == 3;]
+"
+220,"The given code finds the first even number in a list of numbers and returns it, or -1 if no even number is found.","
+public static int firstEven(int[] nums) {
+        return Arrays.stream(nums)
+                     .filter(el -> el % 2 == 0)
+                     .findFirst()
+                     .orElse(-1);
+    }
+",221,"
+[assert firstEven(new int[]{1, 3, 5, 7, 4, 1, 6, 8}) == 4;
+,
+assert firstEven(new int[]{2, 3, 4}) == 2;
+,
+assert firstEven(new int[]{5, 6, 7}) == 6;]
+"
+226,The given code defines a function that compares three integers and returns the smallest one.,"
+public static int minOfThree(int a, int b, int c) {
+        int smallest;
+        if ((a <= b) && (a <= c)) {
+            smallest = a;
+        } else if ((b <= a) && (b <= c)) {
+            smallest = b;
+        } else {
+            smallest = c;
+        }
+        return smallest;
+    }
+",227,"
+[assert minOfThree(10, 20, 0) == 0;
+,
+assert minOfThree(19, 15, 18) == 15;
+,
+assert minOfThree(-10, -20, -30) == -30;]
+"
+234,"The given Java code sets all even bits of a given number by shifting and performing bitwise operations, and the equivalent Python function would achieve the same functionality of setting even bits in a binary representation of a number.","
+public static int evenBitSetNumber(int n) {
+        int count = 0, res = 0, temp = n;
+        while (temp > 0) {
+            if (count % 2 == 1) {
+                res |= (1 << count);
+            }
+            count++;
+            temp >>= 1;
+        }
+        return (n | res);
+    }
+",235,"
+[assert evenBitSetNumber(10) == 10;
+,
+assert evenBitSetNumber(20) == 30;
+,
+assert evenBitSetNumber(30) == 30;]
+"
+281,The given code subtracts corresponding elements from two input lists and returns the resulting list of differences.,"
+public static List<Integer> subList(List<Integer> nums1, List<Integer> nums2) {
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0; i < nums1.size(); i++) {
+            result.add(nums1.get(i) - nums2.get(i));
+        }
+        return result;
+    }
+",282,"
+[assert subList(Arrays.asList(1, 2, 3), Arrays.asList(4, 5, 6)).equals(Arrays.asList(-3, -3, -3));
+,
+assert subList(Arrays.asList(1, 2), Arrays.asList(3, 4)).equals(Arrays.asList(-2, -2));
+,
+assert subList(Arrays.asList(90, 120), Arrays.asList(50, 70)).equals(Arrays.asList(40, 50));]
+"
+283,The given code checks if all elements in a list are equal to a specified element by comparing each item in the list to the given element and returning false as soon as it finds a mismatch.,"
+public static boolean checkElement(List<Object> list, Object element) {
+        for (Object v : list) {
+            if (!v.equals(element)) {
+                return false;
+            }
+        }
+        return true;
+    }
+",284,"
+[assert checkElement(List.of(""green"", ""orange"", ""black"", ""white""), ""blue"") == false;
+, 
+assert checkElement(List.of(1, 2, 3, 4), 7) == false;
+,
+assert checkElement(List.of(""green"", ""green"", ""green"", ""green""), ""green"") == true;]
+"
+306,"The given code creates a copy of a list of integer lists, appends a specified integer to a specified sublist, and returns the modified copy.","
+public static Object[] colon_tuplex(Object[] tuplex, int m, int n) {
+        // Create a deep copy of the input array
+        Object[] tuplexColon = tuplex.clone();
+        
+        // Ensure the m-th element is a list before modifying
+        if (tuplexColon[m] instanceof List) {
+            @SuppressWarnings(""unchecked"")
+            List<Integer> list = (List<Integer>) tuplexColon[m];
+            // Create a new list to avoid modifying the original
+            List<Integer> newList = new ArrayList<>(list);
+            newList.add(n);
+            tuplexColon[m] = newList;
+        }
+        
+        return tuplexColon;
+    }
+",307,"
+[assert Arrays.equals(colon_tuplex(new Object[]{""HELLO"", 5, new ArrayList<>(), true}, 2, 50),new Object[]{""HELLO"", 5, new ArrayList<>(Arrays.asList(50)), true});
+,
+assert Arrays.equals(colon_tuplex(new Object[]{""HELLO"", 5, new ArrayList<>(), true}, 2, 100),new Object[]{""HELLO"", 5, new ArrayList<>(Arrays.asList(100)), true});
+,
+assert Arrays.equals(colon_tuplex(new Object[]{""HELLO"", 5, new ArrayList<>(), true}, 2, 500),new Object[]{""HELLO"", 5, new ArrayList<>(Arrays.asList(500)), true});]
+"
+308,The given code defines a function that compares two numbers and returns the larger one.,"
+public static int maximum(int a, int b) {
+        if (a >= b) {
+            return a;
+        } else {
+            return b;
+        }
+    }
+",309,"
+[assert maximum(5, 10) == 10;
+,
+assert maximum(-1, -2) == -1;
+,
+assert maximum(9, 7) == 9;]
+"
+373,The given code generates all possible permutations of a given string by recursively inserting the first character of the string into all positions of the permutations of the remaining string.,"
+public static List<String> permuteString(String str) {
+        if (str.length() == 0) {
+            List<String> baseList = new ArrayList<>();
+            baseList.add("""");
+            return baseList;
+        }
+        List<String> prevList = permuteString(str.substring(1));
+        HashSet<String> nextList = new HashSet<>();
+        for (String s : prevList) {
+            for (int j = 0; j <= s.length(); j++) {
+                String newStr = s.substring(0, j) + str.charAt(0) + s.substring(j);
+                nextList.add(newStr);
+            }
+        }
+        List<String> result = new ArrayList<>(nextList);
+        Collections.sort(result);
+        return result;
+    }
+",374,"
+[assert permuteString(""ab"").equals(Arrays.asList(""ab"", ""ba""));
+,
+assert permuteString(""abc"").equals(Arrays.asList(""abc"", ""acb"", ""bac"", ""bca"", ""cab"", ""cba""));
+,
+assert permuteString(""abcd"").equals(Arrays.asList(""abcd"", ""abdc"", ""acbd"", ""acdb"", ""adbc"", ""adcb"", ""bacd"", ""badc"", ""bcad"", ""bcda"", ""bdac"", ""bdca"", ""cabd"", ""cadb"", ""cbad"", ""cbda"", ""cdab"", ""cdba"", ""dabc"", ""dacb"", ""dbac"", ""dbca"", ""dcab"", ""dcba""));]
+"
+383,The given code calculates the frequency of the smallest element in a given array by iterating through the array and updating the minimum value and its frequency as it encounters smaller or equal elements.,"
+public static int frequencyOfSmallest(int n, int[] arr) {
+	        int mn = arr[0];
+	        int freq = 1;
+	        for (int i = 1; i < n; i++) {
+	            if (arr[i] < mn) {
+	                mn = arr[i];
+	                freq = 1;
+	            } else if (arr[i] == mn) {
+	                freq++;
+	            }
+	        }
+	        return freq;
+}
+",384,"
+[assert frequencyOfSmallest(5, new int[]{1, 2, 3, 4, 3}) == 1;
+,
+assert frequencyOfSmallest(7, new int[]{3, 1, 2, 5, 6, 2, 3}) == 1;
+,
+assert frequencyOfSmallest(7, new int[]{3, 3, 6, 3, 7, 4, 9}) == 3;]
+"
+387,The given Java code and the requested Python function aim to find the largest power of 2 that is less than or equal to a given number.,"
+public static int highestPowerOf2(int n) {
+        int res = 0;
+        for (int i = n; i > 0; i--) {
+            if ((i & (i - 1)) == 0) {
+                res = i;
+                break;
+            }
+        }
+        return res;
+    }
+",388,"
+[assert highestPowerOf2(10) == 8;
+,
+assert highestPowerOf2(19) == 16;
+,
+assert highestPowerOf2(32) == 32;]
+"
+395,"The given Java code checks whether a given string starts and ends with the same character, or if it contains only a single character, and returns ""Valid"" if the condition is met, otherwise it returns ""Invalid"".","
+public static String checkChar(String string) {
+    	final String regex = ""^[a-z]$|^([a-z]).*\1$"";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(string);
+        if (matcher.find()) {
+            return ""Valid"";
+        } else {
+            return ""Invalid"";
+        }
+}
+",396,"
+[assert checkChar(""abba"").equals(""Valid"");
+,
+assert checkChar(""a"").equals(""Valid"");
+,
+assert checkChar(""abcd"").equals(""Invalid"");]
+"
+409,This function finds the smallest integer value in a list that contains different types of data.,"
+public static int minVal(List<Object> listVal) {
+        return listVal.stream()
+                      .filter(i -> i instanceof Integer)
+                      .mapToInt(i -> (Integer) i)
+                      .min()
+                      .orElseThrow(); // or handle exception
+    }
+",410,"
+[assert minVal(List.of(""Python"", 3, 2, 4, 5, ""version"")) == 2;
+,
+assert minVal(List.of(""Python"", 15, 20, 25)) == 15;
+,
+assert minVal(List.of(""Python"", 30, 20, 40, 50, ""version"")) == 20;]
+"
+410,"This code converts a given string from snake case to camel case by splitting the string at underscores, capitalizing the first letter of each part, and then joining the parts back together.","
+public static String snakeToCamel(String word) {
+        String[] parts = word.split(""_"");
+        StringJoiner joiner = new StringJoiner("""");
+
+        for (String part : parts) {
+            joiner.add(capitalize(part));
+        }
+
+        return joiner.toString();
+    }
+
+private static String capitalize(String str) {
+        if (str == null || str.isEmpty()) {
+            return str;
+        }
+        return Character.toUpperCase(str.charAt(0)) + str.substring(1);
+}
+",411,"
+[assert snakeToCamel(""android_tv"").equals(""AndroidTv"");
+,
+assert snakeToCamel(""google_pixel"").equals(""GooglePixel"");
+,
+assert snakeToCamel(""apple_watch"").equals(""AppleWatch"");]
+"
+425,"The given code filters a list of integers to include only the odd numbers, and the task is to achieve the same functionality using a lambda function.","
+public static List<Integer> filterOddNumbers(int[] nums) {
+        List<Integer> oddNums = new ArrayList<>();
+        for (int num : nums) {
+            if (num % 2 != 0) {
+                oddNums.add(num);
+            }
+        }
+        return oddNums;
+    }
+",426,"
+[assert filterOddNumbers(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}).equals(Arrays.asList(1, 3, 5, 7, 9));
+,
+assert filterOddNumbers(new int[]{10, 20, 45, 67, 84, 93}).equals(Arrays.asList(45, 67, 93));
+,
+assert filterOddNumbers(new int[]{5, 7, 9, 8, 6, 4, 3}).equals(Arrays.asList(5, 7, 9, 3));]
+"
+448,The given code checks whether three given points form a valid triangle or not by calculating the area of the triangle and returning Yes if the points do not lie on the same line and No otherwise.,"
+public static String check_Triangle(double x1, double y1, double x2, double y2, double x3, double y3) {
+        double a = (x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2));
+        if (a == 0) {
+            return ""No"";
+        } else {
+            return ""Yes"";
+        }
+    }
+",449,"
+[assert check_Triangle(1, 5, 2, 5, 4, 6).equals(""Yes"");
+,
+assert check_Triangle(1, 1, 1, 4, 1, 5).equals(""No"");
+,
+assert check_Triangle(1, 1, 1, 1, 1, 1).equals(""No"");]
+"
+450,The given Java code removes all whitespaces from a given string using a regular expression pattern that matches one or more whitespace characters.,"
+public static String removeWhitespaces(String text1) {
+        return Pattern.compile(""\s+"").matcher(text1).replaceAll("""");
+    }
+",451,"
+[assert removeWhitespaces("" Google    Flutter "").equals(""GoogleFlutter"");
+,
+assert removeWhitespaces("" Google    Dart "").equals(""GoogleDart"");
+,
+assert removeWhitespaces("" iOS    Swift "").equals(""iOSSwift"");]
+"
+465,"This code finds the index of a peak element in a given array, which is an element that is greater than or equal to its neighbors.","
+public static int findPeakUtil(int[] arr, int low, int high, int n) {
+        int mid = low + (high - low) / 2;
+
+        if ((mid == 0 || arr[mid - 1] <= arr[mid]) &&
+            (mid == n - 1 || arr[mid + 1] <= arr[mid])) {
+            return mid;
+        } else if (mid > 0 && arr[mid - 1] > arr[mid]) {
+            return findPeakUtil(arr, low, mid - 1, n);
+        } else {
+            return findPeakUtil(arr, mid + 1, high, n);
+        }
+    }
+
+    public static int findPeak(int[] arr, int n) {
+        return findPeakUtil(arr, 0, n - 1, n);
+    }
+",466,"
+[assert findPeak(new int[]{1, 3, 20, 4, 1, 0}, 6) == 2;
+,
+assert findPeak(new int[]{2, 3, 4, 5, 6}, 5) == 4;
+,
+assert findPeak(new int[]{8, 9, 11, 12, 14, 15}, 6) == 5;]
+"
+478,The given Java code and the requested Python function are designed to extract the first digit of a given integer by continuously dividing the number by 10 until only one digit remains.,"
+public static int firstDigit(int n) {
+        while (n >= 10) {
+            n = n / 10;
+        }
+        return n;
+    }
+",479,"
+[assert firstDigit(123) == 1;
+,
+assert firstDigit(456) == 4;
+,
+assert firstDigit(12) == 1;]
+"
+485,"The code calculates the probability of getting exactly k successes in n independent trials, where the probability of success in each trial is p.","
+	public static long nCr(int n, int r) {
+        if (r > n / 2) {
+            r = n - r;
+        }
+        long answer = 1;
+        for (int i = 1; i <= r; i++) {
+            answer *= (n - r + i);
+            answer /= i;
+        }
+        return answer;
+    }
+
+    public static double binomialProbability(int n, int k, double p) {
+        return (nCr(n, k) * Math.pow(p, k) * Math.pow(1 - p, n - k));
+    }
+",486,"
+[assert binomialProbability(10, 5, 1.0 / 3) == 0.13656454808718185;
+,
+assert binomialProbability(11, 6, 2.0 / 4) == 0.2255859375;
+,
+assert binomialProbability(12, 7, 3.0 / 5) == 0.227030335488;]
+"
+489,The given code extracts symmetric pairs from a list by adding the reverse of each pair and then filtering out pairs where the first element is greater than the second element.,"
+public static Set<int[]> extractSymmetric(int[][] testList) {
+        Set<String> temp = new HashSet<>();
+        for (int[] pair : testList) {
+            temp.add(pair[0] + "","" + pair[1]);
+            temp.add(pair[1] + "","" + pair[0]);
+        }
+        
+        Set<int[]> res = new HashSet<>();
+        for (String pairStr : temp) {
+            String[] parts = pairStr.split("","");
+            int first = Integer.parseInt(parts[0]);
+            int second = Integer.parseInt(parts[1]);
+            if (first < second) {
+                res.add(new int[]{first, second});
+            }
+        }
+        return res;
+	}
+",490,"
+[assert Arrays.deepEquals(extractSymmetric(new int[][]{{6, 7}, {2, 3}, {7, 6}, {9, 8}, {10, 2}, {8, 9}}).toArray(new int[0][]), new int[][]{{8, 9}, {6, 7}});
+,
+assert Arrays.deepEquals(extractSymmetric(new int[][]{{7, 8}, {3, 4}, {8, 7}, {10, 9}, {11, 3}, {9, 10}}).toArray(new int[0][]), new int[][]{{7, 8}, {9, 10}});
+,
+assert Arrays.deepEquals(extractSymmetric(new int[][]{{8, 9}, {4, 5}, {9, 8}, {11, 10}, {12, 4}, {10, 11}}).toArray(new int[0][]), new int[][]{{8, 9}, {10, 11}});]
+"
+510,The given code calculates the minimum sum of factors of a given number by dividing it into its prime factors and summing them up.,"
+public static int findMinSum(int num) {
+        int sum = 0;
+        int i = 2;
+        while (i * i <= num) {
+            while (num % i == 0) {
+                sum += i;
+                num /= i;
+            }
+            i++;
+        }
+        sum += num;
+        return sum;
+    }
+",511,"
+[assert findMinSum(12) == 7;
+,
+assert findMinSum(105) == 15;
+,
+assert findMinSum(2) == 2;]
+"
+524,The given code checks whether two lines are parallel by comparing the ratio of their slopes.,"
+public static boolean parallelLines(double[] line1, double[] line2) {
+	        return line1[0] / line1[1] == line2[0] / line2[1];
+	    }
+",525,"
+[assert parallelLines(new double[]{2, 3, 4}, new double[]{2, 3, 8}) == true;
+,
+assert parallelLines(new double[]{2, 3, 4}, new double[]{4, -3, 8}) == false;
+,
+assert parallelLines(new double[]{3, 3}, new double[]{5, 5}) == true;]
+"
+541,"The given code replaces all occurrences of spaces, commas, or dots in a string with a colon using regular expressions.","
+public static String fillSpaces(String text) {
+        return Pattern.compile(""[ ,.]"", Pattern.CASE_INSENSITIVE).matcher(text).replaceAll("":"");
+    }
+",542,"
+[assert fillSpaces(""Boult Curve Wireless Neckband"").equals(""Boult:Curve:Wireless:Neckband"");
+,
+assert fillSpaces(""Stereo Sound Sweatproof"").equals(""Stereo:Sound:Sweatproof"");
+,
+assert fillSpaces(""Probass Curve Audio"").equals(""Probass:Curve:Audio"");]
+"
+545,"The given code finds the last occurrence of a specified character in a string and returns its position, with the position being 1-indexed.","
+public static Integer lastOccurrenceChar(String string, char ch) {
+        int flag = -1;
+        for (int i = 0; i < string.length(); i++) {
+            if (string.charAt(i) == ch) {
+                flag = i;
+            }
+        }
+        if (flag == -1) {
+            return null;
+        } else {
+            return flag + 1;
+        }
+    }
+",546,"
+[assert lastOccurrenceChar(""hello world"", 'l') == 10;
+,
+assert lastOccurrenceChar(""language"", 'g') == 7;
+,
+assert lastOccurrenceChar(""little"", 'y') == null;]
+"
+565,The given code calculates the sum of the digits of a non-negative integer using recursion.,"
+public static int sumDigits(int n) {
+        if (n == 0) {
+            return 0;
+        } else {
+            return n % 10 + sumDigits(n / 10);
+        }
+    }
+",566,"
+[assert sumDigits(345) == 12;
+,
+assert sumDigits(12) == 3;
+,
+assert sumDigits(97) == 16;]
+"
+568,The given code sorts each sublist of integers in a list of lists in ascending order and returns the sorted list of lists.,"
+public static String[][] sortSublists(String[][] arrays) {
+        return Arrays.stream(arrays)
+                    .map(subarray -> Arrays.stream(subarray)
+                                         .sorted()
+                                         .toArray(String[]::new))
+                    .toArray(String[][]::new);
+    }
+",569,"
+[assert Arrays.deepEquals(sortSublists(new String[][] {{""green"", ""orange""}, {""black"", ""white""}, {""white"", ""black"", ""orange""}}), new String[][] {{""green"", ""orange""}, {""black"", ""white""}, {""black"", ""orange"", ""white""}});
+,
+assert Arrays.deepEquals(sortSublists(new String[][] {{""green"", ""orange""}, {""black""}, {""green"", ""orange""}, {""white""}}), new String[][] {{""green"", ""orange""}, {""black""}, {""green"", ""orange""}, {""white""}});
+,
+assert Arrays.deepEquals(sortSublists(new String[][] {{""a"", ""b""}, {""d"", ""c""}, {""g"", ""h""}, {""f"", ""e""}}), new String[][] {{""a"", ""b""}, {""c"", ""d""}, {""g"", ""h""}, {""e"", ""f""}});]
+"
+570,This function calculates the maximum possible sum of disjoint pairs in an array where the difference between the elements of each pair is less than a given number k.,"
+public static int maxSumPairDiffLessThanK(int[] arr, int N, int K) {
+        Arrays.sort(arr);
+        int[] dp = new int[N];
+        dp[0] = 0;
+        
+        for (int i = 1; i < N; i++) {
+            dp[i] = dp[i - 1];
+            if (arr[i] - arr[i - 1] < K) {
+                if (i >= 2) {
+                    dp[i] = Math.max(dp[i], dp[i - 2] + arr[i] + arr[i - 1]);
+                } else {
+                    dp[i] = Math.max(dp[i], arr[i] + arr[i - 1]);
+                }
+            }
+        }
+        return dp[N - 1];
+    }
+",571,"
+[assert maxSumPairDiffLessThanK(new int[]{3, 5, 10, 15, 17, 12, 9}, 7, 4) == 62;
+,
+assert maxSumPairDiffLessThanK(new int[]{5, 15, 10, 300}, 4, 12) == 25;
+,
+assert maxSumPairDiffLessThanK(new int[]{1, 2, 3, 4, 5, 6}, 6, 6) == 21;]
+"
+595,This function calculates the approximate size of a tuple in memory by subtracting the free memory from the total memory.,"
+public static long tupleSize(Object[] tuple) {  // Changed parameter type from List<?> to Object[]
+        return Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+    }
+    
+private static long getSize(Object[] tuple) {
+        return Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+    }
+",596,"
+[assert tupleSize(new Object[]{""A"", 1, ""B"", 2, ""C"", 3}) == getSize(new Object[]{'A', 1, 'B', 2, 'C', '3'});
+,
+assert tupleSize(new Object[]{1, ""Raju"", 2, ""Nikhil"", 3, ""Deepanshu""}) == getSize(new Object[]{1, ""Raju"", 2, ""Nikhil"", 3, ""Deepanshu""});
+,
+assert tupleSize(new Object[]{new Object[]{1, ""Lion""}, new Object[]{2, ""Tiger""}, new Object[]{3, ""Fox""}, new Object[]{4, ""Wolf""}}) == getSize(new Object[]{new Object[]{1, ""Lion""}, new Object[]{2, ""Tiger""}, new Object[]{3, ""Fox""}, new Object[]{4, ""Wolf""}});]
+"
+599,The given code checks whether a number is even by using a bitwise XOR operation to compare the number with its incremented value.,"
+public static boolean isEven(int n) {
+	    if ((n ^ 1) == (n + 1)) {
+	        return true;
+	    } else {
+	        return false;
+	    }
+	}
+",600,"
+[assert isEven(1) == false;
+,
+assert isEven(2) == true;
+,
+assert isEven(3) == false;]
+"
+601,The given code finds the first repeated character in a given string by checking each character to see if it appears more than once in the substring up to its current position.,"
+public static String firstRepeatedChar(String str1) {
+        for (int index = 0; index < str1.length(); index++) {
+            char c = str1.charAt(index);
+            if (str1.substring(0, index + 1).chars().filter(ch -> ch == c).count() > 1) {
+                return String.valueOf(c);
+            }
+        }
+        return ""None"";
+    }
+",602,"
+[assert firstRepeatedChar(""abcabc"").equals(""a"");
+,
+assert firstRepeatedChar(""abc"").equals(""None"");
+,
+assert firstRepeatedChar(""123123"").equals(""1"");]
+"
+603,"The code reverses the order of words in a given string, changing ""hello world"" to ""world hello"" for example.","
+public static String reverseWords(String s) {
+        List<String> words = Arrays.asList(s.split("" ""));
+        Collections.reverse(words);
+        return String.join("" "", words);
+    }
+",604,"
+[assert reverseWords(""python program"").equals(""program python"");
+,
+assert reverseWords(""java language"").equals(""language java"");
+,
+assert reverseWords(""indian man"").equals(""man indian"");]
+"
+608,The given Java code calculates the minimum possible value for a periodic function by finding the maximum of two values and then using it to calculate the result of a formula involving division and multiplication.,"
+public static int floor_Min(int A, int B, int N) {
+        int x = Math.max(B - 1, N);
+        return (A * x) / B;
+    }
+",609,"
+[assert floor_Min(10, 20, 30) == 15;
+,
+assert floor_Min(1, 2, 1) == 0;
+,
+assert floor_Min(11, 10, 9) == 9;]
+"
+611,"The given Java code transposes a list of lists, effectively turning rows into columns and vice versa, while the described Python function aims to merge the first and last elements of each sublist separately.","
+public static <T> List<List<T>> merge(T[][] arrays) {
+        List<List<T>> result = new ArrayList<>();
+        for (int i = 0; i < arrays[0].length; i++) {
+            List<T> row = new ArrayList<>();
+            for (T[] array : arrays) {
+                row.add(array[i]);
+            }
+            result.add(row);
+        }
+        return result;
+    }
+",612,"
+[assert merge(new String[][] {{""x"", ""y""}, {""a"", ""b""}, {""m"", ""n""}}).equals(List.of(List.of(""x"", ""a"", ""m""), List.of(""y"", ""b"", ""n"")));
+,
+assert merge(new Integer[][] {{1, 2}, {3, 4}, {5, 6}, {7, 8}}).equals(List.of(List.of(1, 3, 5, 7), List.of(2, 4, 6, 8)));
+,
+assert merge(new String[][] {{""x"", ""y"", ""z""}, {""a"", ""b"", ""c""}, {""m"", ""n"", ""o""}}).equals(List.of(List.of(""x"", ""a"", ""m""), List.of(""y"", ""b"", ""n""), List.of(""z"", ""c"", ""o"")));]
+"
+638,"The given code calculates the total length of names in a list that start with an uppercase letter and have all lowercase letters afterwards, by filtering out the names that do not meet this condition and summing up the lengths of the remaining names.","
+public static int sampleNam(String[] strings) {
+        List<String> filteredNames = java.util.Arrays.stream(strings)
+            .filter(el -> Character.isUpperCase(el.charAt(0)) && el.substring(1).equals(el.substring(1).toLowerCase()))
+            .collect(Collectors.toList());
+        return (int) String.join("""", filteredNames).length();
+    }
+",639,"
+[assert sampleNam(new String[]{""sally"", ""Dylan"", ""rebecca"", ""Diana"", ""Joanne"", ""keith""}) == 16;
+,
+assert sampleNam(new String[]{""php"", ""res"", ""Python"", ""abcd"", ""Java"", ""aaa""}) == 10;
+,
+assert sampleNam(new String[]{""abcd"", ""Python"", ""abba"", ""aba""}) == 6;]
+"
+640,The given code calculates the nth nonagonal number using a mathematical formula.,"
+public static int isNonagonal(int n) {
+        return (int) (n * (7 * n - 5) / 2);
+    }
+",641,"
+[assert isNonagonal(10) == 325;
+,
+assert isNonagonal(15) == 750;
+,
+assert isNonagonal(18) == 1089;]
+"
+644,The given code calculates the product of the kth index elements from a list of integer arrays.,"
+public static int getProduct(int[] val) {
+        int res = 1;
+        for (int ele : val) {
+            res *= ele;
+        }
+        return res;
+    }
+
+public static int findKProduct(int[][] js, int K) {
+        int[] subArray = new int[js.length];
+        for (int i = 0; i < js.length; i++) {
+            subArray[i] = js[i][K];
+        }
+        return getProduct(subArray);
+    }
+",645,"
+[assert findKProduct(new int[][]{{5, 6, 7}, {1, 3, 5}, {8, 9, 19}}, 2) == 665;
+,
+assert findKProduct(new int[][]{{6, 7, 8}, {2, 4, 6}, {9, 10, 20}}, 1) == 280;
+,
+assert findKProduct(new int[][]{{7, 8, 9}, {3, 5, 7}, {10, 11, 21}}, 0) == 210;]
+"
+648,The function calculates the sum of the numbers in a list between the specified start and end indices.,"
+public static int sumRangeList(int[] nums, int m, int n) {
+	    int sumRange = 0;
+	    for (int i = m; i <= n; i++) {
+	        sumRange += nums[i];
+	    }
+	    return sumRange;
+	}
+",649,"
+[assert sumRangeList(new int[]{2, 1, 5, 6, 8, 3, 4, 9, 10, 11, 8, 12}, 8, 10) == 29;
+,
+assert sumRangeList(new int[]{1, 2, 3, 4, 5}, 1, 2) == 5;
+,
+assert sumRangeList(new int[]{1, 0, 1, 2, 5, 6}, 4, 5) == 11;]
+"
+658,"The given Java code finds and returns duplicate strings from an input array, and similarly, a Python function would be written to find and print duplicate integers from a list of integers.","
+public static ArrayList<Integer> Repeat(int[] ls) {
+        int _size = ls.length;
+        ArrayList<Integer> repeated = new ArrayList<>();
+        for (int i = 0; i < _size; i++) {
+            int k = i + 1;
+            for (int j = k; j < _size; j++) {
+                if (ls[i] == ls[j] && !repeated.contains(ls[i])) {
+                    repeated.add(ls[i]);
+                }
+            }
+        }
+        return repeated;
+    }
+",659,"
+[assert Repeat(new int[]{10, 20, 30, 20, 20, 30, 40, 50, -20, 60, 60, -20, -20}).equals(Arrays.asList(20, 30, -20, 60));
+,
+assert Repeat(new int[]{-1, 1, -1, 8}).equals(Arrays.asList(-1));
+,
+assert Repeat(new int[]{1, 2, 3, 1, 2}).equals(Arrays.asList(1, 2));]
+"
+670,The given code calculates the position of the rightmost set bit in a given number and uses this functionality to set the rightmost unset bit in the number.,"
+public static int getPosOfRightMostSetBit(int n) {
+        return (int)(Math.log(n & -n) / Math.log(2) + 1);
+    }
+
+    public static int setRightMostUnsetBit(int n) {
+        if (n == 0) {
+            return 1;
+        }
+        if ((n & (n + 1)) == 0) {
+            return n;
+        }
+        int pos = getPosOfRightMostSetBit(~n);
+        return (1 << (pos - 1)) | n;
+    }
+",671,"
+[assert setRightMostUnsetBit(21) == 23;
+,
+assert setRightMostUnsetBit(11) == 15;
+,
+assert setRightMostUnsetBit(15) == 15;]
+"
+673,The given code removes duplicate words from a string by storing unique words in a LinkedHashMap and then returning them as a string.,"
+public static String removeDuplicate(String string) {
+        LinkedHashMap<String, String> map = new LinkedHashMap<>();
+        for (String w : string.split("" "")) {
+            map.put(w, w);
+        }
+        return String.join("" "", map.keySet());
+    }
+",674,"
+[assert removeDuplicate(""Python Exercises Practice Solution Exercises"").equals(""Python Exercises Practice Solution"");
+,
+assert removeDuplicate(""Python Exercises Practice Solution Python"").equals(""Python Exercises Practice Solution"");
+,
+assert removeDuplicate(""Python Exercises Practice Solution Practice"").equals(""Python Exercises Practice Solution"");]
+"
+681,The given code multiplies corresponding elements from two input lists and returns the result as a new list.,"
+public static List<Integer> mulList(List<Integer> nums1, List<Integer> nums2) {
+        return IntStream.range(0, nums1.size())
+                .map(i -> nums1.get(i) * nums2.get(i))
+                .boxed()
+                .collect(Collectors.toList());
+    }
+",682,"
+[assert mulList(List.of(1, 2, 3), List.of(4, 5, 6)).equals(List.of(4, 10, 18));
+,
+assert mulList(List.of(1, 2), List.of(3, 4)).equals(List.of(3, 8));
+,
+assert mulList(List.of(90, 120), List.of(50, 70)).equals(List.of(4500, 8400));]
+"
+686,The given code calculates the greatest common divisor of two integers using a recursive function based on the Euclidean algorithm.,"
+public static int recurGcd(int a, int b) {
+        int low = Math.min(a, b);
+        int high = Math.max(a, b);
+        if (low == 0) {
+            return high;
+        } else if (low == 1) {
+            return 1;
+        } else {
+            return recurGcd(low, high % low);
+        }
+    }
+",687,"
+[assert recurGcd(12, 14) == 2;
+,
+assert recurGcd(13, 17) == 1;
+,
+assert recurGcd(9, 3) == 3;]
+"
+708,"The given code counts the number of unique keys for each value in a list of tuples, where each tuple contains a key-value pair.","
+public static Map<String, Integer> getUnique(List<List<Integer>> testList) {
+        Map<Integer, List<Integer>> res = new HashMap<>();
+        for (List<Integer> sub : testList) {
+            res.computeIfAbsent(sub.get(1), k -> new ArrayList<>()).add(sub.get(0));
+        }
+        Map<String, Integer> resDict = new HashMap<>();
+        for (Integer key : res.keySet()) {
+            resDict.put(key.toString(), new HashSet<>(res.get(key)).size());
+        }
+        return resDict;
+    }
+",709,"
+[assert getUnique(Arrays.asList(Arrays.asList(3, 4), Arrays.asList(1, 2), Arrays.asList(2, 4),Arrays.asList(8, 2), Arrays.asList(7, 2), Arrays.asList(8, 1),Arrays.asList(9, 1), Arrays.asList(8, 4), Arrays.asList(10, 4))).equals(Map.of(""4"", 4, ""2"", 3, ""1"", 2));        
+,
+assert getUnique(Arrays.asList(Arrays.asList(4, 5), Arrays.asList(2, 3), Arrays.asList(3, 5),Arrays.asList(9, 3), Arrays.asList(8, 3), Arrays.asList(9, 2),Arrays.asList(10, 2), Arrays.asList(9, 5), Arrays.asList(11, 5))).equals(Map.of(""5"", 4, ""3"", 3, ""2"", 2));        
+,
+assert getUnique(Arrays.asList(Arrays.asList(6, 5), Arrays.asList(3, 4), Arrays.asList(2, 6),Arrays.asList(11, 1), Arrays.asList(8, 22), Arrays.asList(8, 11),Arrays.asList(4, 3), Arrays.asList(14, 3), Arrays.asList(11, 6))).equals(Map.of(""5"", 1, ""4"", 1, ""6"", 2, ""1"", 1, ""22"", 1, ""11"", 1, ""3"", 2));]
+"
+710,The given code checks whether the product of digits at odd places in a number is equal to the product of digits at even places.,"
+public static boolean productEqual(int n) {
+        if (n < 10) {
+            return false;
+        }
+        int prodOdd = 1, prodEven = 1;
+        while (n > 0) {
+            int digit = n % 10;
+            prodOdd *= digit;
+            n = n / 10;
+            if (n == 0) {
+                break;
+            }
+            digit = n % 10;
+            prodEven *= digit;
+            n = n / 10;
+        }
+        return prodOdd == prodEven;
+    }
+",711,"
+[assert productEqual(2841) == true;
+,
+assert productEqual(1234) == false;
+,
+assert productEqual(1212) == false;]
+"
+711,The given code removes duplicate integers from a sorted list by iterating through the list and adding each unique integer to a new list.,"
+public static List<List<Integer>> removeDuplicate(int[][] arrays) {
+        Set<List<Integer>> set = new LinkedHashSet<>();
+        for (int[] arr : arrays) {
+            set.add(Arrays.stream(arr).boxed().collect(Collectors.toList()));
+        }
+        return new ArrayList<>(set);
+    }
+",712,"
+[assert removeDuplicate(new int[][]{{10, 20}, {40}, {30, 56, 25}, {10, 20}, {33}, {40}}).equals(Arrays.asList(Arrays.asList(10, 20), Arrays.asList(40), Arrays.asList(30, 56, 25), Arrays.asList(33)));
+,
+assert removeDuplicate(new int[][]{{1}, {2}, {1}, {3}, {2}}).equals(Arrays.asList(Arrays.asList(1), Arrays.asList(2), Arrays.asList(3)));
+,
+assert removeDuplicate(new int[][]{{1, 2}, {3, 4}, {1, 2}, {5, 6}}).equals(Arrays.asList(Arrays.asList(1, 2), Arrays.asList(3, 4), Arrays.asList(5, 6)));]
+"
+736,"This Java code checks whether a given string starts with a vowel and returns ""Valid"" if it does, or ""Invalid"" otherwise, using a regular expression to match the starting character.","
+public static String checkStr(String string) {
+    	final String regex = ""^[aeiouAEIOU][A-Za-z0-9_]*"";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(string);
+        if (matcher.find()) {
+            return ""Valid"";
+        } else {
+            return ""Invalid"";
+        }
+    }
+",737,"
+[assert checkStr(""annie"").equals(""Valid"");
+,
+assert checkStr(""dawood"").equals(""Invalid"");
+,
+assert checkStr(""Else"").equals(""Valid"");]
+"
+752,The given code sorts a list of integer lists in ascending order based on the second element of each sublist and returns the first K records.,"
+public static Object[][] minK(Object[][] data, int k) {
+        Arrays.sort(data, Comparator.comparingInt(o -> (int) o[1]));
+        return Arrays.copyOfRange(data, 0, k);
+    }
+",753,"
+[assert Arrays.deepEquals(minK(new Object[][]{{""Manjeet"", 10}, {""Akshat"", 4}, {""Akash"", 2}, {""Nikhil"", 8}}, 2), new Object[][]{{""Akash"", 2}, {""Akshat"", 4}});
+,
+assert Arrays.deepEquals(minK(new Object[][]{{""Sanjeev"", 11}, {""Angat"", 5}, {""Akash"", 3}, {""Nepin"", 9}}, 3), new Object[][]{{""Akash"", 3}, {""Angat"", 5}, {""Nepin"", 9}});
+,
+assert Arrays.deepEquals(minK(new Object[][]{{""tanmay"", 14}, {""Amer"", 11}, {""Ayesha"", 9}, {""SKD"", 16}}, 1), new Object[][]{{""Ayesha"", 9}});]
+"
+772,The given code finds the first occurrence and position of a specified substring within a given string using regular expressions.,"
+public static Object[] occurenceSubstring(String text, String pattern) {
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(text);
+        if (m.find()) {
+            int s = m.start();
+            int e = m.end();
+            return new Object[]{text.substring(s, e), s, e};
+        }
+        return null;
+    }
+",773,"
+[assert Arrays.deepEquals(occurenceSubstring(""python programming, python language"", ""python""), new Object[]{""python"", 0, 6});
+,
+assert Arrays.deepEquals(occurenceSubstring(""python programming,programming language"", ""programming""), new Object[]{""programming"", 7, 18});
+,
+assert Arrays.deepEquals(occurenceSubstring(""python programming,programming language"", ""language""), new Object[]{""language"", 31, 39});]
+"
+782,"The given code converts RGB color values to HSV color values by normalizing the RGB values and then calculating the hue, saturation, and value based on the maximum and minimum color components.","
+public static double[] rgbToHsv(int r, int g, int b) {
+        double rf = r / 255.0;
+        double gf = g / 255.0;
+        double bf = b / 255.0;
+        double mx = Math.max(rf, Math.max(gf, bf));
+        double mn = Math.min(rf, Math.min(gf, bf));
+        double df = mx - mn;
+        double h = 0, s, v;
+
+        if (mx == mn) {
+            h = 0;
+        } else if (mx == rf) {
+            h = (60 * ((gf - bf) / df) + 360) % 360;
+        } else if (mx == gf) {
+            h = (60 * ((bf - rf) / df) + 120) % 360;
+        } else if (mx == bf) {
+            h = (60 * ((rf - gf) / df) + 240) % 360;
+        }
+
+        if (mx == 0) {
+            s = 0;
+        } else {
+            s = (df / mx) * 100;
+        }
+
+        v = mx * 100;
+        return new double[]{h, s, v};
+    }
+",783,"
+[assert Arrays.equals(rgbToHsv(255, 255, 255), new double[]{0, 0.0, 100.0});
+,
+assert Arrays.equals(rgbToHsv(0, 215, 0), new double[]{120.0, 100.0, 84.31372549019608});
+,
+assert Arrays.equals(rgbToHsv(10, 215, 110), new double[]{149.26829268292684, 95.34883720930233, 84.31372549019608});]
+"
+805,The given code calculates the maximum consecutive run of uppercase characters in a given string.,"
+public static int maxRunUppercase(String testStr) {
+        int cnt = 0;
+        int res = 0;
+        for (int idx = 0; idx < testStr.length(); idx++) {
+            if (Character.isUpperCase(testStr.charAt(idx))) {
+                cnt++;
+            } else {
+                res = cnt;
+                cnt = 0;
+            }
+        }
+        if (Character.isUpperCase(testStr.charAt(testStr.length() - 1))) {
+            res = cnt;
+        }
+        return res;
+    }
+",806,"
+[
+assert maxRunUppercase(""GeMKSForGERksISBESt"") == 5;
+,
+assert maxRunUppercase(""PrECIOusMOVemENTSYT"") == 6;
+,
+assert maxRunUppercase(""GooGLEFluTTER"") == 4;
+]
+"
+812,The given code calculates the length of a given string by iterating over each character and incrementing a counter.,public static int string_length(String str1) {     int count = 0;     for (char ch : str1.toCharArray()) {         count += 1;     }     return count; },813,"[ assert string_length(""python"") == 6; , assert string_length(""program"") == 7; , assert string_length(""language"") == 8; ]"
+813,The given code calculates the area of a rhombus given the lengths of its diagonals and returns the result as an array containing a single double value.,"public static double[] rombusArea(double p, double q) {
+        double area = (p * q) / 2;
+        return new double[]{area};
+    }",814,"[
+assert rombusArea(10, 20)[0] == 100;
+,
+assert rombusArea(10, 5)[0] == 25;
+,
+assert rombusArea(4, 2)[0] == 4;
+]"
+820,"The given code merges two dictionaries into one, giving priority to the first dictionary's values in case of key collisions.","public static Map<String, Object> mergeDictionaries(HashMap<String, String> hashMap, HashMap<String, String> hashMap2) {         Map<String, Object> mergedDict = new HashMap<>(hashMap2);         mergedDict.putAll(hashMap);         return mergedDict;     }",821,"[ assert mergeDictionaries(new HashMap<String, String>() {{             put(""R"", ""Red"");             put(""B"", ""Black"");             put(""P"", ""Pink"");         }}, new HashMap<String, String>() {{             put(""G"", ""Green"");             put(""W"", ""White"");         }}).equals(new HashMap<String, String>() {{             put(""R"", ""Red"");             put(""B"", ""Black"");             put(""P"", ""Pink"");             put(""G"", ""Green"");             put(""W"", ""White"");         }}), , assert mergeDictionaries(new HashMap<String, String>() {{             put(""R"", ""Red"");             put(""B"", ""Black"");             put(""P"", ""Pink"");         }}, new HashMap<String, String>() {{             put(""O"", ""Orange"");             put(""W"", ""White"");             put(""B"", ""Black"");         }}).equals(new HashMap<String, String>() {{             put(""R"", ""Red"");             put(""B"", ""Black"");             put(""P"", ""Pink"");             put(""O"", ""Orange"");             put(""W"", ""White"");         }}), , assert mergeDictionaries(new HashMap<String, String>() {{             put(""G"", ""Green"");             put(""W"", ""White"");         }}, new HashMap<String, String>() {{             put(""O"", ""Orange"");             put(""W"", ""White"");             put(""B"", ""Black"");         }}).equals(new HashMap<String, String>() {{             put(""G"", ""Green"");             put(""W"", ""White"");             put(""O"", ""Orange"");             put(""B"", ""Black"");         }}) ]"
+856,The given Java code takes a list of objects as input and returns a new list where each object from the original list is wrapped in its own separate list.,"    public static List<List<Object>> listifyList(List<Object> list1) {
+        List<List<Object>> result = new ArrayList<>();
+        for (Object item : list1) {
+            List<Object> innerList = new ArrayList<>();
+            if (item instanceof String) {
+                for (char c : ((String) item).toCharArray()) {
+                    innerList.add(c);
+                }
+            } else {
+                innerList.add(item);
+            }
+            result.add(innerList);
+        }
+        return result;
+    }",857,"[
+assert listifyList(Arrays.asList(""Red"", ""Blue"", ""Black"", ""White"", ""Pink"")).equals(Arrays.asList(Arrays.asList('R', 'e', 'd'), Arrays.asList('B', 'l', 'u', 'e'), Arrays.asList('B', 'l', 'a', 'c', 'k'), Arrays.asList('W', 'h', 'i', 't', 'e'), Arrays.asList('P', 'i', 'n', 'k'))) : ""Test 1 Failed"";
+,
+assert listifyList(Arrays.asList(""python"")).equals(Arrays.asList(Arrays.asList('p', 'y', 't', 'h', 'o', 'n'))) : ""Test 2 Failed"";
+,
+assert listifyList(Arrays.asList("" red "", ""green"", "" black"", ""blue "", "" orange"", ""brown"")).equals(Arrays.asList(Arrays.asList(' ', 'r', 'e', 'd', ' '), Arrays.asList('g', 'r', 'e', 'e', 'n'), Arrays.asList(' ', 'b', 'l', 'a', 'c', 'k'), Arrays.asList('b', 'l', 'u', 'e', ' '), Arrays.asList(' ', 'o', 'r', 'a', 'n', 'g', 'e'), Arrays.asList('b', 'r', 'o', 'w', 'n'))) : ""Test 3 Failed"";
+]"
+888,"The given code sorts each sublist in a list of lists in descending order, effectively reversing the order of elements in each sublist if they were initially in ascending order.","public static List<List<Integer>> reverseListLists(List<List<Integer>> lists) {         for (List<Integer> l : lists) {             Collections.sort(l, Collections.reverseOrder());         }         return lists;     }",889,"[ assert reverseListLists(new ArrayList<>(Arrays.asList(Arrays.asList(1, 2, 3, 4), Arrays.asList(5, 6, 7, 8), Arrays.asList(9, 10, 11, 12), Arrays.asList(13, 14, 15, 16)))).equals(Arrays.asList(Arrays.asList(4, 3, 2, 1), Arrays.asList(8, 7, 6, 5), Arrays.asList(12, 11, 10, 9), Arrays.asList(16, 15, 14, 13))) , assert reverseListLists(new ArrayList<>(Arrays.asList(Arrays.asList(1, 2), Arrays.asList(2, 3), Arrays.asList(3, 4)))).equals(Arrays.asList(Arrays.asList(2, 1), Arrays.asList(3, 2), Arrays.asList(4, 3))) , assert reverseListLists(new ArrayList<>(Arrays.asList(Arrays.asList(10, 20), Arrays.asList(30, 40)))).equals(Arrays.asList(Arrays.asList(20, 10), Arrays.asList(40, 30))) ]"
+892,The given Java code and the requested Python function extract the last element from each sublist in a list of lists and return them as a new list.,"    public static List<String> extract(List<List<String>> lst) {
+        List<String> result = new ArrayList<>();
+        for (List<String> item : lst) {
+            result.add(item.get(item.size() - 1));
+        }
+        return result;
+    }
+
+    public static List<String> Extract(int[][] lst) {
+        List<List<String>> temp = new ArrayList<>();
+        for (int[] item : lst) {
+            List<String> tempItem = new ArrayList<>();
+            for (int i : item) {
+                tempItem.add(String.valueOf(i));
+            }
+            temp.add(tempItem);
+        }
+        return extract(temp);
+    }
+
+    public static List<String> Extract(String[][] lst) {
+        List<List<String>> temp = new ArrayList<>();
+        for (String[] item : lst) {
+            List<String> tempItem = new ArrayList<>();
+            for (String i : item) {
+                tempItem.add(i);
+            }
+            temp.add(tempItem);
+        }
+        return extract(temp);
+    }",893,"[
+assert Extract(new int[][]{{1, 2, 3}, {4, 5}, {6, 7, 8, 9}}).equals(Arrays.asList(""3"", ""5"", ""9""));
+,
+assert Extract(new String[][]{{""x"", ""y"", ""z""}, {""m""}, {""a"", ""b""}, {""u"", ""v""}}).equals(Arrays.asList(""z"", ""m"", ""b"", ""v""));
+,
+assert Extract(new int[][]{{1, 2, 3}, {4, 5}}).equals(Arrays.asList(""3"", ""5""));
+]"
+900,The given code calculates the smallest multiple that is evenly divisible by all numbers from 1 to a given input number n.,"    public static int smallestMultiple(int n) {
+        if (n <= 2) {
+            return n;
+        }
+        int i = n * 2;
+        List<Integer> factors = new ArrayList<>();
+        for (int number = n; number > 1; number--) {
+            if (number * 2 > n) {
+                factors.add(number);
+            }
+        }
+        while (true) {
+            for (int a : factors) {
+                if (i % a != 0) {
+                    i += n;
+                    break;
+                }
+                if (a == factors.get(factors.size() - 1) && i % a == 0) {
+                    return i;
+                }
+            }
+        }
+    } 
+",901,"[
+assert smallestMultiple(13) == 360360;
+,
+assert smallestMultiple(2) == 2;
+,
+assert smallestMultiple(1) == 1;
+] 
+"
+902,The given Java code counts the total number of unset bits in the binary representation of all numbers from 1 to a given number n.,"    public static int countUnsetBits(int n) {
+        int cnt = 0;
+        for (int i = 1; i <= n; i++) {
+            int temp = i;
+            while (temp != 0) {
+                if (temp % 2 == 0) {
+                    cnt++;
+                }
+                temp /= 2;
+            }
+        }
+        return cnt;
+    } 
+",903,"[
+assert countUnsetBits(2) == 1;
+,
+assert countUnsetBits(5) == 4;
+,
+assert countUnsetBits(14) == 17;
+]"
+914,"The given code rearranges the numbers in an array so that all non-zero numbers are sorted in descending order of their absolute values, with zeros placed at the end, while the requested functionality is to separate positive and negative numbers.","public static int[] rearrangeNumbs(int[] arrayNums) {         Integer[] wrapperArray = new Integer[arrayNums.length];         for (int i = 0; i < arrayNums.length; i++) {             wrapperArray[i] = arrayNums[i];         }                  Arrays.sort(wrapperArray, new Comparator<Integer>() {             @Override             public int compare(Integer i1, Integer i2) {                 if (i1 >= 0 && i2 >= 0) {                     return i1.compareTo(i2);                 }                 else if (i1 < 0 && i2 < 0) {                     return Integer.compare(Math.abs(i2), Math.abs(i1));                 }                 return i2.compareTo(i1);             }         });                  int[] result = new int[arrayNums.length];         for (int i = 0; i < wrapperArray.length; i++) {             result[i] = wrapperArray[i];         }         return result;     }",915,"[ assert Arrays.equals(rearrangeNumbs(new int[]{-1, 2, -3, 5, 7, 8, 9, -10}), new int[]{2, 5, 7, 8, 9, -10, -3, -1}) : ""a1"" , assert Arrays.equals(rearrangeNumbs(new int[]{10, 15, 14, 13, -18, 12, -20}), new int[]{10, 12, 13, 14, 15, -20, -18}) : ""a2"" , assert Arrays.equals(rearrangeNumbs(new int[]{-20, 20, -10, 10, -30, 30}), new int[]{10, 20, 30, -30, -20, -10}) : ""a3"" ]"
+917,This function calculates the number of ways to make change for a given amount using a set of coins with different denominations.,"    
+    public static int coinChange(int[] S, int m, int n) {
+        int[][] table = new int[n + 1][m];
+        for (int i = 0; i < m; i++) {
+            table[0][i] = 1;
+        }
+        for (int i = 1; i <= n; i++) {
+            for (int j = 0; j < m; j++) {
+                int x = (i - S[j] >= 0) ? table[i - S[j]][j] : 0;
+                int y = (j >= 1) ? table[i][j - 1] : 0;
+                table[i][j] = x + y;
+            }
+        }
+        return table[n][m - 1];
+    } 
+",918,"[
+assert coinChange(new int[]{1, 2, 3}, 3, 4) == 4;
+,
+assert coinChange(new int[]{4, 5, 6, 7, 8, 9}, 6, 9) == 2;
+,
+assert coinChange(new int[]{4, 5, 6, 7, 8, 9}, 6, 4) == 1;
+] 
+"
+927,"This Java function takes a date string in yyyy-mm-dd format and returns the same date in dd-mm-yyyy format by rearranging the year, month, and day components.","    public static String changeDateFormat(String dt) {
+        Pattern pattern = Pattern.compile(""(\\d{4})-(\\d{1,2})-(\\d{1,2})"");
+        Matcher matcher = pattern.matcher(dt);
+        return matcher.replaceAll(""$3-$2-$1"");
+    }",928,"[
+assert changeDateFormat(""2026-01-02"").equals(""02-01-2026"");
+,
+assert changeDateFormat(""2021-01-04"").equals(""04-01-2021"");
+,
+assert changeDateFormat(""2030-06-06"").equals(""06-06-2030"");
+]"
+940,"The given function counts the number of elements in a list until it encounters a tuple, at which point it stops counting and returns the count of elements before the tuple.","public static int countElim(Object[] num) {
+    int countElim = 0;
+    for (Object n : num) {
+        if (n instanceof Object[]) { 
+            break;
+        }
+        countElim++;
+    }
+    return countElim;
+}",941,"[
+assert countElim(new Object[]{10, 20, 30, new Object[]{10, 20}, 40}) == 3;
+,
+assert countElim(new Object[]{10, new Object[]{20, 30}, new Object[]{10, 20}, 40}) == 1;
+,
+assert countElim(new Object[]{new Object[]{10, new Object[]{20, 30, new Object[]{10, 20}, 40}}}) == 0;
+]"
+956,The given code calculates the position of the rightmost set bit in a given integer by using bitwise operations and logarithmic functions.,"public static int getFirstSetBitPos(int n) {
+    return (int)(Math.log(n & -n) / Math.log(2)) + 1;
+}",957,"[
+assert getFirstSetBitPos(12) == 3;
+,
+assert getFirstSetBitPos(18) == 2;
+,
+assert getFirstSetBitPos(16) == 5;
+]"
+967,"The given Java code calculates the maximum possible integer value for the expression A*x/B, where x is constrained to be less than or equal to the minimum of B-1 and N.","public static int[] floorMax(int A, int B, int N) {
+    int x = Math.min(B - 1, N);
+    return new int[] {(A * x) / B};
+}",968,"[
+assert java.util.Arrays.equals(floorMax(11, 10, 9), new int[] {9}),
+assert java.util.Arrays.equals(floorMax(5, 7, 4), new int[] {2}),
+assert java.util.Arrays.equals(floorMax(2, 2, 1), new int[] {1}),
+]"
+976,The given code takes a decimal number as input and returns its decimal part by finding the remainder when divided by 1.,"    public static double truncateNumber(double number) {
+        return number % 1.0;
+    }",977,"[
+assert truncateNumber(3.5) == 0.5;
+,
+assert Math.abs(truncateNumber(1.33) - 0.33) < 1e-6;
+,
+assert Math.abs(truncateNumber(123.456) - 0.456) < 1e-6;
+]"
+993,The given code sorts a string of space-delimited numerals in ascending order by mapping the word representations to their corresponding integer values and then rearranging them.,"    public static String sortNumbers(String numbers) {
+        Map<String, Integer> valueMap = new HashMap<>();
+        valueMap.put(""zero"", 0);
+        valueMap.put(""one"", 1);
+        valueMap.put(""two"", 2);
+        valueMap.put(""three"", 3);
+        valueMap.put(""four"", 4);
+        valueMap.put(""five"", 5);
+        valueMap.put(""six"", 6);
+        valueMap.put(""seven"", 7);
+        valueMap.put(""eight"", 8);
+        valueMap.put(""nine"", 9);
+
+        String[] numberArray = numbers.split("" "");
+        List<String> numberList = new ArrayList<>();
+
+        for (String x : numberArray) {
+            if (!x.isEmpty()) {
+                numberList.add(x);
+            }
+        }
+
+        numberList.sort(Comparator.comparing(valueMap::get));
+        return String.join("" "", numberList);
+    }",994,"[
+assert sortNumbers("""").equals("""");
+,
+assert sortNumbers(""three"").equals(""three"");
+,
+assert sortNumbers(""three five nine"").equals(""three five nine"");
+,
+assert sortNumbers(""five zero four seven nine eight"").equals(""zero four five seven eight nine"");
+,
+assert sortNumbers(""six five four three two one zero"").equals(""zero one two three four five six"");
+]"
+995,The given code rescales a list of numbers so that the smallest number becomes 0 and the largest number becomes 1 by applying a linear transformation.,"public static List<Double> rescaleToUnit(List<Double> numbers) {         double minNumber = Double.MAX_VALUE;         double maxNumber = Double.MIN_VALUE;          for (double num : numbers) {             if (num < minNumber) minNumber = num;             if (num > maxNumber) maxNumber = num;         }          List<Double> rescaled = new ArrayList<>();         for (double x : numbers) {             rescaled.add((x - minNumber) / (maxNumber - minNumber));         }          return rescaled;     }      public static double[] listToArray(List<Double> list) {         double[] array = new double[list.size()];         for (int i = 0; i < list.size(); i++) {             array[i] = list.get(i);         }         return array;     }      public static boolean arrayEquals(double[] a, double[] b) {         if (a.length != b.length) return false;         for (int i = 0; i < a.length; i++) {             if (a[i] != b[i]) return false;         }         return true;     }",996,"[         assert arrayEquals(listToArray(rescaleToUnit(List.of(2.0, 49.9))), new double[]{0.0, 1.0});         ,         assert arrayEquals(listToArray(rescaleToUnit(List.of(100.0, 49.9))), new double[]{1.0, 0.0});         ,         assert arrayEquals(listToArray(rescaleToUnit(List.of(1.0, 2.0, 3.0, 4.0, 5.0))), new double[]{0.0, 0.25, 0.5, 0.75, 1.0});         ,         assert arrayEquals(listToArray(rescaleToUnit(List.of(2.0, 1.0, 5.0, 3.0, 4.0))), new double[]{0.25, 0.0, 1.0, 0.5, 0.75});         ,         assert arrayEquals(listToArray(rescaleToUnit(List.of(12.0, 11.0, 15.0, 13.0, 14.0))), new double[]{0.25, 0.0, 1.0, 0.5, 0.75});         ]"
+997,The given code calculates and returns the number of characters in a given string.,"    public static int strlen(String string) {
+        return string.length();
+    }",998,"[
+assert strlen("""") == 0;
+,
+assert strlen(""x"") == 1;
+,
+assert strlen(""asdasnakj"") == 9;
+]"
+1006,The given code evaluates a polynomial with given coefficients at a specific point and finds a root of the polynomial using a binary search-like approach.,"    public static double poly(double[] xs, double x) {
+        // Implement your polynomial evaluation logic here
+        return 0; // Placeholder return value
+    }
+
+    public static double findRoot(double[] xs) {
+        double begin = -1.0, end = 1.0;
+        while (poly(xs, begin) * poly(xs, end) > 0) {
+            begin *= 2.0;
+            end *= 2.0;
+        }
+        while (end - begin > 1e-10) {
+            double center = (begin + end) / 2.0;
+            if (poly(xs, center) * poly(xs, begin) > 0) {
+                begin = center;
+            } else {
+                end = center;
+            }
+        }
+        return begin;
+    }
+
+    public static double poly(int[] arr, Object sortedThird) {
+        // Implementation of poly method
+        return 0;
+    }
+
+    public static Object sortThird(Object obj) {
+        // Implementation of sortThird method
+        return obj;
+    }
+
+    public static int[] copyArray(int[] original) {
+        return original.clone();
+    }",1007,"[
+assert Math.abs(poly(new int[]{-10}, sortThird(copyArray(new int[]{-10})))) < 1e-4,
+assert Math.abs(poly(new int[]{-10, -2}, sortThird(copyArray(new int[]{-10, -2})))) < 1e-4,
+assert Math.abs(poly(new int[]{-3}, sortThird(copyArray(new int[]{-3})))) < 1e-4,
+assert Math.abs(poly(new int[]{-3, -6}, sortThird(copyArray(new int[]{-3, -6})))) < 1e-4,
+assert Math.abs(poly(new int[]{-3, -6, -7}, sortThird(copyArray(new int[]{-3, -6, -7})))) < 1e-4,
+assert Math.abs(poly(new int[]{-3, -6, -7, 7}, sortThird(copyArray(new int[]{-3, -6, -7, 7})))) < 1e-4,
+assert Math.abs(poly(new int[]{8}, sortThird(copyArray(new int[]{8})))) < 1e-4,
+assert Math.abs(poly(new int[]{8, 3}, sortThird(copyArray(new int[]{8, 3})))) < 1e-4,
+assert Math.abs(poly(new int[]{-10}, sortThird(copyArray(new int[]{-10})))) < 1e-4,
+assert Math.abs(poly(new int[]{-10, -8}, sortThird(copyArray(new int[]{-10, -8})))) < 1e-4,
+assert Math.abs(poly(new int[]{-3}, sortThird(copyArray(new int[]{-3})))) < 1e-4,
+assert Math.abs(poly(new int[]{-3, 6}, sortThird(copyArray(new int[]{-3, 6})))) < 1e-4,
+assert Math.abs(poly(new int[]{-3, 6, 9}, sortThird(copyArray(new int[]{-3, 6, 9})))) < 1e-4,
+assert Math.abs(poly(new int[]{-3, 6, 9, -10}, sortThird(copyArray(new int[]{-3, 6, 9, -10})))) < 1e-4,
+assert Math.abs(poly(new int[]{10}, sortThird(copyArray(new int[]{10})))) < 1e-4,
+assert Math.abs(poly(new int[]{10, 7}, sortThird(copyArray(new int[]{10, 7})))) < 1e-4,
+assert Math.abs(poly(new int[]{10, 7, 3}, sortThird(copyArray(new int[]{10, 7, 3})))) < 1e-4,
+assert Math.abs(poly(new int[]{10, 7, 3, -3}, sortThird(copyArray(new int[]{10, 7, 3, -3})))) < 1e-4,
+assert Math.abs(poly(new int[]{8}, sortThird(copyArray(new int[]{8})))) < 1e-4,
+assert Math.abs(poly(new int[]{8, -2}, sortThird(copyArray(new int[]{8, -2})))) < 1e-4,
+assert Math.abs(poly(new int[]{8, -2, -10}, sortThird(copyArray(new int[]{8, -2, -10})))) < 1e-4,
+assert Math.abs(poly(new int[]{8, -2, -10, -5}, sortThird(copyArray(new int[]{8, -2, -10, -5})))) < 1e-4,
+assert Math.abs(poly(new int[]{8, -2, -10, -5, 3}, sortThird(copyArray(new int[]{8, -2, -10, -5, 3})))) < 1e-4,
+assert Math.abs(poly(new int[]{8, -2, -10, -5, 3, 1}, sortThird(copyArray(new int[]{8, -2, -10, -5, 3, 1})))) < 1e-4,
+assert Math.abs(poly(new int[]{8, -2, -10, -5, 3, 1, -2}, sortThird(copyArray(new int[]{8, -2, -10, -5, 3, 1, -2})))) < 1e-4,
+assert Math.abs(poly(new int[]{8, -2, -10, -5, 3, 1, -2, -6}, sortThird(copyArray(new int[]{8, -2, -10, -5, 3, 1, -2, -6})))) < 1e-4,
+assert Math.abs(poly(new int[]{1}, sortThird(copyArray(new int[]{1})))) < 1e-4,
+assert Math.abs(poly(new int[]{1, -7}, sortThird(copyArray(new int[]{1, -7})))) < 1e-4,
+assert Math.abs(poly(new int[]{1, -7, -8}, sortThird(copyArray(new int[]{1, -7, -8})))) < 1e-4,
+assert Math.abs(poly(new int[]{1, -7, -8, 2}, sortThird(copyArray(new int[]{1, -7, -8, 2})))) < 1e-4,
+assert Math.abs(poly(new int[]{1}, sortThird(copyArray(new int[]{1})))) < 1e-4,
+assert Math.abs(poly(new int[]{1, 1}, sortThird(copyArray(new int[]{1, 1})))) < 1e-4,
+assert Math.abs(poly(new int[]{-9}, sortThird(copyArray(new int[]{-9})))) < 1e-4,
+assert Math.abs(poly(new int[]{-9, 4}, sortThird(copyArray(new int[]{-9, 4})))) < 1e-4,
+assert Math.abs(poly(new int[]{-9, 4, 7}, sortThird(copyArray(new int[]{-9, 4, 7})))) < 1e-4,
+assert Math.abs(poly(new int[]{-9, 4, 7, -7}, sortThird(copyArray(new int[]{-9, 4, 7, -7})))) < 1e-4,
+assert Math.abs(poly(new int[]{-9, 4, 7, -7, 2}, sortThird(copyArray(new int[]{-9, 4, 7, -7, 2})))) < 1e-4,
+assert Math.abs(poly(new int[]{-9, 4, 7, -7, 2, -8}, sortThird(copyArray(new int[]{-9, 4, 7, -7, 2, -8})))) < 1e-4
+]"
+1016,The given code increments each element in a list of integers by 1 and returns the resulting list.,"    public static List<Integer> incrList(List<Integer> l) {
+        return l.stream().map(e -> e + 1).collect(Collectors.toList());
+    }",1017,"[
+assert incrList(List.of()).equals(List.of());
+,
+assert Arrays.equals(incrList(List.of(3, 2, 1)).stream().mapToInt(i -> i).toArray(), new int[] {4, 3, 2});
+,
+assert Arrays.equals(incrList(List.of(5, 2, 5, 2, 3, 3, 9, 0, 123)).stream().mapToInt(i -> i).toArray(), new int[] {6, 3, 6, 3, 4, 4, 10, 1, 124});
+]"
+1021,This code calculates the median of a given list of integers by sorting the list and then determining the middle value or the average of the two middle values if the list has an even number of elements.,"    public static double median(int[] l) {
+        Arrays.sort(l);
+        if (l.length % 2 == 1) {
+            return l[l.length / 2];
+        } else {
+            return (l[l.length / 2 - 1] + l[l.length / 2]) / 2.0;
+        }
+    }",1022,"[
+assert median(new int[]{3, 1, 2, 4, 5}) == 3;
+,
+assert median(new int[]{-10, 4, 6, 1000, 10, 20}) == 8.0;
+,
+assert median(new int[]{5}) == 5;
+,
+assert median(new int[]{6, 5}) == 5.5;
+,
+assert median(new int[]{8, 1, 3, 9, 9, 2, 7}) == 7;
+]"
+1043,The given code finds the largest integer in a list that appears at least as many times as its own value.,public static int search(int[] lst) {         int maxVal = Integer.MIN_VALUE;         for (int val : lst) {             if (val > maxVal) {                 maxVal = val;             }         }          int[] frq = new int[maxVal + 1];         for (int i : lst) {             frq[i]++;         }          int ans = -1;         for (int i = 1; i < frq.length; i++) {             if (frq[i] >= i) {                 ans = i;             }         }          return ans;     },1044,"[         assert search(new int[]{5, 5, 5, 5, 1}) == 1 : ""Test 1 failed"";         ,         assert search(new int[]{4, 1, 4, 1, 4, 4}) == 4 : ""Test 2 failed"";         ,         assert search(new int[]{3, 3}) == -1 : ""Test 3 failed"";         ,         assert search(new int[]{8, 8, 8, 8, 8, 8, 8, 8}) == 8 : ""Test 4 failed"";         ,         assert search(new int[]{2, 3, 3, 2, 2}) == 2 : ""Test 5 failed"";         ,         assert search(new int[]{2, 7, 8, 8, 4, 8, 7, 3, 9, 6, 5, 10, 4, 3, 6, 7, 1, 7, 4, 10, 8, 1}) == 1 : ""Test 6 failed"";         ,         assert search(new int[]{3, 2, 8, 2}) == 2 : ""Test 7 failed"";         ,         assert search(new int[]{6, 7, 1, 8, 8, 10, 5, 8, 5, 3, 10}) == 1 : ""Test 8 failed"";         ,         assert search(new int[]{8, 8, 3, 6, 5, 6, 4}) == -1 : ""Test 9 failed"";         ,         assert search(new int[]{6, 9, 6, 7, 1, 4, 7, 1, 8, 8, 9, 8, 10, 10, 8, 4, 10, 4, 10, 1, 2, 9, 5, 7, 9}) == 1 : ""Test 10 failed"";         ,         assert search(new int[]{1, 9, 10, 1, 3}) == 1 : ""Test 11 failed"";         ,         assert search(new int[]{6, 9, 7, 5, 8, 7, 5, 3, 7, 5, 10, 10, 3, 6, 10, 2, 8, 6, 5, 4, 9, 5, 3, 10}) == 5 : ""Test 12 failed"";         ,         assert search(new int[]{1}) == 1 : ""Test 13 failed"";         ,          assert search(new int[]{8, 8, 10, 6, 4, 3, 5, 8, 2, 4, 2, 8, 4, 6, 10, 4, 2, 1, 10, 2, 1, 1, 5}) == 4 : ""Test 14 failed"";         ,         assert search(new int[]{2, 10, 4, 8, 2, 10, 5, 1, 2, 9, 5, 5, 6, 3, 8, 6, 4, 10}) == 2 : ""Test 15 failed"";         ,         assert search(new int[]{1, 6, 10, 1, 6, 9, 10, 8, 6, 8, 7, 3}) == 1 : ""Test 16 failed"";         ,         assert search(new int[]{9, 2, 4, 1, 5, 1, 5, 2, 5, 7, 7, 7, 3, 10, 1, 5, 4, 2, 8, 4, 1, 9, 10, 7, 10, 2, 8, 10, 9, 4}) == 4 : ""Test 17 failed"";         ,         assert search(new int[]{2, 6, 4, 2, 8, 7, 5, 6, 4, 10, 4, 6, 3, 7, 8, 8, 3, 1, 4, 2, 2, 10, 7}) == 4 : ""Test 18 failed"";         ,         assert search(new int[]{9, 8, 6, 10, 2, 6, 10, 2, 7, 8, 10, 3, 8, 2, 6, 2, 3, 1}) == 2 : ""Test 19 failed"";         ,         assert search(new int[]{5, 5, 3, 9, 5, 6, 3, 2, 8, 5, 6, 10, 10, 6, 8, 4, 10, 7, 7, 10, 8}) == -1 : ""Test 20 failed"";         ,         assert search(new int[]{10}) == -1 : ""Test 21 failed"";         ,         assert search(new int[]{9, 7, 7, 2, 4, 7, 2, 10, 9, 7, 5, 7, 2}) == 2 : ""Test 22 failed"";         ,         assert search(new int[]{5, 4, 10, 2, 1, 1, 10, 3, 6, 1, 8}) == 1 : ""Test 23 failed"";         ,         assert search(new int[]{7, 9, 9, 9, 3, 4, 1, 5, 9, 1, 2, 1, 1, 10, 7, 5, 6, 7, 6, 7, 7, 6}) == 1 : ""Test 24 failed"";         ,         assert search(new int[]{3, 10, 10, 9, 2}) == -1 : ""Test 25 failed"";         ]"
+1044,The given code sorts a list of integers in a strange order by alternating between the minimum and maximum values of the remaining integers.,"public static List<Integer> strangeSortList(List<Integer> lst) {
+    List<Integer> res = new ArrayList<>();
+    boolean switchFlag = true;
+    while (!lst.isEmpty()) {
+        if (switchFlag) {
+            res.add(Collections.min(lst));
+        } else {
+            res.add(Collections.max(lst));
+        }
+        lst.remove(res.get(res.size() - 1));
+        switchFlag = !switchFlag;
+    }
+    return res;
+}
+
+public static int[] strangeSortList(int[] arr) {
+    List<Integer> list = new ArrayList<>();
+    for (int i : arr) {
+        list.add(i);
+    }
+    return strangeSortList(list).stream().mapToInt(i -> i).toArray();
+}",1045,"assert Arrays.equals(strangeSortList(new int[]{1, 2, 3, 4}), new int[]{1, 4, 2, 3});
+assert Arrays.equals(strangeSortList(new int[]{5, 6, 7, 8, 9}), new int[]{5, 9, 6, 8, 7});
+assert Arrays.equals(strangeSortList(new int[]{1, 2, 3, 4, 5}), new int[]{1, 5, 2, 4, 3});
+assert Arrays.equals(strangeSortList(new int[]{5, 6, 7, 8, 9, 1}), new int[]{1, 9, 5, 8, 6, 7});
+assert Arrays.equals(strangeSortList(new int[]{5, 5, 5, 5}), new int[]{5, 5, 5, 5});
+assert Arrays.equals(strangeSortList(new int[]{}), new int[]{});
+assert Arrays.equals(strangeSortList(new int[]{1, 2, 3, 4, 5, 6, 7, 8}), new int[]{1, 8, 2, 7, 3, 6, 4, 5});
+assert Arrays.equals(strangeSortList(new int[]{0, 2, 2, 2, 5, 5, -5, -5}), new int[]{-5, 5, -5, 5, 0, 2, 2, 2});
+assert Arrays.equals(strangeSortList(new int[]{111111}), new int[]{111111});"
+1070,The given code generates a list of prime numbers less than a given non-negative integer.,public static List<Integer> countUpTo(int n) {         List<Integer> primes = new ArrayList<>();         for (int i = 2; i <= n; i++) {             if (isPrime(i)) {                 primes.add(i);             }         }         return primes;     }      public static boolean isPrime(int num) {         if (num < 2) {             return false;         }         for (int i = 2; i * i <= num; i++) {             if (num % i == 0) {                 return false;             }         }         return true;     },1071,"[         assert countUpTo(5).equals(Arrays.asList(2, 3,5)) : ""Test n=5 failed"";         ,         assert countUpTo(6).equals(Arrays.asList(2, 3, 5)) : ""Test n=6 failed"";         ,         assert countUpTo(7).equals(Arrays.asList(2, 3, 5, 7)) : ""Test n=7 failed""; // Fixed this test case         ,         assert countUpTo(10).equals(Arrays.asList(2, 3, 5, 7)) : ""Test n=10 failed"";         ,         assert countUpTo(0).equals(Arrays.asList()) : ""Test n=0 failed"";         ,         assert countUpTo(22).equals(Arrays.asList(2, 3, 5, 7, 11, 13, 17, 19)) : ""Test n=22 failed"";         ,         assert countUpTo(1).equals(Arrays.asList()) : ""Test n=1 failed"";         ,         assert countUpTo(18).equals(Arrays.asList(2, 3, 5, 7, 11, 13, 17)) : ""Test n=18 failed"";         ,         assert countUpTo(47).equals(Arrays.asList(2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47)) : ""Test n=47 failed""; // Fixed this test case         ,         assert countUpTo(101).equals(Arrays.asList(2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101)) : ""Test n=101 failed"";         ]"
+1112,The given code checks if a number can be expressed as the sum of exactly four positive even numbers by verifying if it is even and greater than or equal to 8.,"public static boolean isEqualToSumEven(int n) {
+    return n % 2 == 0 && n >= 8;
+}",1113,"[
+assert !isEqualToSumEven(4) : ""isEqualToSumEven(4) should return false"";
+,
+assert !isEqualToSumEven(6) : ""isEqualToSumEven(6) should return false"";
+,
+assert isEqualToSumEven(8) : ""isEqualToSumEven(8) should return true"";
+,
+assert isEqualToSumEven(10) : ""isEqualToSumEven(10) should return true"";
+,
+assert !isEqualToSumEven(11) : ""isEqualToSumEven(11) should return false"";
+,
+assert isEqualToSumEven(12) : ""isEqualToSumEven(12) should return true"";
+,
+assert !isEqualToSumEven(13) : ""isEqualToSumEven(13) should return false"";
+,
+assert isEqualToSumEven(16) : ""isEqualToSumEven(16) should return true"";
+]"
+1114,"The given code replaces all spaces in a string with underscores, unless there are more than two consecutive spaces, in which case it replaces them with a hyphen.","Here are the function definitions (methods) without the main method:
+
+    public static String fixSpaces(String text) {
+        StringBuilder newText = new StringBuilder();
+        int i = 0;
+        int start = 0, end = 0;
+
+        while (i < text.length()) {
+            if (text.charAt(i) == ' ') {
+                end++;
+            } else {
+                if (end - start > 2) {
+                    newText.append('-').append(text.charAt(i));
+                } else if (end - start > 0) {
+                    for (int j = 0; j < end - start; j++) {
+                        newText.append('_');
+                    }
+                    newText.append(text.charAt(i));
+                } else {
+                    newText.append(text.charAt(i));
+                }
+                start = i + 1;
+                end = start;
+            }
+            i++;
+        }
+
+        if (end - start > 2) {
+            newText.append('-');
+        } else if (end - start > 0) {
+            newText.append('_');
+        }
+        
+        return newText.toString();
+    }",1115,"assert fixSpaces(""Example"").equals(""Example"") : ""This prints if this assert fails 1 (good for debugging!)"",
+assert fixSpaces(""Mudasir Hanif "").equals(""Mudasir_Hanif_"") : ""This prints if this assert fails 2 (good for debugging!)"",
+assert fixSpaces(""Yellow Yellow  Dirty  Fellow"").equals(""Yellow_Yellow__Dirty__Fellow"") : ""This prints if this assert fails 3 (good for debugging!)"",
+assert fixSpaces(""Exa   mple"").equals(""Exa-mple"") : ""This prints if this assert fails 4 (good for debugging!)"",
+assert fixSpaces(""   Exa 1 2 2 mple"").equals(""-Exa_1_2_2_mple"") : ""This prints if this assert fails 5 (good for debugging!)"","
+1122,"The given code returns a list of planet names between two given planets in our solar system, sorted by their proximity to the sun.","public static List<String> bf(String planet1, String planet2) {         List<String> planetNames = Arrays.asList(""Mercury"", ""Venus"", ""Earth"", ""Mars"", ""Jupiter"", ""Saturn"", ""Uranus"", ""Neptune"");                  if (!planetNames.contains(planet1) || !planetNames.contains(planet2) || planet1.equals(planet2)) {             return Arrays.asList(); // Return empty list         }          int planet1Index = planetNames.indexOf(planet1);         int planet2Index = planetNames.indexOf(planet2);                  if (planet1Index < planet2Index) {             return planetNames.subList(planet1Index + 1, planet2Index);         } else {             return planetNames.subList(planet2Index + 1, planet1Index);         }     }",1123,"[ assert bf(""Jupiter"", ""Neptune"").equals(Arrays.asList(""Saturn"", ""Uranus"")) : ""First test error: "" + bf(""Jupiter"", ""Neptune"").size(), assert bf(""Earth"", ""Mercury"").equals(Arrays.asList(""Venus"")) : ""Second test error: "" + bf(""Earth"", ""Mercury""), assert bf(""Mercury"", ""Uranus"").equals(Arrays.asList(""Venus"", ""Earth"", ""Mars"", ""Jupiter"", ""Saturn"")) : ""Third test error: "" + bf(""Mercury"", ""Uranus""), assert bf(""Neptune"", ""Venus"").equals(Arrays.asList(""Earth"", ""Mars"", ""Jupiter"", ""Saturn"", ""Uranus"")) : ""Fourth test error: "" + bf(""Neptune"", ""Venus""), assert bf(""Earth"", ""Earth"").isEmpty() : ""Fifth test error"", assert bf(""Mars"", ""Earth"").isEmpty() : ""Sixth test error"", assert bf(""Jupiter"", ""Makemake"").isEmpty() : ""Seventh test error"", ]"
+1124,"This code checks if a given number is prime, returning the value of x if it is and the value of y if it is not.","public static int xOrY(int n, int x, int y) {
+    if (n == 1) {
+        return y;
+    }
+    for (int i = 2; i < n; i++) {
+        if (n % i == 0) {
+            return y;
+        }
+    }
+    return x;
+}",1125,"[
+assert xOrY(7, 34, 12) == 34;
+,
+assert xOrY(15, 8, 5) == 5;
+,
+assert xOrY(3, 33, 5212) == 33;
+,
+assert xOrY(1259, 3, 52) == 3;
+,
+assert xOrY(7919, -1, 12) == -1;
+,
+assert xOrY(3609, 1245, 583) == 583;
+,
+assert xOrY(91, 56, 129) == 129;
+,
+assert xOrY(6, 34, 1234) == 1234;
+,
+assert xOrY(1, 2, 0) == 0;
+,
+assert xOrY(2, 2, 0) == 2;
+]"
+1137,"The given code generates a list of even integers between two input numbers, including the numbers themselves if they are even, and returns them in ascending order.","public static List<Integer> generateIntegers(int a, int b) {
+    int lower = Math.max(2, Math.min(a, b));
+    int upper = Math.min(8, Math.max(a, b));
+    List<Integer> result = new ArrayList<>();
+
+    for (int i = lower; i <= upper; i++) {
+        if (i % 2 == 0) {
+            result.add(i);
+        }
+    }
+    return result;
+}",1138,"[
+assert generateIntegers(2, 10).equals(Arrays.asList(2, 4, 6, 8)) : ""Test 1"";
+,
+assert generateIntegers(10, 2).equals(Arrays.asList(2, 4, 6, 8)) : ""Test 2"";
+,
+assert generateIntegers(132, 2).equals(Arrays.asList(2, 4, 6, 8)) : ""Test 3"";
+,
+assert generateIntegers(17, 89).equals(new ArrayList<>()) : ""Test 4"";
+,
+assert true : ""This prints if this assert fails 2 (also good for debugging!)"";
+]"
