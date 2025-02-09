@@ -94,7 +94,7 @@ assert(check_equilateral(6, 8, 12) == false);
 assert(check_equilateral(6, 6, 12) == false);
 assert(check_equilateral(6, 6, 6) == true);
 ```"
-52,Write a python function to check whether the first and last characters of a given string are equal or not.,"```cpp
+52,Write a c++ function to check whether the first and last characters of a given string are equal or not.,"```cpp
 #include <string>
 
 std::string check_Equality(const std::string& str) {
@@ -340,7 +340,7 @@ int main() {
     return 0;
 }
 ```"
-95,Write a python function to find the number of divisors of a given integer.,"```cpp
+95,Write a c++ function to find the number of divisors of a given integer.,"```cpp
 #include <vector>
 
 std::pair<int, int> divisor(int n) {
@@ -366,7 +366,7 @@ int main() {
     return 0;
 }
 ```"
-125,Write a python function to find the sum of common divisors of two given numbers.,"```cpp
+125,Write a c++ function to find the sum of common divisors of two given numbers.,"```cpp
 #include <iostream>
 #include <algorithm>
 
@@ -384,7 +384,7 @@ std::pair<int, int> sum(int a, int b) {
 
 int sum(int a, int b) {
     // Assuming the sum function implementation here
-    return (a + b) % 100; // Placeholder for the logic that was implied in the Python code
+    return (a + b) % 100; // Placeholder for the logic that was implied in the c++ code
 }
 
 int main() {
@@ -442,7 +442,7 @@ int main() {
     return 0;
 }
 ```"
-149,Write a python function to find whether the given number is present in the infinite sequence or not.,"```cpp
+149,Write a c++ function to find whether the given number is present in the infinite sequence or not.,"```cpp
 bool does_Contain_B(int a, int b, int c) { 
     if (a == b) { 
         return true; 
@@ -487,7 +487,7 @@ int main() {
     return 0;
 }
 ```"
-188,Write a python function to find the first missing positive number.,"```cpp
+188,Write a c++ function to find the first missing positive number.,"```cpp
 #include <vector>
 using namespace std;
 
@@ -563,7 +563,7 @@ int main() {
     return 0;
 }
 ```"
-203,Write a python function to count the occurrence of a given character in a string.,"```cpp
+203,Write a c++ function to count the occurrence of a given character in a string.,"```cpp
 #include <string>
 
 std::pair<int, int> count(const std::string& s, char c) {
@@ -573,7 +573,7 @@ std::pair<int, int> count(const std::string& s, char c) {
             res = res + 1;
         }
     }
-    return {res, 0}; // Returning 0 as the second value since it's not defined in Python code
+    return {res, 0}; // Returning 0 as the second value since it's not defined in c++ code
 }
 ```",204,"```cpp
 #include <cassert>
@@ -635,7 +635,7 @@ int main() {
     return 0;
 }
 ```"
-217,Write a python function to find the minimum operations required to make two numbers equal.,"```cpp
+217,Write a c++ function to find the minimum operations required to make two numbers equal.,"```cpp
 #include <iostream>
 #include <algorithm>
 #include <numeric>
@@ -645,7 +645,7 @@ std::pair<int, int> min_Operations(int A, int B) {
         std::swap(A, B);
     }
     B = B / std::gcd(A, B);
-    return {B - 1, 0}; // Since there was no second return value in the original Python code
+    return {B - 1, 0}; // Since there was no second return value in the original c++ code
 }
 ```",218,"```cpp
 #include <cassert>
@@ -659,7 +659,7 @@ int main() {
     return 0;
 }
 ```"
-220,Write a python function to find the first even number in a given list of numbers.,"```cpp
+220,Write a c++ function to find the first even number in a given list of numbers.,"```cpp
 #include <vector>
 #include <algorithm>
 
@@ -718,7 +718,7 @@ int main() {
     return 0;
 }
 ```"
-234,Write a python function to set all even bits of a given number.,"```cpp
+234,Write a c++ function to set all even bits of a given number.,"```cpp
 #include <iostream>
 
 std::pair<int, int> even_bit_set_number(int n) {
@@ -828,7 +828,7 @@ int main() {
     return 0;
 }
 ```"
-308,Write a python function to find the maximum of two numbers.,"```cpp
+308,Write a c++ function to find the maximum of two numbers.,"```cpp
 int maximum(int a, int b) {   
     if (a >= b) 
         return a; 
@@ -887,7 +887,7 @@ int main() {
     return 0;
 }
 ```"
-383,Write a python function to find the frequency of the smallest value in a given array.,"```cpp
+383,Write a c++ function to find the frequency of the smallest value in a given array.,"```cpp
 #include <vector>
 using namespace std;
 
@@ -921,7 +921,7 @@ int main() {
     return 0;
 }
 ```"
-387,Write a python function to find the highest power of 2 that is less than or equal to n.,"```cpp
+387,Write a c++ function to find the highest power of 2 that is less than or equal to n.,"```cpp
 int highest_Power_of_2(int n) { 
     int res = 0; 
     for (int i = n; i > 0; --i) { 
@@ -1012,9 +1012,9 @@ int min_val(const std::vector<std::variant<int, std::string>>& values) {
 }
 
 int main() {
-    assert(min_val({""Python"", 3, 2, 4, 5, ""version""}) == 2);
-    assert(min_val({""Python"", 15, 20, 25}) == 15);
-    assert(min_val({""Python"", 30, 20, 40, 50, ""version""}) == 20);
+    assert(min_val({""c++"", 3, 2, 4, 5, ""version""}) == 2);
+    assert(min_val({""c++"", 15, 20, 25}) == 15);
+    assert(min_val({""c++"", 30, 20, 40, 50, ""version""}) == 20);
     return 0;
 }
 ```"
@@ -1081,7 +1081,7 @@ int main() {
     return 0;
 }
 ```"
-448,Write a python function to check whether the triangle is valid or not if 3 points are given.,"```cpp
+448,Write a c++ function to check whether the triangle is valid or not if 3 points are given.,"```cpp
 #include <iostream>
 
 std::string check_Triangle(double x1, double y1, double x2, double y2, double x3, double y3) { 
@@ -1166,7 +1166,7 @@ int main() {
     return 0;
 }
 ```"
-478,Write a python function to find the first digit of a given number.,"```cpp
+478,Write a c++ function to find the first digit of a given number.,"```cpp
 int first_Digit(int n) {
     while (n >= 10) {
         n = n / 10;
@@ -1258,7 +1258,7 @@ int main() {
     return 0;
 }
 ```"
-510,Write a python function to find minimum sum of factors of a given number.,"```cpp
+510,Write a c++ function to find minimum sum of factors of a given number.,"```cpp
 #include <iostream>
 
 std::pair<int, int> find_Min_Sum(int num) {
@@ -1293,7 +1293,7 @@ int main() {
     return 0;
 }
 ```"
-524,Write a python function to check whether two given lines are parallel or not.,"```cpp
+524,Write a c++ function to check whether two given lines are parallel or not.,"```cpp
 #include <utility>
 
 std::pair<bool, bool> parallel_lines(std::pair<double, double> line1, std::pair<double, double> line2) {
@@ -1508,7 +1508,7 @@ int main() {
     return 0;
 }
 ```"
-599,Write a python function to check whether the given number is even or not using bitwise operator.,"```cpp
+599,Write a c++ function to check whether the given number is even or not using bitwise operator.,"```cpp
 bool is_Even(int n) {
     if ((n ^ 1) == (n + 1)) {
         return true;
@@ -1521,7 +1521,7 @@ assert(is_Even(1) == false);
 assert(is_Even(2) == true);
 assert(is_Even(3) == false);
 ```"
-601,Write a python function to find the first repeated character in a given string.,"```cpp
+601,Write a c++ function to find the first repeated character in a given string.,"```cpp
 #include <string>
 #include <unordered_map>
 
@@ -1603,13 +1603,13 @@ std::string reverse_words(const std::string& str) {
 }
 
 int main() {
-    assert(reverse_words(""python program"") == ""program python"");
+    assert(reverse_words(""c++ program"") == ""program c++"");
     assert(reverse_words(""java language"") == ""language java"");
     assert(reverse_words(""indian man"") == ""man indian"");
     return 0;
 }
 ```"
-608,Write a python function to find minimum possible value for the given periodic function.,"```cpp
+608,Write a c++ function to find minimum possible value for the given periodic function.,"```cpp
 #include <algorithm>
 
 std::pair<int, int> floor_Min(int A, int B, int N) {
@@ -1631,7 +1631,7 @@ int main() {
     return 0;
 }
 ```"
-611,Write a python function to merge the first and last elements separately in a list of lists.,"```cpp
+611,Write a c++ function to merge the first and last elements separately in a list of lists.,"```cpp
 #include <vector>
 #include <tuple>
 #include <algorithm>
@@ -1700,8 +1700,8 @@ int sample_nam(const std::vector<std::string>& names);
 
 int main() {
     assert(sample_nam({""sally"", ""Dylan"", ""rebecca"", ""Diana"", ""Joanne"", ""keith""}) == 16);
-    assert(sample_nam({""php"", ""res"", ""Python"", ""abcd"", ""Java"", ""aaa""}) == 10);
-    assert(sample_nam({""abcd"", ""Python"", ""abba"", ""aba""}) == 6);
+    assert(sample_nam({""php"", ""res"", ""c++"", ""abcd"", ""Java"", ""aaa""}) == 10);
+    assert(sample_nam({""abcd"", ""c++"", ""abba"", ""aba""}) == 6);
     return 0;
 }
 ```"
@@ -1768,7 +1768,7 @@ int main() {
     return 0;
 }
 ```"
-648,Write a python function to calculate the sum of the numbers in a list between the indices of a specified range.,"```cpp
+648,Write a c++ function to calculate the sum of the numbers in a list between the indices of a specified range.,"```cpp
 #include <vector>
 
 int sum_Range_list(const std::vector<int>& nums, int m, int n) {
@@ -1797,7 +1797,7 @@ int main() {
     return 0;
 }
 ```"
-658,Write a python function to print duplicants from a list of integers.,"```cpp
+658,Write a c++ function to print duplicants from a list of integers.,"```cpp
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -1844,7 +1844,7 @@ int main() {
     assert(Repeat({1, 2, 3, 1, 2}) == std::vector<int>{1, 2});
 }
 ```"
-670,Write a python function to set the right most unset bit.,"```cpp
+670,Write a c++ function to set the right most unset bit.,"```cpp
 #include <cmath>
 
 int get_Pos_Of_Right_most_Set_Bit(int n) { 
@@ -1930,9 +1930,9 @@ std::string remove_duplicate(const std::string &input) {
 }
 
 int main() {
-    assert(remove_duplicate(""Python Exercises Practice Solution Exercises"") == ""Python Exercises Practice Solution"");
-    assert(remove_duplicate(""Python Exercises Practice Solution Python"") == ""Python Exercises Practice Solution"");
-    assert(remove_duplicate(""Python Exercises Practice Solution Practice"") == ""Python Exercises Practice Solution"");
+    assert(remove_duplicate(""c++ Exercises Practice Solution Exercises"") == ""c++ Exercises Practice Solution"");
+    assert(remove_duplicate(""c++ Exercises Practice Solution c++"") == ""c++ Exercises Practice Solution"");
+    assert(remove_duplicate(""c++ Exercises Practice Solution Practice"") == ""c++ Exercises Practice Solution"");
 }
 ```"
 681,Write a function to multiply two lists using map and lambda function.,"```cpp
@@ -2053,7 +2053,7 @@ int main() {
     return 0;
 }
 ```"
-710,Write a python function to check whether the product of digits of a number at even and odd places is equal or not.,"```cpp
+710,Write a c++ function to check whether the product of digits of a number at even and odd places is equal or not.,"```cpp
 #include <iostream>
 using namespace std;
 
@@ -2209,9 +2209,9 @@ std::tuple<std::string, int, int> occurance_substring(const std::string& str, co
 }
 
 int main() {
-    assert(occurance_substring(""python programming, python language"", ""python"") == std::make_tuple(""python"", 0, 6));
-    assert(occurance_substring(""python programming,programming language"", ""programming"") == std::make_tuple(""programming"", 7, 18));
-    assert(occurance_substring(""python programming,programming language"", ""language"") == std::make_tuple(""language"", 31, 39));
+    assert(occurance_substring(""c++ programming, c++ language"", ""c++"") == std::make_tuple(""c++"", 0, 6));
+    assert(occurance_substring(""c++ programming,programming language"", ""programming"") == std::make_tuple(""programming"", 7, 18));
+    assert(occurance_substring(""c++ programming,programming language"", ""language"") == std::make_tuple(""language"", 31, 39));
     return 0;
 }
 ```"
@@ -2312,7 +2312,7 @@ int string_length(const std::string& str) {
 }
 
 int main() {
-    assert(string_length(""python"") == 6);
+    assert(string_length(""c++"") == 6);
     assert(string_length(""program"") == 7);
     assert(string_length(""language"") == 8);
     return 0;
@@ -2404,7 +2404,7 @@ std::vector<std::vector<char>> listify_list(const std::vector<std::string>& inpu
 
 int main() {
     assert(listify_list({""Red"", ""Blue"", ""Black"", ""White"", ""Pink""}) == std::vector<std::vector<char>>{{'R', 'e', 'd'}, {'B', 'l', 'u', 'e'}, {'B', 'l', 'a', 'c', 'k'}, {'W', 'h', 'i', 't', 'e'}, {'P', 'i', 'n', 'k'}});
-    assert(listify_list({""python""}) == std::vector<std::vector<char>>{{'p', 'y', 't', 'h', 'o', 'n'}});
+    assert(listify_list({""c++""}) == std::vector<std::vector<char>>{{'p', 'y', 't', 'h', 'o', 'n'}});
     assert(listify_list({"" red "", ""green"", "" black"", ""blue "", "" orange"", ""brown""}) == std::vector<std::vector<char>>{{' ', 'r', 'e', 'd', ' '}, {'g', 'r', 'e', 'e', 'n'}, {' ', 'b', 'l', 'a', 'c', 'k'}, {'b', 'l', 'u', 'e', ' '}, {' ', 'o', 'r', 'a', 'n', 'g', 'e'}, {'b', 'r', 'o', 'w', 'n'}});
     
     return 0;
@@ -2441,7 +2441,7 @@ int main() {
     return 0;
 }
 ```"
-892,Write a python function to get the last element of each sublist.,"```cpp
+892,Write a c++ function to get the last element of each sublist.,"```cpp
 #include <vector>
 #include <string>
 
@@ -2518,7 +2518,7 @@ int main() {
     return 0;
 }
 ```"
-902,Write a python function to count the total unset bits from 1 to n.,"```cpp
+902,Write a c++ function to count the total unset bits from 1 to n.,"```cpp
 int count_Unset_Bits(int n) {  
     int cnt = 0;  
     for (int i = 1; i <= n; i++) {  
@@ -2661,7 +2661,7 @@ int main() {
     return 0;
 }
 ```"
-956,Write a python function to get the position of rightmost set bit.,"```cpp
+956,Write a c++ function to get the position of rightmost set bit.,"```cpp
 #include <cmath>
 
 std::pair<double, double> get_First_Set_Bit_Pos(int n) {
@@ -2681,7 +2681,7 @@ int main() {
     return 0;
 }
 ```"
-967,Write a python function to find maximum possible value for the given periodic function.,"```cpp
+967,Write a c++ function to find maximum possible value for the given periodic function.,"```cpp
 #include <algorithm>
 
 std::pair<int, int> floor_Max(int A, int B, int N) {
